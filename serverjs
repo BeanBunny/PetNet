@@ -1,27 +1,23 @@
 // //importing
-const express = require('express')
+const express = require("express");
 
 // app config
-const app = express()
-const port = process.env.PORT || 9000
-
+const app = express();
+const port = process.env.PORT || 9000;
 
 //middleware
 
 //DB config
-//const connection_url = 
-
+//const connection_url =
 
 //??
 
-
 // api routes
-app.get('./', (req, res) =>{
-    res.status(200).send('Hello world') //200 = ok
-})
-
+app.get("./", (req, res) => {
+  res.status(200).send("Hello world"); //200 = ok
+});
 
 //listen
 app.listen(port, () => {
-    console.log(`Listening in localhost:${port}`)
-})
+  console.log(`Listening in localhost:${port}`);
+});

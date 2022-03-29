@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+//todo: Add more schemas and perform validations
 
 const petSchema = new mongoose.Schema({
   pet_type: {

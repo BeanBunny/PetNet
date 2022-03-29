@@ -3,34 +3,59 @@ import {
     Text,
     StyleSheet,
     View,
-    Button,
     TouchableOpacity,
     Image,
     Pressable,
 } from "react-native";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { Button } from "react-native-paper";
+
 // import Image from "../Components/ImageDetail";
 // the props in here means we are passing props to Homescreen
+
+// CHANGE THIS AFTERWARDSSSS
+const theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: "tomato",
+        accent: "yellow",
+        background: "#000000",
+    },
+};
+
 const HomeScreen = (props) => {
     return (
-        <View>
-            {/* <Text style={styles.text}>"Hello"</Text> */}
-            <Image
-                style={styles.image_resize}
-                source={require("../../assets/now.jpg")}
-            />
-            <Text style={styles.text}> PetNet </Text>
-            {/* <Button
+        <PaperProvider>
+            <View>
+                {/* <Text style={styles.text}>"Hello"</Text> */}
+                <Image
+                    style={styles.image_resize}
+                    source={require("../../assets/now.jpg")}
+                />
+                <Text style={styles.text}> PetNet </Text>
+                {/* <Button
         onPress={() => props.navigation.navigate("Login")}
         color="white"
         title="Login"
       /> */}
-            <Pressable
-                style={styles.button}
-                onPress={() => props.navigation.navigate("Login")}
-            >
-                <Text style={styles.text_button}> Login </Text>
-            </Pressable>
-        </View>
+                {/* <Pressable
+                    style={styles.button}
+                    onPress={() => props.navigation.navigate("Login")}
+                >
+                    <Text style={styles.text_button}> Login </Text>
+                </Pressable> */}
+                <View style={styles.view_button}>
+                    <Button
+                        mode="contained"
+                        onPress={() => props.navigation.navigate("Login")}
+                        style={styles.button}
+                    >
+                        Login
+                    </Button>
+                </View>
+            </View>
+        </PaperProvider>
     );
 };
 
@@ -61,16 +86,20 @@ const styles = StyleSheet.create({
     button: {
         // alignItems: "center",
         // justifyContent: "center",
-        paddingVertical: 25,
-        paddingHorizontal: 0,
-        borderRadius: 20,
-        elevation: 100,
-        marginTop: 50,
-        marginLeft: 105,
-        marginRight: 100,
-        backgroundColor: "#32627F",
-        height: 90,
-        width: 180,
+        // paddingVertical: 25,
+        // paddingHorizontal: 0,
+        // borderRadius: 20,
+        // elevation: 100,
+        // marginTop: 50,
+        // marginLeft: 105,
+        // marginRight: 100,
+        // backgroundColor: "#32627F",
+        // height: 90,
+        width: "40%",
+    },
+    view_button: {
+        alignItems: "center",
+        justifyContent: "center",
     },
 });
 

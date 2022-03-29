@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 async function generateCollections(db, collections_list) {
   console.log(db.collection.collectionName);
@@ -13,22 +13,22 @@ async function generateCollections(db, collections_list) {
   });
 }
 
-mongoose.connect("mongodb://localhost/petnet", (error, db) => {
-  if (error) {
-    console.log("DB connection can not be established");
-  }
+// mongoose.connect("mongodb://localhost/petnet", (error, db) => {
+//   if (error) {
+//     console.log("DB connection can not be established");
+//   }
 
-  collections = [
-    "Pet Owner",
-    "Appointments",
-    "Vet Clinics",
-    "Verification",
-    "Admin",
-    "Banned Vets",
-    "Banned Pet Owners",
-    "Report Pet Owner",
-    "Report Clinic",
-  ];
+//   collections = [
+//     "Pet Owner",
+//     "Appointments",
+//     "Vet Clinics",
+//     "Verification",
+//     "Admin",
+//     "Banned Vets",
+//     "Banned Pet Owners",
+//     "Report Pet Owner",
+//     "Report Clinic",
+//   ];
 
-  generateCollections(db, collections);
-});
+//   generateCollections(db, collections);
+// });

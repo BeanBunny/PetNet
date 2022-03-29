@@ -1,0 +1,1 @@
+/Users/Umair/mongodb/bin/mongod.exe --dbpath=/Users/umair/mongodb-data

@@ -1,30 +1,29 @@
 import React from "react";
 import {
-  Text,
-  StyleSheet,
-  View,
-  Button,
-  TouchableOpacity,
-  Image,
+    Text,
+    StyleSheet,
+    View,
+    Button,
+    TouchableOpacity,
+    Image,
 } from "react-native";
 
 const LoginScreen = (props) => {
-  return (
-    <View>
-      <Text style={styles.text}> LOGIN SCREEN </Text>
-    </View>
-  );
+    return (
+        <View>
+            <Text style={styles.text}> LOGIN SCREEN </Text>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 70,
-    // marginLeft: 138,
-    // marginTop: 8,
-    color: "white",
-    fontFamily: "Hoefler Text",
-    fontWeight: "bold",
-  },
+    text: {
+        fontSize: 70,
+        // marginLeft: 138,
+        // marginTop: 8,
+        color: "white",
+        fontWeight: "bold",
+    },
 });
 
 export default LoginScreen;

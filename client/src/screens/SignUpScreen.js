@@ -11,10 +11,12 @@ import {
 } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Button } from "react-native-paper";
-
-const LoginScreen = (props) => {
-  const [text, onChangeText] = React.useState(null);
-  const [text_, onChangeText_] = React.useState(null);
+const SignUpScreen = (props) => {
+  const [name, onChangeText] = React.useState(null);
+  const [phone_number, onChangeText_] = React.useState(null);
+  const [email, onChangeText_1] = React.useState(null);
+  const [password, onChangeText_2] = React.useState(null);
+  const [confirm_password, onChangeText_3] = React.useState(null);
   // console.log(text);
   return (
     <PaperProvider>
@@ -29,18 +31,26 @@ const LoginScreen = (props) => {
           resizeMode="contain"
           style={styles.image_login}
           source={require("../../assets/login.jpg")}
-        >
-          {/* <TextInput
-            // style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder="Password"
-          /> */}
-        </ImageBackground>
+        ></ImageBackground>
         <TextInput
-          style={styles.input_phone_number}
+          style={styles.input}
           onChangeText={onChangeText}
-          value={text}
+          value={name}
+          mode="outlined"
+          label="Name"
+          placeholder="Name"
+          theme={{
+            colors: {
+              primary: "green",
+              underlineColor: "transparent",
+            },
+          }}
+        />
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText_}
+          value={phone_number}
           mode="outlined"
           label="Phone Number"
           placeholder="Phone Number"
@@ -52,9 +62,24 @@ const LoginScreen = (props) => {
           }}
         />
         <TextInput
-          style={styles.input_password}
-          onChangeText={onChangeText_}
-          value={text_}
+          style={styles.input}
+          onChangeText={onChangeText_1}
+          value={email}
+          mode="outlined"
+          label="Email"
+          placeholder="Email"
+          theme={{
+            colors: {
+              primary: "green",
+              underlineColor: "transparent",
+            },
+          }}
+        />
+
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText_2}
+          value={password}
           mode="outlined"
           label="Password"
           placeholder="Password"
@@ -66,21 +91,11 @@ const LoginScreen = (props) => {
           }}
         />
         <Button
-          // mode="contained"
-          // this is where the data that has been entered can be returned to the backend
-          onPress={() => console.log(text)}
-          style={styles.button_forgot_password}
-        >
-          <Text> Forgot Password </Text>
-        </Button>
-        <Button
           mode="contained"
           // this is where the data that has been entered can be returned to the backend
           onPress={() => console.log(text)}
           style={styles.button}
-        >
-          <Text style={styles.text_button}> Login </Text>
-        </Button>
+        ></Button>
       </View>
     </PaperProvider>
   );
@@ -90,42 +105,22 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     marginLeft: 180,
-    marginTop: 3,
+    marginTop: 8,
     color: "white",
     fontWeight: "bold",
   },
-  input_phone_number: {
+  input: {
     height: 60,
     width: 300,
     // margin: 12,
     borderWidth: 3,
-    marginLeft: 93,
+    marginLeft: 90,
     // padding: 10,
     padding: 10,
     // color: "#32627F",
     // color: "green",
     borderRadius: 9,
-    marginTop: 470,
-    position: "absolute",
-  },
-  button_forgot_password: {
-    position: "absolute",
-    marginTop: 605,
-    marginLeft: 222,
-  },
-  input_password: {
-    height: 60,
-    width: 300,
-    // margin: 12,
-    borderWidth: 3,
-    marginLeft: 93,
-    // padding: 10,
-    padding: 10,
-    // color: "#32627F",
-    // color: "green",
-    borderRadius: 9,
-    marginTop: 550,
-    position: "absolute",
+    marginTop: 10,
   },
   or_text: {
     fontSize: 30,
@@ -137,7 +132,7 @@ const styles = StyleSheet.create({
   text_button: {
     fontSize: 20,
     marginLeft: 50,
-    marginTop: 100,
+    marginTop: 7,
     color: "white",
     fontWeight: "bold",
   },
@@ -169,15 +164,13 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 0,
     // borderRadius: 20,
     // elevation: 100,
-    position: "absolute",
-    marginTop: 755,
-    marginLeft: 120,
+    marginTop: 50,
     // marginLeft: 105,
     // marginRight: 100,
     backgroundColor: "#32627F",
-    height: "7%",
+    height: "13%",
 
-    width: "50%",
+    width: "70%",
   },
   view_button: {
     alignItems: "center",
@@ -186,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;

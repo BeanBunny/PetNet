@@ -31,7 +31,7 @@ db.on("disconnected", function () {
 //   })
 //   .save()
 //   .catch((err) => {
-//     console.log("Error in adding pet owner", err);
+//     console.log("Error in adding pet owner\n", err.message);
 //   });
 
 // models.petowner.find({ email: "scorcese@gmail.com" }, (err, res) => {

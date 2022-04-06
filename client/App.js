@@ -7,7 +7,7 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 const navigator = createStackNavigator(
   {
     StartUp: StartScreen,
-    // Login: LoginScreen,
+    Login: LoginScreen,
     // SignUp: SignUpScreen,
   },
   {

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import ButtonComp from "./components/button.js";
+import ButtonComp from "../components/button";
 
 const StartScreen = () => {
   return (
@@ -11,6 +11,12 @@ const StartScreen = () => {
       <ButtonComp text="Vet Clinic" style={styles.button2} />
     </View>
   );
+};
+
+StartScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
 };
 
 const styles = StyleSheet.create({

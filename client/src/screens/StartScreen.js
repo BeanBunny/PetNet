@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import ButtonComp from "./components/button";
+import ButtonComp from "./components/button.js";
 
 const StartScreen = () => {
   return (

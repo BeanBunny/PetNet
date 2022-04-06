@@ -115,6 +115,46 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         console.log("New clinic saved:", res);
       })
       .catch((err) => console.log("Err in saving clinic", err));
+
+    let verificationTest1 = new verification_clinic({
+      cnic: "4230142301111",
+      email: "saadclinic@gmail.com",
+      password: "saadkinglmao123$$",
+      phone: "03030303039",
+      clinic_name: "fahad Pets Clinic",
+      clinic_location: {
+        long: 22,
+        lat: 22,
+      },
+      PVMC_reg: {
+        name: "Saad 2222",
+        gender: "F",
+        reg_num: 4454546465468,
+        father_name: "Umair Yousaf2222",
+      },
+    })
+      .save()
+      .catch((err) => console.log(err.message));
+
+    let verificationTest2 = new verification_clinic({
+      cnic: "4230142301555",
+      email: "saadclinic@gmail.com",
+      password: "saadkinglmao123$$",
+      phone: "03030303030",
+      clinic_name: "Saad Pets Clinic",
+      clinic_location: {
+        long: 25,
+        lat: 24,
+      },
+      PVMC_reg: {
+        name: "Saad Malik",
+        gender: "M",
+        reg_num: 445454646546460,
+        father_name: "Umair Yousaf",
+      },
+    })
+      .save()
+      .catch((err) => console.log(err.message));
   }
 });
 

@@ -6,6 +6,7 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true, //todo:validate
     maxlength: 255,
+    unique: true,
   },
   password: {
     type: String,

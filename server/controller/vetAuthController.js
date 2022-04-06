@@ -9,7 +9,7 @@ export const postSignup = async (req, res) => {
 
         return res.send("DONE!!!!!!!!!!!!!!!");
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         return res.status(422).send(err.message);
     }
 };

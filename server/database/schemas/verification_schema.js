@@ -1,41 +1,18 @@
 import mongoose from "mongoose";
+import { pvmc } from "./pvmc_schema.js";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-
-const pvmcSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "PVMC name missing"],
-        maxlength: [30, "pvmc user name too long"],
-    },
-    gender: {
-        type: String,
-        required: [true, "gender missing"],
-        maxlength: 1,
-    },
-    reg_num: {
-        type: String,
-        unique: true,
-        required: [true, "Registration number missing"],
-        maxlength: [30, "Registration number too long"],
-    },
-    father_name: {
-        type: String,
-        required: [true, "father name missing"],
-        maxlength: [30, "father mame too long"],
-    },
-});
 
 const verificationSchema = new mongoose.Schema({
     cnic: {
         type: String,
-        required: true,
-        unique: true,
+        required: [true, "cnic missing"],
         match: [/[0-9]{13}$/, "invalid cnic entered, enter 13 digit cnic without dashes"], //03XXXXXXXXX
+        unique: true,
     },
     email: {
         type: String,
-        unique: true,
         required: [true, "Email missing"], //todo:validate
+        unique: true,
         maxlength: 255,
     },
     password: {
@@ -43,11 +20,11 @@ const verificationSchema = new mongoose.Schema({
         required: [true, "Password missing"], //todo:validate
     },
 
-    phone_number: {
+    phone: {
         type: String,
-        unique: true,
         required: [true, "Phone number missing"],
         match: [/^((0))(3)([0-9]{9})$/, "invalid phone number"], //03XXXXXXXXX
+        unique: true,
     },
 
     clinic_name: {
@@ -61,7 +38,7 @@ const verificationSchema = new mongoose.Schema({
         required: true,
     },
 
-    pvmc_reg: pvmcSchema,
+    pvmc_reg: pvmc,
 });
 
 export const verification_model = mongoose.model("verification", verificationSchema);

@@ -18,6 +18,7 @@ const bannedClinic = new mongoose.Schema({
     type: String,
     required: [true, "Email missing"],
     maxlength: 255,
+    unique: true,
   },
   phone: {
     type: String,

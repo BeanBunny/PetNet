@@ -1,126 +1,67 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  Pressable,
-  TextInput,
-  ImageBackground,
-} from "react-native";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { Button } from "react-native-paper";
+import { View, Text, StyleSheet, Image } from "react-native";
+import Input from "../components/inputbox";
+import ButtomComp from "../components/button";
 
-const LoginScreen = (props) => {
-  const [text, onChangeText] = React.useState(null);
+const LoginScreen = () => {
   return (
-    <PaperProvider>
-      <View>
-        {/* <Text style={styles.text}>"Hello"</Text> */}
-        <Image
-          style={styles.image_resize}
-          source={require("../../assets/now.jpg")}
+    <View>
+      <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+      <View style={styles.container}>
+        <Input
+          text="Phone Number"
+          text2="03XX-XXX-XXXX"
+          style={styles.input1}
+          secure={false}
         />
-        <Text style={styles.text}> PetNet </Text>
-        <ImageBackground
-          resizeMode="contain"
-          style={styles.image_login}
-          source={require("../../assets/login.jpg")}
-        >
-          <Text>Hellp</Text>
-          <TextInput
-            // style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder="Phone Number"
-          />
-          {/* <TextInput
-            style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder="Password"
-          />
-          <Button
-            mode="contained"
-            onPress={() => console.log(value)}
-            style={styles.button}
-          ></Button> */}
-        </ImageBackground>
+        <Input
+          text="Password"
+          text2="Password"
+          style={styles.input2}
+          secure={true}
+        />
+        <Text style={styles.forgor}>Forgot Password?</Text>
       </View>
-    </PaperProvider>
+      <ButtomComp text="Login" style={styles.button} />
+    </View>
   );
 };
 
+LoginScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-    marginLeft: 180,
-    marginTop: 8,
-    color: "white",
-    fontWeight: "bold",
+  img: {
+    justifyContent: "center",
+    marginHorizontal: "10%",
+    marginTop: "10%",
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    color: "#32627F",
+  input1: {
+    marginHorizontal: "15%",
+    marginVertical: "5%",
   },
-  or_text: {
-    fontSize: 30,
-    marginLeft: -10,
-    marginTop: 40,
-    color: "white",
-    fontWeight: "bold",
+  input2: {
+    marginHorizontal: "15%",
+    marginVertical: "5%",
   },
-  text_button: {
-    fontSize: 20,
-    marginLeft: 50,
-    marginTop: 7,
-    color: "white",
-    fontWeight: "bold",
+  container: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: "30%",
+    // width: "100%",
+    marginTop: "20%",
+    marginHorizontal: "10%",
   },
-  image_resize: {
-    // flex: 1,
-    // width: 200,
-    marginTop: 30,
-    height: 200,
-    resizeMode: "contain",
-    paddingLeft: 480,
-    // alignItems: "center",
-    // paddingTop: 200,
-  },
-  image_login: {
-    // flex: 1,
-    // width: 200,
-    marginTop: 50,
-    height: 400,
-    resizeMode: "contain",
-    paddingLeft: 480,
-    // alignItems: "center",
-    // paddingTop: 200,
+  forgor: {
+    color: "blue",
+    marginLeft: "60%",
   },
   button: {
-    // the actual contents of the button
-    // alignItems: "center",
-    // justifyContent: "center",
-    // paddingVertical: 25,
-    // paddingHorizontal: 0,
-    // borderRadius: 20,
-    // elevation: 100,
-    marginTop: 50,
-    // marginLeft: 105,
-    // marginRight: 100,
-    backgroundColor: "#32627F",
-    height: "13%",
-
-    width: "70%",
-  },
-  view_button: {
-    alignItems: "center",
-    justifyContent: "center",
-    // color: "black",
+    marginTop: "5%",
+    marginHorizontal: "15%",
   },
 });
 

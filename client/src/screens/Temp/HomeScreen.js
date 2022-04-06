@@ -56,7 +56,7 @@ const HomeScreen = (props) => {
           <Text style={styles.or_text}> OR</Text>
           <Button
             mode="contained"
-            onPress={() => props.navigation.navigate("Login")}
+            onPress={() => props.navigation.navigate("SignUp")}
             style={styles.button}
           >
             <Text style={styles.text_button}>Sign Up</Text>

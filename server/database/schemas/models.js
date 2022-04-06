@@ -9,13 +9,13 @@ import { banned_clinic_model } from "./banned_clinic_schema.js";
 import { banned_petowner_model } from "./banned_petowners_schema.js";
 
 export const models = {
-  petowner: petowner_model,
-  admin: admin_model,
-  appointment: appointment_model,
-  report_petowner: reportPetOwner_model,
-  report_clinic: reportClinic_model,
-  clinic: clinic_model,
-  verification_clinic: verification_model,
-  banned_clinic: banned_clinic_model,
-  banned_petowner: banned_petowner_model,
+    petowner: petowner_model,
+    admin: admin_model,
+    appointment: appointment_model,
+    report_petowner: reportPetOwner_model,
+    report_clinic: reportClinic_model,
+    clinic: clinic_model,
+    verification_clinic: verification_model,
+    banned_clinic: banned_clinic_model,
+    banned_petowner: banned_petowner_model,
 };

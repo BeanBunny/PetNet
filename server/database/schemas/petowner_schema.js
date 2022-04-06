@@ -24,7 +24,6 @@ const petOwnerSchema = new mongoose.Schema({
     trim: true,
     maxlength: [30, "Name too long"],
   },
-
   phone: {
     type: String,
     required: [true, "Phone number missing"],

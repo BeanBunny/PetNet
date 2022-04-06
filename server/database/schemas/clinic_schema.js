@@ -11,11 +11,13 @@ const clinicSchema = new mongoose.Schema({
       /[0-9]{13}$/,
       "invalid cnic entered, enter 13 digit cnic without dashes",
     ], //03XXXXXXXXX
+    unique: true,
   },
   email: {
     type: String,
     required: [true, "Email missing"], //todo:validate
     maxlength: 255,
+    unique: true,
   },
   password: {
     type: String,
@@ -26,6 +28,7 @@ const clinicSchema = new mongoose.Schema({
     type: String,
     required: [true, "Phone number missing"],
     match: [/^((0))(3)([0-9]{9})$/, "invalid phone number"], //03XXXXXXXXX
+    unique: true,
   },
 
   clinic_name: {

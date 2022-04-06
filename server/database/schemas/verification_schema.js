@@ -5,15 +5,17 @@ import { pvmc } from "./pvmc_schema.js";
 const verificationSchema = new mongoose.Schema({
   cnic: {
     type: String,
-    required: true,
+    required: [true, "cnic missing"],
     match: [
       /[0-9]{13}$/,
       "invalid cnic entered, enter 13 digit cnic without dashes",
     ], //03XXXXXXXXX
+    unique: true,
   },
   email: {
     type: String,
     required: [true, "Email missing"], //todo:validate
+    unique: true,
     maxlength: 255,
   },
   password: {
@@ -25,6 +27,7 @@ const verificationSchema = new mongoose.Schema({
     type: String,
     required: [true, "Phone number missing"],
     match: [/^((0))(3)([0-9]{9})$/, "invalid phone number"], //03XXXXXXXXX
+    unique: true,
   },
 
   clinic_name: {

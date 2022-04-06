@@ -16,6 +16,7 @@ const pvmcSchema = new mongoose.Schema({
     type: String,
     required: [true, "Registration number missing"],
     maxlength: [30, "Registration number too long"],
+    unique: true,
   },
   father_name: {
     type: String,

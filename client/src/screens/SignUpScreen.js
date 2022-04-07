@@ -45,7 +45,8 @@ const SignUpScreen = () => {
       <AlertButton
         style={styles.button}
         text="Sign Up"
-        alertText="Your account has been created"
+        alertText1="Your account has been created!"
+        alertText2="Login to get started!"
       />
     </View>
   );

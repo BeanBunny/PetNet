@@ -3,10 +3,12 @@ import express from "express";
 // import auth0 from "auth0-js";
 import * as adminController from "../controller/adminController.js";
 
-const adminAuthRoutes = express.Router();
+const adminRoutes = express.Router();
 
-adminAuthRoutes.post("/signup", adminController.postSignup);
+adminRoutes.get("/sign-up-requests", adminController.getSignUpRequests);
 
-adminAuthRoutes.get("/signup", adminController.getSignup);
+adminRoutes.post("/signup", adminController.postSignup);
 
-export default adminAuthRoutes;
+adminRoutes.get("/signup", adminController.getSignup);
+
+export default adminRoutes;

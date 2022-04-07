@@ -3,10 +3,10 @@ import express from "express";
 // import auth0 from "auth0-js";
 import * as vetController from "../controller/vetController.js";
 
-const vetAuthRoutes = express.Router();
+const vetRoutes = express.Router();
 
-vetAuthRoutes.post("/signup", vetController.postSignup);
+vetRoutes.post("/signup", vetController.postSignup);
 
-vetAuthRoutes.get("/signup", vetController.getSignup);
+vetRoutes.get("/signup", vetController.getSignup);
 
-export default vetAuthRoutes;
+export default vetRoutes;

@@ -1,9 +1,7 @@
 import { models } from "../models/models.js";
 
 export const postSignup = async (req, res) => {
-    console.log(req.body);
-
-    res.send("INSIDE ADMIN");
+    res.send("INSIDE SIGNUP - POST");
 };
 
 export const getSignup = (req, res) => {
@@ -12,4 +10,13 @@ export const getSignup = (req, res) => {
     res.send("INSIDE SIGNUP - GET");
 };
 
-export const postLogin = (req, res) => {};
+export const getSignUpRequests = (req, res) => {
+    console.log("aaaa");
+
+    // try {
+    //     const pendingRequests = models.verification_clinic().
+    // } catch (err) {console.log(err.message);
+    // return res.status(422).send(err.message);}
+
+    res.send("AAAAA");
+};

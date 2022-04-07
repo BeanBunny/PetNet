@@ -1,8 +1,6 @@
 import { models } from "../models/models.js";
 
 export const postSignup = async (req, res) => {
-    console.log(req.body);
-
     try {
         const signup = models.verification_clinic(req.body);
         await signup.save();

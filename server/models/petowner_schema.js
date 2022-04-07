@@ -24,16 +24,17 @@ const petOwnerSchema = new mongoose.Schema({
     trim: true,
     maxlength: [30, "Name too long"],
   },
-
   phone: {
     type: String,
     required: [true, "Phone number missing"],
     match: [/^((0))(3)([0-9]{9})$/, "invalid phone number"], //03XXXXXXXXX
+    unique: true,
   },
   email: {
     type: String,
     required: [true, "Email missing"], //todo:validate
     maxlength: 255,
+    unique: true,
   },
   password: {
     type: String,
@@ -43,53 +44,4 @@ const petOwnerSchema = new mongoose.Schema({
   pet: petSchema,
 });
 
-const adminSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true, //todo:validate
-    maxlength: 255,
-  },
-  password: {
-    type: String,
-    required: true,
-    maxlength: 20,
-  },
-});
-
-const appointmentSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  time: {
-    type: Date,
-    required: true,
-  },
-  status: {
-    type: String,
-    required: true,
-  },
-  petowner_id: {
-    type: ObjectId,
-    required: true,
-  },
-  pet_id: {
-    type: ObjectId,
-    required: true,
-  },
-  vet_id: {
-    type: ObjectId,
-    required: true,
-  },
-});
-
-export const models = [
-  mongoose.model("pet owner", petOwnerSchema),
-  mongoose.model("admin", adminSchema),
-  mongoose.model("appointment", appointmentSchema),
-  //Add more models then export as a list
-];
+export const petowner_model = mongoose.model("pet owner", petOwnerSchema);

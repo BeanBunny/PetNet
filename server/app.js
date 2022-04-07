@@ -1,8 +1,8 @@
 // Import all dependencies & middleware here
 import express from "express";
 import bodyParser from "body-parser";
-import userController from "./controller/userController.js";
-import vetAuthRoutes from "./routes/vetAuthRoutes.js";
+import vetRoutes from "./routes/vetRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
 // import pkg from "express-openid-connect";
@@ -48,7 +48,9 @@ const config = {
 
 app.use(bodyParser.json());
 
-app.use("/vet", vetAuthRoutes);
+app.use("/vet", vetRoutes);
+
+app.use("/admin", adminRoutes);
 
 // Start Server here
 const port = process.env.PORT;

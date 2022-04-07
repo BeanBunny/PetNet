@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
 import ButtomComp from "../components/button";
+import Textbutton from "../components/TextOnlyButton";
 
 const LoginScreen = () => {
   return (
@@ -20,9 +21,15 @@ const LoginScreen = () => {
           style={styles.input2}
           secure={true}
         />
-        <Text style={styles.forgor}>Forgot Password?</Text>
+        <Textbutton text="Forgot Password?" margin_left="38%" />
       </View>
       <ButtomComp text="Login" style={styles.button} />
+      <View>
+        <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
+          Don't have an account?
+        </Text>
+        <Textbutton text="Sign Up" margin_left="29%" routeName="Signup" />
+      </View>
     </View>
   );
 };
@@ -36,8 +43,10 @@ LoginScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
+    resizeMode: "contain",
+    height: "30%",
     marginHorizontal: "10%",
-    marginTop: "10%",
+    marginTop: "15%",
   },
   input1: {
     marginHorizontal: "15%",

@@ -12,12 +12,6 @@ const SignUpScreen = () => {
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
       <View style={styles.container}>
         <Input
-          text="Name"
-          text2="Sarah Dar"
-          style={styles.input1}
-          secure={false}
-        />
-        <Input
           text="Phone Number"
           text2="03XX-XXX-XXXX"
           style={styles.input1}
@@ -29,26 +23,14 @@ const SignUpScreen = () => {
           style={styles.input1}
           secure={false}
         />
-        <Input
-          text="Password"
-          text2="Password"
-          style={styles.input2}
-          secure={true}
-        />
-        <Input
-          text="Confirm Password"
-          text2="Confirm Password"
-          style={styles.input2}
-          secure={true}
-        />
       </View>
       <AlertButton
         style={styles.button}
-        text="Sign Up"
+        text="Send OTP"
         route="Login"
-        alertText1="Your account has been created!"
-        alertText2="Login to get started!"
-        alertText3="Account Created! Login to Continue"
+        alertText1="An OTP has been generated"
+        alertText2="Access it on your email or phone number"
+        alertText3="Enter OTP"
       />
     </View>
   );
@@ -64,7 +46,7 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     resizeMode: "contain",
-    height: "15%",
+    height: "30%",
     marginHorizontal: "10%",
     marginTop: "10%",
   },
@@ -79,9 +61,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: "63%",
+    height: "30%",
     // width: "100%",
-    marginTop: "5%",
+    marginTop: "20%",
     marginHorizontal: "10%",
   },
   forgor: {

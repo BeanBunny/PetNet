@@ -21,7 +21,11 @@ const LoginScreen = () => {
           style={styles.input2}
           secure={true}
         />
-        <Textbutton text="Forgot Password?" margin_left="38%" />
+        <Textbutton
+          text="Forgot Password?"
+          margin_left="38%"
+          routeName="ForgotPassword"
+        />
       </View>
       <ButtomComp text="Login" style={styles.button} />
       <View>

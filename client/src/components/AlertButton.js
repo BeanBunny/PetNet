@@ -9,12 +9,20 @@ import {
 } from "react-native";
 import { withNavigation } from "react-navigation";
 
-const AlertButton = ({ style, text, navigation, alertText1, alertText2 }) => {
+const AlertButton = ({
+  style,
+  text,
+  navigation,
+  alertText1,
+  alertText2,
+  alertText3,
+  route,
+}) => {
   return (
     <View style={style}>
       <TouchableOpacity
         onPress={() => {
-          showAlert(alertText1, alertText2, navigation);
+          showAlert(alertText1, alertText2, alertText3, navigation, route);
         }}
         style={styles.container}
       >
@@ -37,12 +45,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const showAlert = (alertText1, alertText2, navigation) =>
+const showAlert = (alertText1, alertText2, alertText3, navigation, route) =>
   Alert.alert(alertText1, alertText2, [
     {
-      text: "Account Created! Login to Start",
+      text: alertText3,
       onPress: () => {
-        navigation.navigate("Login");
+        navigation.navigate(route);
       },
     },
   ]);

@@ -16,7 +16,7 @@ const reportClinicSchema = new mongoose.Schema({
   },
 });
 
-export const reportClinic_model = mongoose.model(
+export const reportClinicModel = mongoose.model(
   "reported clinic",
   reportClinicSchema
 );

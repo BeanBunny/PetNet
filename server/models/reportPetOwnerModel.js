@@ -16,7 +16,7 @@ const reportPetOwnerSchema = new mongoose.Schema({
   },
 });
 
-export const reportPetOwner_model = mongoose.model(
+export const reportPetOwnerModel = mongoose.model(
   "reported pet owner",
   reportPetOwnerSchema
 );

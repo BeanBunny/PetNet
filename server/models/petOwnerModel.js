@@ -44,4 +44,4 @@ const petOwnerSchema = new mongoose.Schema({
   pet: petSchema,
 });
 
-export const petowner_model = mongoose.model("pet owner", petOwnerSchema);
+export const petOwnerModel = mongoose.model("pet owner", petOwnerSchema);

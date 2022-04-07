@@ -32,7 +32,7 @@ const appointmentSchema = new mongoose.Schema({
   },
 });
 
-export const appointment_model = mongoose.model(
+export const appointmentModel = mongoose.model(
   "appointment",
   appointmentSchema
 );

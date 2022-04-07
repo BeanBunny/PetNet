@@ -1,20 +1,19 @@
 import mongoose from "mongoose";
+import { pvmc } from "./pvmcModel.js";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-import { pvmc } from "./pvmc_schema.js";
-import { services } from "./services_schema.js";
 
-const clinicSchema = new mongoose.Schema({
+const verificationSchema = new mongoose.Schema({
     cnic: {
         type: String,
-        required: true,
+        required: [true, "cnic missing"],
         match: [/[0-9]{13}$/, "invalid cnic entered, enter 13 digit cnic without dashes"], //03XXXXXXXXX
         unique: true,
     },
     email: {
         type: String,
         required: [true, "Email missing"], //todo:validate
-        maxlength: 255,
         unique: true,
+        maxlength: 255,
     },
     password: {
         type: String,
@@ -34,20 +33,12 @@ const clinicSchema = new mongoose.Schema({
         maxlength: [40, "Name to long"],
     },
 
-    about_clinic: {
-        type: String,
-        required: false,
-        maxlength: [16777215, "About too long"], //MEDIUMTEXT
-    },
-
     clinic_location: {
         type: Object,
         required: true,
     },
 
     pvmc_reg: pvmc,
-
-    Services: [services],
 });
 
-export const clinic_model = mongoose.model("Vet clinic", clinicSchema);
+export const verificationModel = mongoose.model("verification", verificationSchema);

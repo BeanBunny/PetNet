@@ -1,1 +1,1 @@
-/Users/Umair/mongodb/bin/mongod.exe --dbpath=/Users/umair/mongodb-data
+/Users/shaya/mongodb/bin/mongod.exe --dbpath=/Users/shaya/mongodb-data

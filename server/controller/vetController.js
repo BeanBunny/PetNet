@@ -1,4 +1,4 @@
-import { models } from "../database/schemas/models.js";
+import { models } from "../models/models.js";
 
 export const postSignup = async (req, res) => {
     console.log(req.body);

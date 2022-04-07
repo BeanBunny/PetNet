@@ -11,4 +11,8 @@ adminRoutes.post("/signup", adminController.postSignup);
 
 adminRoutes.get("/signup", adminController.getSignup);
 
+adminRoutes.get("/ban-user", adminController.getBanUser);
+
+adminRoutes.post("/ban-user", adminController.postBanUser);
+
 export default adminRoutes;

@@ -47,7 +47,7 @@ const clinicSchema = new mongoose.Schema({
 
     pvmc_reg: pvmc,
 
-    Services: [services],
+    services: [services],
 });
 
 export const clinicModel = mongoose.model("Vet clinic", clinicSchema);

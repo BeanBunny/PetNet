@@ -5,7 +5,7 @@ import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 import { reportClinicModel } from "./reportClinicModel.js";
 import { clinicModel } from "./clinicModel.js";
 import { verificationModel } from "./verificationModel.js";
-import { bannedClinicModel } from "./bannedClinicModel.js";
+import { bannedClinicModel, removeClinicCascadeModel } from "./bannedClinicModel.js";
 import { bannedPetOwnersModel } from "./bannedPetOwnersModel.js";
 
 export const models = {
@@ -17,5 +17,6 @@ export const models = {
     clinic: clinicModel,
     verificationClinic: verificationModel,
     bannedClinic: bannedClinicModel,
-    bannedPetOwner: bannedPetOwnersModel,
+    bannedPetOwners: bannedPetOwnersModel,
+    removeClinicCascade: removeClinicCascadeModel,
 };

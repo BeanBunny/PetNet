@@ -6,37 +6,31 @@ import Textbutton from "../components/TextOnlyButton";
 import AlertButton from "../components/AlertButton";
 
 // name, phone number, email, password, confirm password
-const ForgotPassword = () => {
+const EnterOTP = () => {
   return (
     <View>
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
       <View style={styles.container}>
         <Input
-          text="Phone Number"
-          text2="03XX-XXX-XXXX"
-          style={styles.input1}
-          secure={false}
-        />
-        <Input
-          text="Email Address"
-          text2="example@xyz.com"
+          text="Enter OTP"
+          text2="123xy"
           style={styles.input1}
           secure={false}
         />
       </View>
       <AlertButton
         style={styles.button}
-        text="Send OTP"
-        route="EnterOTP"
-        alertText1="An OTP has been generated"
-        alertText2="Access it on your email or phone number"
-        alertText3="Enter OTP"
+        text="Submit"
+        route="Login"
+        alertText1="OTP Successfully Entered"
+        // alertText2="Access it on your email or phone number"
+        alertText3="Enter New Password"
       />
     </View>
   );
 };
 
-ForgotPassword.navigationOptions = () => {
+EnterOTP.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     resizeMode: "contain",
-    height: "30%",
+    height: "50%",
     marginHorizontal: "10%",
     marginTop: "10%",
   },
@@ -61,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: "30%",
+    height: "13%",
     // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
@@ -76,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPassword;
+export default EnterOTP;

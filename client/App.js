@@ -6,6 +6,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import "react-native-gesture-handler";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
+import EnterOTP from "./src/screens/EnterOTP";
 
 const defaultNavigationOptions = {
   cardStyle: { backgroundColor: "#66C4D2" },
@@ -18,6 +19,7 @@ const navigator = createSwitchNavigator({
       Login: LoginScreen,
       Signup: SignUpScreen,
       ForgotPassword: ForgotPassword,
+      EnterOTP: EnterOTP,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,

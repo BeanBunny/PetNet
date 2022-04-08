@@ -1,13 +1,13 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import StartScreen from "./src/screens/StartScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import HomeScreen from "./src/screens/HomeScreen";
+import LoginScreen from "./src/screens/petscreens/LoginScreen";
+import HomeScreen from "./src/screens/petscreens/HomeScreen";
 import "react-native-gesture-handler";
-import SignUpScreen from "./src/screens/SignUpScreen";
-import ForgotPassword from "./src/screens/ForgotPassword";
-import EnterOTP from "./src/screens/EnterOTP";
-import CreatePassword from "./src/screens/CreatePassword";
+import SignUpScreen from "./src/screens/petscreens/SignUpScreen";
+import ForgotPasswordScreen from "./src/screens/petscreens/ForgotPassword";
+import EnterOTPScreen from "./src/screens/petscreens/EnterOTP";
+import CreatePasswordScreen from "./src/screens/petscreens/CreatePassword";
 
 const defaultNavigationOptions = {
   cardStyle: { backgroundColor: "#66C4D2" },
@@ -19,9 +19,9 @@ const navigator = createSwitchNavigator({
       StartUp: StartScreen,
       Login: LoginScreen,
       Signup: SignUpScreen,
-      ForgotPassword: ForgotPassword,
-      EnterOTP: EnterOTP,
-      CreatePassword: CreatePassword,
+      ForgotPassword: ForgotPasswordScreen,
+      EnterOTP: EnterOTPScreen,
+      CreatePassword: CreatePasswordScreen,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,

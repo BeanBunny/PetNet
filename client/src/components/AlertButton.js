@@ -6,16 +6,16 @@ const AlertButton = ({
   style,
   text,
   navigation,
-  alertText1,
-  alertText2,
-  alertText3,
+  alert1,
+  alert2,
+  alert3,
   route,
 }) => {
   return (
     <View style={style}>
       <TouchableOpacity
         onPress={() => {
-          showAlert(alertText1, alertText2, alertText3, navigation, route);
+          showAlert(alert1, alert2, alert3, navigation, route);
         }}
         style={styles.container}
       >
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const showAlert = (alertText1, alertText2, alertText3, navigation, route) =>
-  Alert.alert(alertText1, alertText2, [
+const showAlert = (alert1, alert2, alert3, navigation, route) =>
+  Alert.alert(alert1, alert2, [
     {
-      text: alertText3,
+      text: alert3,
       onPress: () => {
         navigation.navigate(route);
       },

@@ -1,9 +1,9 @@
 import React from "react";
 import { FlatList, View, Text, StyleSheet } from "react-native";
 import { Provider } from "react-native-paper";
-import Bar from "../components/Bar";
-import TopBar from "../components/TopBar";
-import Search from "../components/SearchBar";
+import Bar from "../../components/Bar";
+import TopBar from "../../components/TopBar";
+import Search from "../../components/SearchBar";
 
 const HomeScreen = () => {
   const queryRes = [

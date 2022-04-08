@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import Input from "../components/inputbox";
-import ButtomComp from "../components/button";
-import Textbutton from "../components/TextOnlyButton";
+import Input from "../../components/InputBox";
+import ButtomComp from "../../components/Button";
+import Textbutton from "../../components/TextOnlyButton";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "Email":
+      return { ...state, Email: action.payload };
+    case "Password":
+      return { ...state, Password: action.payload };
+    default:
+      return state;
+  }
+};
 
 const LoginScreen = () => {
+  const [state, dispatch] = useReducer(reducer, { Email: "", Password: "" });
   return (
-    <View>
-      <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+    <View style={{ flex: 1 }}>
+      <Image
+        style={styles.img}
+        source={require("../../../assets/Logo1.jpeg")}
+      />
       <View style={styles.container}>
         <Input
-          text="Phone Number"
-          text2="03XX-XXX-XXXX"
+          label="Email"
+          placeholder="example@gmail.com"
+          reducer={[state, dispatch]}
           style={styles.input1}
           secure={false}
         />
         <Input
-          text="Password"
-          text2="Password"
+          label="Password"
+          placeholder="Password"
+          reducer={[state, dispatch]}
           style={styles.input2}
           secure={true}
         />
         <Textbutton
           text="Forgot Password?"
-          margin_left="38%"
+          marginLeft="38%"
           routeName="ForgotPassword"
         />
       </View>
@@ -32,7 +49,7 @@ const LoginScreen = () => {
         <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
           Don't have an account?
         </Text>
-        <Textbutton text="Sign Up" margin_left="29%" routeName="Signup" />
+        <Textbutton text="Sign Up" marginLeft="29%" routeName="Signup" />
       </View>
     </View>
   );

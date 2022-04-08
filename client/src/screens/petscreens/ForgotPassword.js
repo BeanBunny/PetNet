@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import Input from "../components/inputbox";
-import AlertButton from "../components/AlertButton";
+import Input from "../../components/InputBox";
+import AlertButton from "../../components/AlertButton";
 
-// name, phone number, email, password, confirm password
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "Email":
+      return { ...state, Email: action.payload };
+    default:
+      return state;
+  }
+};
+
 const ForgotPassword = () => {
+  const [state, dispatch] = useReducer(reducer, { Email: "" });
   return (
     <View>
-      <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+      <Image
+        style={styles.img}
+        source={require("../../../assets/Logo1.jpeg")}
+      />
       <View style={styles.container}>
         <Input
-          text="Phone Number"
-          text2="03XX-XXX-XXXX"
-          style={styles.input1}
-          secure={false}
-        />
-        <Input
-          text="Email Address"
-          text2="example@xyz.com"
-          style={styles.input1}
+          label="Email"
+          placeholder="example@gmail.com"
+          reducer={[state, dispatch]}
+          style={styles.input}
           secure={false}
         />
       </View>
@@ -26,9 +33,9 @@ const ForgotPassword = () => {
         style={styles.button}
         text="Send OTP"
         route="EnterOTP"
-        alertText1="An OTP has been generated"
-        alertText2="Access it on your email or phone number"
-        alertText3="Enter OTP"
+        alert1="An OTP has been generated."
+        alert2="Access it on your Email or Phone Number."
+        alert3="Enter OTP"
       />
     </View>
   );
@@ -48,11 +55,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "10%",
     marginTop: "10%",
   },
-  input1: {
-    marginHorizontal: "15%",
-    marginVertical: "5%",
-  },
-  input2: {
+  input: {
     marginHorizontal: "15%",
     marginVertical: "5%",
   },
@@ -60,13 +63,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     height: "30%",
-    // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
-  },
-  forgor: {
-    color: "blue",
-    marginLeft: "60%",
   },
   button: {
     marginTop: "5%",

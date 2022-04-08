@@ -2,17 +2,17 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-const inputbox = (props) => {
-  const [text, setText] = React.useState("");
+const inputbox = ({ label, placeholder, reducer, style, secure }) => {
+  const [state, dispatch] = reducer;
   return (
-    <View style={props.style}>
+    <View style={style}>
       <TextInput
-        label={props.text}
-        value={text}
+        label={label}
+        value={state[label]}
         mode="outlined"
-        secureTextEntry={props.secure}
-        placeholder={props.text2}
-        onChangeText={(text) => setText(text)}
+        secureTextEntry={secure}
+        placeholder={placeholder}
+        onChangeText={(val) => dispatch({ type: label, payload: val })}
       />
     </View>
   );

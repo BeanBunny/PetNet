@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { View, StyleSheet, Image } from "react-native";
-import Input from "../components/inputbox";
-import AlertButton from "../components/AlertButton";
+import Input from "../../components/InputBox";
+import AlertButton from "../../components/AlertButton";
 
-// name, phone number, email, password, confirm password
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "OTP":
+      return { ...state, OTP: action.payload };
+    default:
+      return state;
+  }
+};
+
 const EnterOTP = () => {
+  const [state, dispatch] = useReducer(reducer, { OTP: "" });
   return (
     <View>
-      <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+      <Image
+        style={styles.img}
+        source={require("../../../assets/Logo1.jpeg")}
+      />
       <View style={styles.container}>
         <Input
-          text="Enter OTP"
-          text2="123xy"
-          style={styles.input1}
+          label="OTP"
+          placeholder="123xy"
+          reducer={[state, dispatch]}
+          style={styles.input}
           secure={false}
         />
       </View>
@@ -20,9 +33,8 @@ const EnterOTP = () => {
         style={styles.button}
         text="Submit"
         route="CreatePassword"
-        alertText1="OTP Successfully Entered"
-        // alertText2="Access it on your email or phone number"
-        alertText3="Enter New Password"
+        alert1="OTP Successfully Entered!"
+        alert3="Enter New Password"
       />
     </View>
   );
@@ -42,11 +54,7 @@ const styles = StyleSheet.create({
     marginHorizontal: "10%",
     marginTop: "10%",
   },
-  input1: {
-    marginHorizontal: "15%",
-    marginVertical: "5%",
-  },
-  input2: {
+  input: {
     marginHorizontal: "15%",
     marginVertical: "5%",
   },
@@ -54,13 +62,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     height: "13%",
-    // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
-  },
-  forgor: {
-    color: "blue",
-    marginLeft: "60%",
   },
   button: {
     marginTop: "5%",

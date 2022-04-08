@@ -2,19 +2,12 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { withNavigation } from "react-navigation";
 
-const TextOnlyButton = ({
-  style,
-  text,
-  margin_left,
-  routeName,
-  navigation,
-}) => {
-  console.log(routeName);
+const TextOnlyButton = ({ style, text, marginLeft, routeName, navigation }) => {
   return (
     <View style={style}>
       <TouchableOpacity
         onPress={() => navigation.navigate(routeName)}
-        style={newstyle(margin_left)}
+        style={newstyle(marginLeft)}
       >
         <Text style={styles.textStyle}>{text}</Text>
       </TouchableOpacity>
@@ -22,10 +15,10 @@ const TextOnlyButton = ({
   );
 };
 
-function newstyle(margin_left) {
+function newstyle(marginLeft) {
   return {
     marginTop: "-9.75%",
-    marginLeft: margin_left,
+    marginLeft: marginLeft,
     padding: "5%",
     alignItems: "center",
   };

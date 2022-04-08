@@ -1,58 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
 import AlertButton from "../components/AlertButton";
 
 // name, phone number, email, password, confirm password
-const SignUpScreen = () => {
+const EnterOTP = () => {
   return (
     <View>
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
       <View style={styles.container}>
         <Input
-          text="Name"
-          text2="Sarah Dar"
+          text="Enter OTP"
+          text2="123xy"
           style={styles.input1}
           secure={false}
-        />
-        <Input
-          text="Phone Number"
-          text2="03XX-XXX-XXXX"
-          style={styles.input1}
-          secure={false}
-        />
-        <Input
-          text="Email Address"
-          text2="example@xyz.com"
-          style={styles.input1}
-          secure={false}
-        />
-        <Input
-          text="Password"
-          text2="Password"
-          style={styles.input2}
-          secure={true}
-        />
-        <Input
-          text="Confirm Password"
-          text2="Confirm Password"
-          style={styles.input2}
-          secure={true}
         />
       </View>
       <AlertButton
         style={styles.button}
-        text="Sign Up"
-        route="Login"
-        alertText1="Your account has been created!"
-        alertText2="Login to get started!"
-        alertText3="Account Created! Login to Continue"
+        text="Submit"
+        route="CreatePassword"
+        alertText1="OTP Successfully Entered"
+        // alertText2="Access it on your email or phone number"
+        alertText3="Enter New Password"
       />
     </View>
   );
 };
 
-SignUpScreen.navigationOptions = () => {
+EnterOTP.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -62,7 +38,7 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     resizeMode: "contain",
-    height: "15%",
+    height: "50%",
     marginHorizontal: "10%",
     marginTop: "10%",
   },
@@ -77,9 +53,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: "63%",
+    height: "13%",
     // width: "100%",
-    marginTop: "5%",
+    marginTop: "20%",
     marginHorizontal: "10%",
   },
   forgor: {
@@ -92,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default EnterOTP;

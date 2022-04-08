@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
-import ButtomComp from "../components/button";
-import Textbutton from "../components/TextOnlyButton";
+import AlertButton from "../components/AlertButton";
 
-const LoginScreen = () => {
+// name, phone number, email, password, confirm password
+const ForgotPassword = () => {
   return (
     <View>
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
@@ -16,29 +16,25 @@ const LoginScreen = () => {
           secure={false}
         />
         <Input
-          text="Password"
-          text2="Password"
-          style={styles.input2}
-          secure={true}
-        />
-        <Textbutton
-          text="Forgot Password?"
-          margin_left="38%"
-          routeName="ForgotPassword"
+          text="Email Address"
+          text2="example@xyz.com"
+          style={styles.input1}
+          secure={false}
         />
       </View>
-      <ButtomComp text="Login" style={styles.button} />
-      <View>
-        <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
-          Don't have an account?
-        </Text>
-        <Textbutton text="Sign Up" margin_left="29%" routeName="Signup" />
-      </View>
+      <AlertButton
+        style={styles.button}
+        text="Send OTP"
+        route="EnterOTP"
+        alertText1="An OTP has been generated"
+        alertText2="Access it on your email or phone number"
+        alertText3="Enter OTP"
+      />
     </View>
   );
 };
 
-LoginScreen.navigationOptions = () => {
+ForgotPassword.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -50,7 +46,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     height: "30%",
     marginHorizontal: "10%",
-    marginTop: "15%",
+    marginTop: "10%",
   },
   input1: {
     marginHorizontal: "15%",
@@ -78,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default ForgotPassword;

@@ -1,24 +1,5 @@
+import { models } from "./models.js";
 import mongoose from "mongoose";
-import { petowner_model } from "./petowner_schema.js";
-import { appointment_model } from "./appointment_schema.js";
-import { admin_model } from "./admin_schema.js";
-import { reportPetOwner_model } from "./report_petowner_schema.js";
-import { reportClinic_model } from "./report_clinic_schema.js";
-import { clinic_model } from "./clinic_schema.js";
-import { verification_model } from "./verification_schema.js";
-import { banned_clinic_model } from "./banned_clinic_schema.js";
-import { banned_petowner_model } from "./banned_petowners_schema.js";
-
-const petOwner = petowner_model;
-const admin = admin_model;
-const appointment = appointment_model;
-const report_petowner = reportPetOwner_model;
-const report_clinic = reportClinic_model;
-const clinic = clinic_model;
-const verification_clinic = verification_model;
-const banned_clinic = banned_clinic_model;
-const banned_petowner = banned_petowner_model;
-//import more models as schema is made
 
 //On establishing connection, collections from models are automatically added to db if they dont exist there
 mongoose.connect("mongodb://localhost/petnet", (error, db) => {
@@ -28,133 +9,132 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     console.log("DB connected");
 
     //check petowner insertion
-    let testPetOwner = new petOwner({
-      name: "Martin Scorsese",
-      phone: "03009988770", //check regex
-      email: "scorcese@gmail.com",
-      password: "qwertyuiop123$$",
-      pet: {
-        pet_type: "Dog",
-        pet_name: "De Niro",
-      },
-    });
-    testPetOwner
+    models
+      .petOwner({
+        name: "Martin Scorsese",
+        phone: "03009988770", //check regex
+        email: "scorcesegmail.com", //invalid email
+        password: "qwertyuiop123$$",
+        pet: [
+          {
+            pet_type: "Dog",
+            pet_name: "De Niro",
+          },
+
+          {
+            pet_type: "Dog",
+            pet_name: "De Liro",
+          },
+        ],
+        location: {
+          lat: 3000,
+          long: 898,
+          city: "Lahore",
+        },
+      })
       .save()
       .then((res) => {
         console.log("Pet owner added", res);
       })
       .catch((err) => {
-        console.log("Error in adding pet owner", err);
+        console.log("Error in adding pet owner", err.message);
       });
 
     //script to check admin
-    let testAdmin = new admin({
-      email: "abc@gmail.com",
-      password: "qwertyuiop123$$",
-    });
-    testAdmin
+    models
+      .admin({
+        email: "abc@gmail.com",
+        password: "qwertyuiop123$$",
+      })
       .save()
       .then((res) => {
         console.log("New Admin saved:", res);
       })
-      .catch((err) => console.log("Err in saving", err));
+      .catch((err) => console.log("Err in saving", err.message));
 
     //script to check report petowner
-    let testReportPetOwner = new report_petowner({
-      pet_owner_id: new mongoose.Types.ObjectId(),
-      report_reason: "Spam appointments",
-      vet_id: new mongoose.Types.ObjectId(),
-    });
-    testReportPetOwner
+    models
+      .reportPetOwner({
+        pet_owner_id: new mongoose.Types.ObjectId(),
+        report_reason: "Spam appointments",
+        vet_id: new mongoose.Types.ObjectId(),
+      })
       .save()
       .then((res) => {
         console.log("New pet owner report saved:", res);
       })
-      .catch((err) => console.log("Err in saving pet owner report", err));
+      .catch((err) =>
+        console.log("Err in saving pet owner report", err.message)
+      );
 
     //script to check clinic
-    let testclinic = new clinic({
-      cnic: "4230142301555",
-      email: "saadclinic@gmail.com",
-      password: "saadkinglmao123$$",
-      phone: "03030303030",
-      clinic_name: "Saad Pets Clinic",
-      //about_clinic: "", //not mandatory
-      clinic_location: {
-        Lat: 121,
-        Long: 555,
-      },
-      PVMC_reg: {
-        name: "Saad Malik",
-        gender: "M",
-        reg_num: 445454646546468,
-        father_name: "Umair Yousaf",
-      },
-      Services: [
-        {
-          service_name: "Deworming",
-          description: "Worm nikaal jaani",
-          price: 500,
+    models
+      .clinic({
+        cnic: "4230142301555",
+        email: "saadclinic@gmail.com",
+        password: "saadkinglmao123$$",
+        phone: "03030303030",
+        clinic_name: "Saad Pets Clinic",
+        //about_clinic: "", //not mandatory
+        clinic_location: {
+          Lat: 121,
+          Long: 555,
         },
-        {
-          service_name: "Vaccination",
-          description:
-            "Get your pet vaccinated, price includes all annual vaccinations",
-          price: 2000,
+        PVMC_reg: {
+          name: "Saad Malik",
+          gender: "M",
+          reg_num: 445454646546468,
+          father_name: "Umair Yousaf",
         },
-        {
-          service_name: "Grooming",
-          description: "Haircut and nails cut",
-          price: 1000,
-        },
-      ],
-    });
-    testclinic
+        Services: [
+          {
+            service_name: "Deworming",
+            description: "Worm nikaal jaani",
+            price: 500,
+          },
+          {
+            service_name: "Vaccination",
+            description:
+              "Get your pet vaccinated, price includes all annual vaccinations",
+            price: 2000,
+          },
+          {
+            service_name: "Grooming",
+            description: "Haircut and nails cut",
+            price: 1000,
+          },
+        ],
+      })
       .save()
       .then((res) => {
         console.log("New clinic saved:", res);
       })
-      .catch((err) => console.log("Err in saving clinic", err));
+      .catch((err) => console.log("Err in saving clinic", err.message));
 
-    let verificationTest1 = new verification_clinic({
-      cnic: "4230142301111",
-      email: "saadclinic@gmail.com",
-      password: "saadkinglmao123$$",
-      phone: "03030303039",
-      clinic_name: "fahad Pets Clinic",
-      clinic_location: {
-        long: 22,
-        lat: 22,
-      },
-      PVMC_reg: {
-        name: "Saad 2222",
-        gender: "F",
-        reg_num: 4454546465468,
-        father_name: "Umair Yousaf2222",
-      },
-    })
+    models
+      .verificationClinic({
+        cnic: "4230142301111",
+        email: "saadclinic@gmail.com",
+        password: "saadkinglmao123$$",
+        phone: "03030303039",
+        clinic_name: "fahad Pets Clinic",
+        clinic_location: {
+          long: 22,
+          lat: 22,
+        },
+        PVMC_reg: {
+          name: "Saad 2222",
+          gender: "F",
+          reg_num: 4454546465468,
+          father_name: "Umair Yousaf2222",
+        },
+      })
       .save()
       .catch((err) => console.log(err.message));
 
-    let verificationTest2 = new verification_clinic({
-      cnic: "4230142301555",
-      email: "saadclinic@gmail.com",
-      password: "saadkinglmao123$$",
-      phone: "03030303030",
-      clinic_name: "Saad Pets Clinic",
-      clinic_location: {
-        long: 25,
-        lat: 24,
-      },
-      PVMC_reg: {
-        name: "Saad Malik",
-        gender: "M",
-        reg_num: 445454646546460,
-        father_name: "Umair Yousaf",
-      },
-    })
-      .save()
-      .catch((err) => console.log(err.message));
+    // models.admin.find({ email: "abcs@gmail.com" }, (err, res) => {
+    //   console.log(res);
+    // });
   }
 });
 

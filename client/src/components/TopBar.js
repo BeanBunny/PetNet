@@ -6,7 +6,7 @@ const topbar = (props) => {
   return (
     <Appbar style={props.style}>
       <Appbar.Action icon="menu" onPress={() => {}} />
-      <Text style={props.textStyle}>{props.text}</Text>
+      <Appbar.Content title={props.text} style={props.textStyle} />
     </Appbar>
   );
 };

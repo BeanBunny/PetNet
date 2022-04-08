@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, View, Text, StyleSheet } from "react-native";
+import { Provider } from "react-native-paper";
 import Bar from "../components/Bar";
 import TopBar from "../components/TopBar";
 import Search from "../components/SearchBar";
@@ -16,7 +17,7 @@ const HomeScreen = () => {
     { uri: "shorturl.at/kpGLY" },
   ];
   return (
-    <View>
+    <Provider>
       <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
       <Search style={styles.input} />
       <FlatList
@@ -46,7 +47,7 @@ const HomeScreen = () => {
         }}
       />
       <Bar style={styles.lowbar} />
-    </View>
+    </Provider>
   );
 };
 
@@ -73,8 +74,8 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
   lowbar: {
-    marginTop: "40%",
-    height: "10%",
+    marginBottom: "1%",
+    height: "5%",
   },
 });
 

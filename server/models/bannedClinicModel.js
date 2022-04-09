@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-import { clinicModel } from "./clinicModel.js";
 
 const bannedClinic = new mongoose.Schema({
     admin_id: {
@@ -35,17 +34,4 @@ const bannedClinic = new mongoose.Schema({
     },
 });
 
-const removeClinicCascade = async (clinicEmail) => {
-    // use email to find vet id
-    console.log(clinicEmail);
-    const clinic = await clinicModel.find({ email: clinicEmail });
-
-    console.log("CLINIC--->", clinic);
-    // remove that ID from appointments table (that are not completed)
-    // remove that ID from report vets table
-    // remove that ID from report vet owner table
-    // remove that ID from vet clinic table
-};
-
 export const bannedClinicModel = mongoose.model("banned clinic", bannedClinic);
-export const removeClinicCascadeModel = removeClinicCascade;

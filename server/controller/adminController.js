@@ -35,28 +35,6 @@ export const getBanUser = (req, res) => {
 };
 
 export const postBanUser = async (req, res) => {
-    // remove dummy insertion -----------------------
-    const dummyClinic = {
-        cnic: "11102938877845",
-        email: "umair@gm6a1li0il.com",
-        password: "hash256 of password",
-        phone: "03275656270",
-        clinic_name: "Umair23 Vet Clinic111",
-        clinic_location: { lat: 420, long: 69 },
-
-        pvmc_reg: {
-            name: "Umair Yousaf",
-            gender: "M",
-            reg_num: "155693991",
-            father_name: "Yousaf Javed",
-        },
-
-        services: [],
-    };
-    // ----------------------------------------------
-
-    console.log("inside post ban user");
-
     const user = req.body;
 
     // CHANGE THESE WHEN SESSION IMPLEMENTED -----------------
@@ -65,8 +43,6 @@ export const postBanUser = async (req, res) => {
     const admin = await models.admin.findOne({ email: adminEmail }); // change from email to _id
     // -------------------------------------------------------
 
-    // console.log("USER:", user);
-
     let bannedUser = {
         admin_id: admin._id,
         email: user.email,
@@ -74,21 +50,28 @@ export const postBanUser = async (req, res) => {
         reason: banReason,
     };
 
-    // console.log("BANNED USER", bannedUser);
-
     try {
         // is a vet clinic
+
         if (user.cnic) {
             bannedUser["cnic"] = user.cnic;
             bannedUser["reg_num"] = user.pvmc_reg.reg_num;
 
-            // await models.bannedClinic(bannedUser).save();
-            await models.removeClinicCascade(user.email);
+            const clinic = await models.clinic.findOne({ email: user.email });
+
+            await clinic.remove();
+            await models.bannedClinic(bannedUser).save();
 
             return res.send("Banned vet clinic!");
         }
         // is a pet owner
         else {
+            console.log("INSIDE BANNED PET OWNER");
+            console.log(user);
+
+            const petOwner = await models.petOwner.findOne({ email: user.email });
+
+            await petOwner.remove();
             await models.bannedPetOwners(bannedUser).save();
 
             return res.send("Banned pet owner!");

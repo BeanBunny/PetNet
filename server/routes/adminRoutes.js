@@ -7,7 +7,7 @@ const adminRoutes = express.Router();
 
 adminRoutes.get("/sign-up-requests", adminController.getSignUpRequests);
 
-adminRoutes.post("/signup", adminController.postSignup);
+adminRoutes.post("/signin", adminController.postSignIn);
 
 adminRoutes.get("/signup", adminController.getSignup);
 

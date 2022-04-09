@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 import { pvmc } from "./pvmcModel.js";
 import { services } from "./servicesModel.js";
+import { appointmentModel } from "./appointmentModel.js";
+import { reportClinicModel } from "./reportClinicModel.js";
+import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 
 const clinicSchema = new mongoose.Schema({
   cnic: {
@@ -54,7 +57,33 @@ const clinicSchema = new mongoose.Schema({
 
   pvmc_reg: pvmc,
 
-  services: [services],
+  services: {
+    type: [services],
+    validate: [servicesLimit, "Services can not be more than 10"],
+  },
+
+  image_url: {
+    type: String,
+    required: false,
+  },
+});
+
+//max limit of services validator function
+function servicesLimit(val) {
+  return val.length <= 10;
+}
+
+clinicSchema.pre("remove", async function (next) {
+  const user = this;
+
+  await appointmentModel.deleteMany({
+    vet_id: user._id,
+    status: { $ne: "completed" },
+  });
+  await reportClinicModel.deleteMany({ vet_id: user._id });
+  await reportPetOwnerModel.deleteMany({ vet_id: user._id });
+
+  next();
 });
 
 export const clinicModel = mongoose.model("Vet clinic", clinicSchema);

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-//todo: Add more schemas and perform validations
+import { appointmentModel } from "./appointmentModel.js";
+import { reportClinicModel } from "./reportClinicModel.js";
+import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 
 const petSchema = new mongoose.Schema({
   pet_type: {
@@ -57,4 +59,19 @@ const petOwnerSchema = new mongoose.Schema({
 function petLimit(val) {
   return val.length <= 5;
 }
+petOwnerSchema.pre("remove", async function (next) {
+  const user = this;
+
+  console.log("AAAAAAAA");
+
+  await appointmentModel.deleteMany({
+    petowner_id: user._id,
+    status: { $ne: "completed" },
+  });
+  await reportClinicModel.deleteMany({ petowner_id: user._id });
+  await reportPetOwnerModel.deleteMany({ petowner_id: user._id });
+
+  next();
+});
+
 export const petOwnerModel = mongoose.model("pet owner", petOwnerSchema);

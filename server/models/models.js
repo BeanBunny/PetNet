@@ -5,18 +5,17 @@ import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 import { reportClinicModel } from "./reportClinicModel.js";
 import { clinicModel } from "./clinicModel.js";
 import { verificationModel } from "./verificationModel.js";
-import { bannedClinicModel, removeClinicCascadeModel } from "./bannedClinicModel.js";
+import { bannedClinicModel } from "./bannedClinicModel.js";
 import { bannedPetOwnersModel } from "./bannedPetOwnersModel.js";
 
 export const models = {
-    petOwner: petOwnerModel,
-    admin: adminModel,
-    appointment: appointmentModel,
-    reportPetOwner: reportPetOwnerModel,
-    reportClinic: reportClinicModel,
-    clinic: clinicModel,
-    verificationClinic: verificationModel,
-    bannedClinic: bannedClinicModel,
-    bannedPetOwners: bannedPetOwnersModel,
-    removeClinicCascade: removeClinicCascadeModel,
+  petOwner: petOwnerModel,
+  admin: adminModel,
+  appointment: appointmentModel,
+  reportPetOwner: reportPetOwnerModel,
+  reportClinic: reportClinicModel,
+  clinic: clinicModel,
+  verificationClinic: verificationModel,
+  bannedClinic: bannedClinicModel,
+  bannedPetOwners: bannedPetOwnersModel,
 };

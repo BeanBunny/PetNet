@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
-import { clinicModel } from "./clinicModel.js";
 
 const bannedClinic = new mongoose.Schema({
   admin_id: {
@@ -37,7 +36,7 @@ const bannedClinic = new mongoose.Schema({
   },
   reason: {
     type: String,
-    required: false,
+    required: true,
     maxlength: 255,
   },
 });
@@ -55,4 +54,3 @@ const removeClinicCascade = async (clinicEmail) => {
 };
 
 export const bannedClinicModel = mongoose.model("banned clinic", bannedClinic);
-export const removeClinicCascadeModel = removeClinicCascade;

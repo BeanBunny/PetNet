@@ -16,6 +16,7 @@ const servicesSchema = new mongoose.Schema({
     type: Number,
     required: [true, "service price missing"],
     min: [0, "Price less than 0"],
+    max: [50000, "Price can not be more than 50,000"],
   },
 });
 

@@ -32,13 +32,13 @@ const SignUpScreen = () => {
         <Input
           text="Password"
           text2="Password"
-          style={styles.input2}
+          style={styles.input1}
           secure={true}
         />
         <Input
           text="Confirm Password"
           text2="Confirm Password"
-          style={styles.input2}
+          style={styles.input1}
           secure={true}
         />
       </View>
@@ -69,8 +69,10 @@ const styles = StyleSheet.create({
     marginTop: "10%",
   },
   input1: {
-    marginHorizontal: "15%",
+    marginHorizontal: "4%",
     marginVertical: "5%",
+    height: 20,
+    width: 277,
   },
   input2: {
     marginHorizontal: "15%",

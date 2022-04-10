@@ -33,7 +33,7 @@ const VetLoginScreen = () => {
           Don't have an account? </Text>     
       </View>
       <View>
-      <Textbutton text="Sign Up" margin_left={220} routeName="Signup" />
+      <Textbutton text="Sign Up" margin_left={220} routeName="VetSignUp" />
       </View>
     </View>
   );

@@ -9,7 +9,8 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import EnterOTP from "./src/screens/EnterOTP";
 import CreatePassword from "./src/screens/CreatePassword";
 import App from "./src/screens/SetAppointmentCalendar";
-import VetLoginScreen from "./src/screens/VetLoginScreen";
+import VetLoginScreen from  "./src/screens/VetLoginScreen";
+import VetSignUpScreen from "./src/screens/VetSignUpScreen";
 
 
 const defaultNavigationOptions = {
@@ -27,6 +28,7 @@ const navigator = createSwitchNavigator({
       ForgotPassword: ForgotPassword,
       EnterOTP: EnterOTP,
       CreatePassword: CreatePassword,
+      VetSignUp: VetSignUpScreen,
       
     },
     {

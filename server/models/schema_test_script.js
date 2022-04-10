@@ -171,7 +171,7 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
       });
       getAppointments(vet, 2);
     }
-    test();
+    // test();
 
     // script to check admin
     // models

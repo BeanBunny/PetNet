@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { pvmc } from "./pvmcModel.js";
+import bcrypt from "bcrypt";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const verificationSchema = new mongoose.Schema({
@@ -46,6 +47,21 @@ const verificationSchema = new mongoose.Schema({
   },
 
   pvmc_reg: pvmc,
+});
+
+verificationSchema.pre("save", function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+
+  bcrypt.genSalt(10, function (err, salt) {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, (err, hash) => {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
 });
 
 export const verificationModel = mongoose.model(

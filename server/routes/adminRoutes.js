@@ -2,12 +2,13 @@ import express from "express";
 // import requiresAuth from "express-openid-connect";
 // import auth0 from "auth0-js";
 import * as adminController from "../controller/adminController.js";
+import requireAuth from "../middleware/requireAuth.js";
 
 const adminRoutes = express.Router();
 
-adminRoutes.get("/sign-up-requests", adminController.getSignUpRequests);
-
 adminRoutes.post("/signin", adminController.postSignIn);
+
+adminRoutes.get("/sign-up-requests", requireAuth, adminController.getSignUpRequests);
 
 adminRoutes.get("/signup", adminController.getSignup);
 

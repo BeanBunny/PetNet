@@ -20,14 +20,14 @@ const VetForgotPassword = () => {
         <Input
           text="Email Address"
           text2="example@xyz.com"
-          style={styles.input1}
+          style={styles.input2}
           secure={false}
         />
       </View>
       <AlertButton
         style={styles.button}
         text="Send OTP"
-        route="EnterOTP"
+        route="VetOTP"
         alertText1="An OTP has been generated"
         alertText2="Access it on your email or phone number"
         alertText3="Enter OTP"
@@ -55,8 +55,9 @@ const styles = StyleSheet.create({
     marginVertical: "2%",
   },
   input2: {
-    marginHorizontal: "15%",
+    marginHorizontal: "5%",
     marginVertical: "5%",
+    marginTop: 5,
   },
   container: {
     backgroundColor: "white",

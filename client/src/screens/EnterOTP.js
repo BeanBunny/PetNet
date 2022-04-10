@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   input1: {
     marginHorizontal: "15%",
     marginVertical: "5%",
+    marginTop: 5,
   },
   input2: {
     marginHorizontal: "15%",

@@ -1,6 +1,5 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Headline, TextInput } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Input from "../components/InputBoxComponent";
 import Button from "../components/ButtonComponent";
@@ -14,6 +13,8 @@ const reducer = (state, action) => {
             return { ...state, password: action.payload };
         case "token":
             return { ...state, token: action.payload };
+        case "userId":
+            return { ...state, userId: action.payload };
         case "errorMessage":
             return { ...state, errorMesaage: action.payload };
         default:
@@ -27,7 +28,17 @@ const SignInScreen = ({ navigation }) => {
         password: "",
         token: null,
         errorMesaage: "",
+        userId: "",
     });
+
+    useEffect(async () => {
+        const token = await AsyncStorage.getItem("token");
+        if (token) {
+            navigation.navigate("BottomTab");
+        } else {
+            navigation.navigate("SignIn");
+        }
+    }, []);
 
     const emailVerify = (email) => {
         const regex =
@@ -41,17 +52,20 @@ const SignInScreen = ({ navigation }) => {
             const response = await restApi.post("/admin/signin", { email, password });
             await AsyncStorage.setItem("token", response.data.token);
             dispatch({ type: "token", payload: response.data.token });
-            navigation.navigate("Home");
+            dispatch({ type: "userId", payload: response.data.userId });
+            console.log("Stateee", state);
+            console.log("RESPONSEEE", response.data);
+            navigation.navigate("BottomTab", {
+                screen: "Home",
+                params: { userId: state.userId },
+            });
         } catch (err) {
             dispatch({ type: "errorMessage", payload: "Your email or passsword was incorrect." });
         }
     };
-
+    navigation.addListener("focus", () => dispatch({ type: "errorMessage", payload: "" }));
     return (
         <View style={{ flex: 1 }}>
-            <View style={styles.img}>
-                <Headline>Admin</Headline>
-            </View>
             <View style={styles.container}>
                 <Input
                     label="email"
@@ -84,12 +98,6 @@ const SignInScreen = ({ navigation }) => {
             {state.errorMesaage ? <Text style={{ color: "red" }}>{state.errorMesaage}</Text> : null}
         </View>
     );
-};
-
-SignInScreen.navigationOptions = () => {
-    return {
-        headerShown: false,
-    };
 };
 
 const styles = StyleSheet.create({

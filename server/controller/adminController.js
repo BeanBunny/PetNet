@@ -9,7 +9,7 @@ export const postSignIn = async (req, res) => {
     try {
         await user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, process.env.SECRET);
-        res.send({ token });
+        res.send({ token, userId: user._id });
     } catch (err) {
         return res.status(422).send({ error: err.message });
     }

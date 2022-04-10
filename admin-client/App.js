@@ -1,25 +1,68 @@
 import "react-native-gesture-handler";
-import React from "react";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import SignInScreen from "./src/screens/SignInScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeScreen from "./src/screens/HomeScreen";
-import VerificationScreen from "./src/screens/VerificationScreen";
-import ListReportScreen from "./src/screens/ListReportScreen";
-import ReportHandlingScreen from "./src/screens/ReportHandlingScreen";
-import AccountScreen from "./src/components/AccountScreenComponent";
-import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import BanPetOwnerScreen from "./src/screens/BanPetOwnerScreen";
+import LogoutScreen from "./src/screens/LogoutScreen";
+import SignInScreen from "./src/screens/SignInScreen";
 
-const switchNavigator = createSwitchNavigator({
-    ResolveAuth: ResolveAuthScreen,
-    SignIn: SignInScreen,
-    mainFlow: createStackNavigator({
-        Home: HomeScreen,
-        Verification: VerificationScreen,
-        ListReport: ListReportScreen,
-        ReportHandling: ReportHandlingScreen,
-        Account: AccountScreen,
-    }),
-});
+const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
-export default createAppContainer(switchNavigator);
+const BottomTab = () => {
+    return (
+        <Tab.Navigator
+            activeColor="#f0edf6"
+            inactiveColor="#3e2465"
+            barStyle={{ backgroundColor: "#694fad" }}
+        >
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    tabBarLabel: "Sign Up Reqs",
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="account" color={color} size={26} />
+                    ),
+                }}
+            />
+            <Tab.Screen name="BanPetOwner" component={BanPetOwnerScreen} />
+            <Tab.Screen
+                name="Logout"
+                component={LogoutScreen}
+                options={{
+                    tabBarLabel: "Logout",
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="logout" color={color} size={26} />
+                    ),
+                }}
+            />
+        </Tab.Navigator>
+    );
+};
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="SignIn"
+                    component={SignInScreen}
+                    options={{
+                        title: "Admin",
+                        headerLeft: () => null,
+                    }}
+                />
+                <Stack.Screen
+                    name="BottomTab"
+                    component={BottomTab}
+                    options={{
+                        headerLeft: () => null,
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}

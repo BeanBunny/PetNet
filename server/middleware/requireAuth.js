@@ -5,6 +5,7 @@ export default function (req, res, next) {
     const { authorization } = req.headers;
 
     if (!authorization) {
+        console.log("aaaaaaaaaaaaaaaaaa");
         return res.status(401).send({ error: "You must be logged in" });
     }
 

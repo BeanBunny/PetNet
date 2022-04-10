@@ -2,25 +2,15 @@ import { models } from "../models/models.js";
 import jwt from "jsonwebtoken";
 
 export const postSignIn = async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
-    const user = await models.admin.findOne({ email: email });
-    if (!user) return res.status(422).send({ error: "Invalid email address" });
-    try {
-        await user.comparePassword(password);
-        const token = jwt.sign({ userId: user._id }, process.env.SECRET);
-        res.send({ token, userId: user._id });
-    } catch (err) {
-        return res.status(422).send({ error: err.message });
-    }
-};
-
+  const { email, password } = req.body;
+  if (!email || !password)
+    return res.status(422).send({ error: "Invalid login: No input seen" });
+  const user = await models.admin.findOne({ email: email });
   if (!user) return res.status(422).send({ error: "Invalid email address" });
-
   try {
     await user.comparePassword(password);
     const token = jwt.sign({ userId: user._id }, process.env.SECRET);
-    res.send({ token });
+    res.send({ token, userId: user._id });
   } catch (err) {
     return res.status(422).send({ error: err.message });
   }

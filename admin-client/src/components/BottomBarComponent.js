@@ -1,12 +1,9 @@
 import React from "react";
+import { View, StyleSheet, Button, Text } from "react-native";
 import { BottomNavigation } from "react-native-paper";
-import { View, StyleSheet, Text } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import AccountScreen from "../components/AccountScreenComponent";
-import SignUpReq from "../components/SignUpReqScreenComponent";
-import LogoutComponent from "../components/LogoutComponent";
+import AccountScreen from "../screens/AccountScreen";
 
-const HomeScreen = ({ navigation }) => {
+const BottomBar = ({ navigation }) => {
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
         {
@@ -16,15 +13,15 @@ const HomeScreen = ({ navigation }) => {
             color: "#66C4D2",
         },
         {
-            key: "Logout",
-            title: "Logout",
+            key: "BanUsers",
+            title: "BanUsers",
             icon: "account",
             color: "#326273",
         },
     ]);
     const renderScene = BottomNavigation.SceneMap({
-        SignUpReqs: () => <SignUpReq />,
-        Logout: () => <LogoutComponent />,
+        SignUpReqs: () => <AccountScreen />,
+        BanUsers: () => <Text>Calendar</Text>,
     });
 
     return (
@@ -45,4 +42,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomeScreen;
+export default BottomBar;

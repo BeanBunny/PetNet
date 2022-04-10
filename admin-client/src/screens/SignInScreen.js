@@ -2,8 +2,8 @@ import React, { useReducer, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Headline, TextInput } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Input from "../components/Inputbox";
-import Button from "../components/Button";
+import Input from "../components/InputBoxComponent";
+import Button from "../components/ButtonComponent";
 import restApi from "../api/restApi";
 
 const reducer = (state, action) => {
@@ -22,11 +22,6 @@ const reducer = (state, action) => {
 };
 
 const SignInScreen = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [token, setToken] = useState(null);
-    const [err, setErr] = useState("");
-
     const [state, dispatch] = useReducer(reducer, {
         email: "",
         password: "",

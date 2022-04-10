@@ -7,9 +7,11 @@ import HomeScreen from "./src/screens/HomeScreen";
 import VerificationScreen from "./src/screens/VerificationScreen";
 import ListReportScreen from "./src/screens/ListReportScreen";
 import ReportHandlingScreen from "./src/screens/ReportHandlingScreen";
-import AccountScreen from "./src/screens/AccountScreen";
+import AccountScreen from "./src/components/AccountScreenComponent";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const switchNavigator = createSwitchNavigator({
+    ResolveAuth: ResolveAuthScreen,
     SignIn: SignInScreen,
     mainFlow: createStackNavigator({
         Home: HomeScreen,

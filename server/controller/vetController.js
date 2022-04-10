@@ -56,29 +56,26 @@ export const getAppointments = async (req, res) => {
     let result = [];
     //get all pet types
     let petTypes = [];
+
     //for every petowner, go through the list of pets and match the id from appointment to get pet type
     for (let i = 0; i < petOwners.length; i++) {
       let listOfPets = petOwners[i].pet;
       let appointmentPetId = appointmentsList[i].pet_id;
-
       for (let j = 0; j < listOfPets.length; j++) {
-        // console.log(appointmentPetId);
-        // console.log(listOfPets[j]._id);
         if (appointmentPetId.equals(listOfPets[j]._id)) {
-          // console.log(listOfPets);
           petTypes.push(listOfPets[j].pet_type);
         }
       }
       // console.log(petTypes);
-      result[i] = {
+      result.push({
         appointment_type: appointmentsList[i].type,
         pet_type: petTypes[i],
         petowner_name: petOwners[i].name,
         petowner_phone: petOwners[i].phone,
         appointment_time: appointmentsList[i].date,
         appointment_status: appointmentsList[i].status,
-      };
-    }
+      });
+    } //todo result according to time then send
     return res.send(result);
   } catch (err) {
     return res.status(422).send(err.message);

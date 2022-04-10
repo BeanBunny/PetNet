@@ -19,11 +19,11 @@ export const postSignIn = async (req, res) => {
   }
 };
 
-export const getSignup = (req, res) => {
-  // if anything inside banned user table then dont let them signup
-  // also if email is already in verifications table
-  res.send("INSIDE SIGNUP - GET");
-};
+// What is this?
+// export const getSignup = (req, res) => {
+//   // if anything inside banned user table then dont let them signup
+//   res.send("INSIDE SIGNUP - GET");
+// };
 
 export const getSignUpRequests = async (req, res) => {
   try {
@@ -34,10 +34,9 @@ export const getSignUpRequests = async (req, res) => {
   }
 };
 
-export const getBanUser = (req, res) => {
-  // should i return reported users or list of all users or what?
-  res.send("INSIDE getBanUser");
-};
+// not sure if this is needed
+// export const getBanPetOwners = async (req, res) => {};
+// export const getBanClinics = async (req, res) => {};
 
 export const postBanUser = async (req, res) => {
   const user = req.body;
@@ -86,6 +85,7 @@ export const postBanUser = async (req, res) => {
   }
 };
 
+// req = vet object
 export const postAcceptRequest = async (req, res) => {
   console.log("INSIDE post Accept Request");
   try {
@@ -118,6 +118,7 @@ export const postAcceptRequest = async (req, res) => {
   }
 };
 
+// req = vet object
 export const postRejectRequest = async (req, res) => {
   console.log("INSIDE post RejectRequest");
   try {

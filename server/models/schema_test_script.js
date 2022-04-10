@@ -12,7 +12,7 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     //   .petOwner({
     //     name: "Martin Scorsese",
     //     phone: "03009988770", //check regex
-    //     email: "scorcesegmail.com", //invalid email
+    //     email: "scorcese@gmail.com", //invalid email
     //     password: "qwertyuiop123$$",
     //     pet: [
     //       {
@@ -23,6 +23,10 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     //         pet_type: "Dog",
     //         pet_name: "De Liro",
     //       },
+    //       {
+    //         pet_type: "Cat",
+    //         pet_name: "Billo Raani",
+    //       },
     //     ],
     //     location: {
     //       lat: 3000,
@@ -32,12 +36,144 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     //   })
     //   .save()
     //   .then((res) => {
-    //     console.log("Pet owner added", res);
+    //     console.log("Pet owner1 added", res);
     //   })
     //   .catch((err) => {
-    //     console.log("Error in adding pet owner", err.message);
+    //     console.log("Error in adding pet owner1", err.message);
     //   });
-    //script to check admin
+    // models
+    //   .petOwner({
+    //     name: "Martin S",
+    //     phone: "03009988776", //check regex
+    //     email: "scorc@gmail.com", //invalid email
+    //     password: "qwertyuiop123$$",
+    //     pet: [
+    //       {
+    //         pet_type: "Dog2",
+    //         pet_name: "De Niro2",
+    //       },
+    //       {
+    //         pet_type: "Dog2",
+    //         pet_name: "De Liro2",
+    //       },
+    //       {
+    //         pet_type: "Cat2",
+    //         pet_name: "Billo Raani2",
+    //       },
+    //       ,
+    //       {
+    //         pet_type: "Cat3",
+    //         pet_name: "3323",
+    //       },
+    //     ],
+    //     location: {
+    //       lat: 3000,
+    //       long: 898,
+    //       city: "Lahore",
+    //     },
+    //   })
+    //   .save()
+    //   .then((res) => {
+    //     console.log("Pet owner2 added", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error in adding pet owner2", err.message);
+    //   });
+
+    // const ownerPromises = pets.map((value) => getOwner(value, 1000));
+    // const ownerIds = await Promise.all(ownerPromises);
+    // console.log(ownerIds);
+
+    async function InsertApppointmnet() {
+      const petOwner = await models.petOwner.findOne({
+        name: "Martin S",
+      });
+      const vet = await models.clinic.findOne({
+        email: "saadclinic@gmail.com",
+      });
+      const appointmentPetowner = await models
+        .appointment({
+          type: "death",
+          date: new Date(),
+          time: new Date(),
+          status: "approved",
+          petowner_id: petOwner._id,
+          pet_id: petOwner.pet[0]._id,
+          vet_id: vet._id,
+        })
+        .save()
+        .catch((err) => console.log(err.message));
+    }
+
+    // InsertApppointmnet();
+    const getAppointments = async (req, res) => {
+      //vet object received
+      const vetId = req._id; //change
+      // query appointments table for the particular clinic
+      const appointmentsList = await models.appointment.find({
+        vet_id: vetId,
+        status: "completed", //change
+      });
+      if (appointmentsList.length == 0) {
+        return res.send([]);
+      }
+      // get all petowner and pet ids
+      let petOwnerIds = [];
+      let petIdLists = [];
+      appointmentsList.forEach((element) => {
+        petOwnerIds.push(element.petowner_id);
+        petIdLists.push(element.petowner_id);
+      });
+      // get all petwner details (order would change so for loops rearrange)
+      const petOwners2 = await models.petOwner.find({
+        _id: { $in: petOwnerIds },
+      });
+      let petOwners = [];
+      for (let i = 0; i < petOwnerIds.length; i++) {
+        for (let j = 0; j < petOwners2.length; j++) {
+          if (petOwners2[j]._id.equals(petOwnerIds[i])) {
+            petOwners.push(petOwners2[j]);
+            break;
+          }
+        }
+      }
+      let result = [];
+      //get all pet types
+      let petTypes = [];
+      //for every petowner, go through the list of pets and match the id from appointment to get pet type
+      for (let i = 0; i < petOwners.length; i++) {
+        let listOfPets = petOwners[i].pet;
+        let appointmentPetId = appointmentsList[i].pet_id;
+
+        for (let j = 0; j < listOfPets.length; j++) {
+          // console.log(appointmentPetId);
+          // console.log(listOfPets[j]._id);
+          if (appointmentPetId.equals(listOfPets[j]._id)) {
+            // console.log(listOfPets);
+            petTypes.push(listOfPets[j].pet_type);
+          }
+        }
+        // console.log(petTypes);
+        result[i] = {
+          appointment_type: appointmentsList[i].type,
+          pet_type: petTypes[i],
+          petowner_name: petOwners[i].name,
+          petowner_phone: petOwners[i].phone,
+          appointment_time: appointmentsList[i].date,
+          appointment_status: appointmentsList[i].status,
+        };
+      }
+      console.log(result);
+    };
+    async function test() {
+      const vet = await models.clinic.findOne({
+        email: "saadclinic@gmail.com",
+      });
+      getAppointments(vet, 2);
+    }
+    test();
+
+    // script to check admin
     // models
     //   .admin({
     //     email: "abc@gmail.com",
@@ -123,10 +259,11 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     //       father_name: "Umair Yousaf2222",
     //     },
     //   })
+
     //   .save()
     //   .catch((err) => console.log(err.message));
     // const Temp = async () => {
-    //   const temp = await models.admin.findOne({ email: "abc@gmail.com" });
+    //   const temp = await models.admin.find({ email: "abc@gmail.com" });
     //   console.log(temp);
     //   await models.admin.deleteOne({ email: temp.email }); // temp.remove();
     // };

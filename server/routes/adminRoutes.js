@@ -16,4 +16,6 @@ adminRoutes.get("/ban-user", adminController.getBanUser);
 
 adminRoutes.post("/ban-user", adminController.postBanUser);
 
+//add routes for clinic accept reject
+
 export default adminRoutes;

@@ -8,6 +8,8 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import ForgotPassword from "./src/screens/ForgotPassword";
 import EnterOTP from "./src/screens/EnterOTP";
 import CreatePassword from "./src/screens/CreatePassword";
+import App from "./src/screens/SetAppointmentCalendar";
+
 
 const defaultNavigationOptions = {
   cardStyle: { backgroundColor: "#66C4D2" },
@@ -16,12 +18,13 @@ const defaultNavigationOptions = {
 const navigator = createSwitchNavigator({
   loginFlow: createStackNavigator(
     {
-      StartUp: StartScreen,
-      Login: LoginScreen,
-      Signup: SignUpScreen,
-      ForgotPassword: ForgotPassword,
-      EnterOTP: EnterOTP,
-      CreatePassword: CreatePassword,
+      SetAppointment: App,
+      // StartUp: StartScreen,
+      // Login: LoginScreen,
+      // Signup: SignUpScreen,
+      // ForgotPassword: ForgotPassword,
+      // EnterOTP: EnterOTP,
+      // CreatePassword: CreatePassword,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,
@@ -29,7 +32,7 @@ const navigator = createSwitchNavigator({
   ),
   mainFlow: createStackNavigator(
     {
-      Home: HomeScreen,
+      Home: App,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,

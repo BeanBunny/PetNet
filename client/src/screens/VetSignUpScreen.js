@@ -3,15 +3,29 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
 import ButtomComp from "../components/button";
 import Textbutton from "../components/TextOnlyButton";
+import AlertButton from "../components/AlertButton";
 
-const LoginScreen = () => {
+// name, phone number, email, password, confirm password
+const SignUpScreen = () => {
   return (
     <View>
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
       <View style={styles.container}>
         <Input
+          text="Name"
+          text2="Sarah Dar"
+          style={styles.input1}
+          secure={false}
+        />
+        <Input
           text="Phone Number"
           text2="03XX-XXX-XXXX"
+          style={styles.input1}
+          secure={false}
+        />
+        <Input
+          text="Email Address"
+          text2="example@xyz.com"
           style={styles.input1}
           secure={false}
         />
@@ -21,24 +35,26 @@ const LoginScreen = () => {
           style={styles.input2}
           secure={true}
         />
-        <Textbutton
-          text="Forgot Password?"
-          margin_left="38%"
-          routeName="ForgotPassword"
+        <Input
+          text="Confirm Password"
+          text2="Confirm Password"
+          style={styles.input2}
+          secure={true}
         />
       </View>
-      <ButtomComp text="Login" style={styles.button} />
-      <View>
-        <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
-          Don't have an account?
-        </Text>
-        <Textbutton text="Sign Up" margin_left={220} routeName="Signup" />
-      </View>
+      <AlertButton
+        style={styles.button}
+        text="Sign Up"
+        route="Login"
+        alertText1="Your account has been created!"
+        alertText2="Login to get started!"
+        alertText3="Account Created! Login to Continue"
+      />
     </View>
   );
 };
 
-LoginScreen.navigationOptions = () => {
+SignUpScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -48,9 +64,9 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     resizeMode: "contain",
-    height: "30%",
+    height: "15%",
     marginHorizontal: "10%",
-    marginTop: "15%",
+    marginTop: "10%",
   },
   input1: {
     marginHorizontal: "15%",
@@ -63,9 +79,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: "30%",
+    height: "63%",
     // width: "100%",
-    marginTop: "20%",
+    marginTop: "5%",
     marginHorizontal: "10%",
   },
   forgor: {
@@ -78,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;

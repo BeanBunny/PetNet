@@ -4,7 +4,7 @@ import Input from "../components/inputbox";
 import ButtomComp from "../components/button";
 import Textbutton from "../components/TextOnlyButton";
 
-const LoginScreen = () => {
+const VetLoginScreen = () => {
   return (
     <View>
       <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
@@ -30,15 +30,16 @@ const LoginScreen = () => {
       <ButtomComp text="Login" style={styles.button} />
       <View>
         <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
-          Don't have an account?
-        </Text>
-        <Textbutton text="Sign Up" margin_left={220} routeName="Signup" />
+          Don't have an account? </Text>     
+      </View>
+      <View>
+      <Textbutton text="Sign Up" margin_left={220} routeName="Signup" />
       </View>
     </View>
   );
 };
 
-LoginScreen.navigationOptions = () => {
+VetLoginScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -78,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default VetLoginScreen;

@@ -9,6 +9,7 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import EnterOTP from "./src/screens/EnterOTP";
 import CreatePassword from "./src/screens/CreatePassword";
 import App from "./src/screens/SetAppointmentCalendar";
+import VetLoginScreen from "./src/screens/VetLoginScreen";
 
 
 const defaultNavigationOptions = {
@@ -18,13 +19,15 @@ const defaultNavigationOptions = {
 const navigator = createSwitchNavigator({
   loginFlow: createStackNavigator(
     {
-      SetAppointment: App,
-      // StartUp: StartScreen,
-      // Login: LoginScreen,
-      // Signup: SignUpScreen,
-      // ForgotPassword: ForgotPassword,
-      // EnterOTP: EnterOTP,
-      // CreatePassword: CreatePassword,
+     // SetAppointment: App,
+      StartUp: StartScreen,
+      VetLogin: VetLoginScreen,
+      Login: LoginScreen,
+      Signup: SignUpScreen,
+      ForgotPassword: ForgotPassword,
+      EnterOTP: EnterOTP,
+      CreatePassword: CreatePassword,
+      
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,
@@ -32,7 +35,7 @@ const navigator = createSwitchNavigator({
   ),
   mainFlow: createStackNavigator(
     {
-      Home: App,
+      Home: StartScreen,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,

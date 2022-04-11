@@ -14,7 +14,9 @@ export const postAddPet = async (req, res) => {
 
         if (petOwner.pet.length < 5) {
             petOwner.pet.push({ pet_type: petType, pet_name: petName });
-            await models.petOwner.updateOne({ _id: petOwner._id }, petOwner);
+            await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
+                runValidators: true,
+            });
 
             return res.send("Pet added successfully!");
         } else {
@@ -45,7 +47,7 @@ export const postRemovePet = async (req, res) => {
         }
 
         petOwner.pet.splice(index, 1);
-        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner);
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
 
         return res.send("Pet Removed successfully!");
     } catch (err) {
@@ -55,10 +57,45 @@ export const postRemovePet = async (req, res) => {
 
 // i assume i am getting user id from front end
 export const getProfile = async (req, res) => {
-    const id = req.body.userId;
+    const petOwnerId = req.body.userId;
 
     try {
-        return res.send(await models.petOwner.findById(id));
+        return res.send(await models.petOwner.findById(petOwnerId));
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postUpdateProfileGeneral = async (req, res) => {
+    // // remove this ----------------------------------------
+    // const email = req.body.email;
+    // const temp = await models.petOwner.findOne({ email: email });
+    // const petOwnerId = temp._id;
+    // // ----------------------------------------------------
+
+    const petOwnerId = req.body.userId;
+    const newPhone = req.body.newPhone;
+    const newEmail = req.body.newEmail;
+    const newName = req.body.newName;
+
+    console.log(req.body);
+
+    try {
+        let petOwner = await models.petOwner.findById(petOwnerId);
+
+        if (newPhone) {
+            petOwner.phone = newPhone;
+        }
+        if (newEmail) {
+            petOwner.email = newEmail;
+        }
+        if (newName) {
+            petOwner.name = newName;
+        }
+
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+
+        return res.send("Updates successful!");
     } catch (err) {
         return res.status(422).send(err.message);
     }

@@ -1,33 +1,40 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
 
-const TextOnlyButton = ({ style, text, margin_left, routeName, navigation }) => {
-    console.log(routeName);
-    return (
-        <View style={style}>
-            <TouchableOpacity
-                onPress={() => navigation.navigate(routeName)}
-                style={newstyle(margin_left)}
-            >
-                <Text style={styles.textStyle}>{text}</Text>
-            </TouchableOpacity>
-        </View>
-    );
+const TextOnlyButton = ({
+  style,
+  text,
+  margin_left,
+  routeName,
+  navigation,
+}) => {
+  console.log("ROUTE NAMEEEE---->", routeName);
+  console.log(navigation);
+  return (
+    <View style={style}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(routeName)}
+        style={newstyle(margin_left)}
+      >
+        <Text style={styles.textStyle}>{text}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 function newstyle(margin_left) {
-    return {
-        marginTop: "-9.75%",
-        marginLeft: margin_left,
-        padding: "5%",
-        alignItems: "center",
-    };
+  return {
+    marginTop: "-9.75%",
+    marginLeft: margin_left,
+    padding: "5%",
+    alignItems: "center",
+  };
 }
 const styles = StyleSheet.create({
-    textStyle: {
-        fontSize: 16,
-        color: "blue",
-    },
+  textStyle: {
+    fontSize: 16,
+    color: "blue",
+  },
 });
 
 export default TextOnlyButton;

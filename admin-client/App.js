@@ -12,7 +12,6 @@ import SignInScreen from "./src/screens/SignInScreen";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
-const Auth = createStackNavigator();
 
 const BottomTab = () => {
     return (

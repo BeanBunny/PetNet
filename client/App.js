@@ -2,12 +2,12 @@ import "react-native-gesture-handler";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./src/screens/StartScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
-import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
-import EnterOTPScreen from "./src/screens/EnterOTPScreen";
-import CreatePasswordScreen from "./src/screens/CreatePasswordScreen";
+import LoginScreen from "./src/screens/petscreens/LoginScreen";
+import HomeScreen from "./src/screens/petscreens/HomeScreen";
+import SignUpScreen from "./src/screens/petscreens/SignUpScreen";
+import ForgotPasswordScreen from "./src/screens/petscreens/ForgotPassword";
+import EnterOTPScreen from "./src/screens/petscreens/EnterOTP";
+import CreatePasswordScreen from "./src/screens/petscreens/CreatePassword";
 
 const Stack = createNativeStackNavigator();
 

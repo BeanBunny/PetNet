@@ -173,21 +173,21 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         }
         // test();
 
-        const getServices = async (req, res) => {
-            //vet_id required (any vet index would work)
-            const vet_email = req;
-            try {
-                let vet = await models.clinic.findOne({ email: vet_email });
-                console.log(vet);
-                let servicesList = vet.services;
-                //where each service has name description and price
-                console.log(servicesList);
-                //return res.send("Service removed!");
-            } catch (err) {
-                return res.status(422).send(err.message);
-            }
-        };
-        getServices("saadclinic2@gmail.com", 0);
+        // const getServices = async (req, res) => {
+        //     //vet_id required (any vet index would work)
+        //     const vet_email = req;
+        //     try {
+        //         let vet = await models.clinic.findOne({ email: vet_email });
+        //         console.log(vet);
+        //         let servicesList = vet.services;
+        //         //where each service has name description and price
+        //         console.log(servicesList);
+        //         //return res.send("Service removed!");
+        //     } catch (err) {
+        //         return res.status(422).send(err.message);
+        //     }
+        // };
+        // getServices("saadclinic2@gmail.com", 0);
 
         // script to check admin
         // models
@@ -258,30 +258,30 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         //   })
         //   .catch((err) => console.log("Err in saving clinic", err.message));
         // models
-        //   .verificationClinic({
-        //     cnic: "4230142301111",
-        //     email: "saadclinic@gmail.com",
-        //     password: "saadkinglmao123$$",
-        //     phone: "03030303039",
-        //     clinic_name: "fahad Pets Clinic",
-        //     clinic_location: {
-        //       long: 22,
-        //       lat: 22,
-        //     },
-        //     pvmc_reg: {
-        //       name: "Saad 2222",
-        //       gender: "F",
-        //       reg_num: 4454546465468,
-        //       father_name: "Umair Yousaf2222",
-        //     },
-        //   })
+        //     .verificationClinic({
+        //         cnic: "4230142301111",
+        //         email: "saadclinic@gmail.com",
+        //         password: "saadkinglmao123$$",
+        //         phone: "03030303039",
+        //         clinic_name: "fahad Pets Clinic",
+        //         clinic_location: {
+        //             long: 22,
+        //             lat: 22,
+        //         },
+        //         pvmc_reg: {
+        //             name: "Saad 2222",
+        //             gender: "F",
+        //             reg_num: 4454546465468,
+        //             father_name: "Umair Yousaf2222",
+        //         },
+        //     })
 
-        //   .save()
-        //   .catch((err) => console.log(err.message));
+        //     .save()
+        //     .catch((err) => console.log(err.message));
         // const Temp = async () => {
-        //   const temp = await models.admin.find({ email: "abc@gmail.com" });
-        //   console.log(temp);
-        //   await models.admin.deleteOne({ email: temp.email }); // temp.remove();
+        //     const temp = await models.admin.find({ email: "abc@gmail.com" });
+        //     console.log(temp);
+        //     await models.admin.deleteOne({ email: temp.email }); // temp.remove();
         // };
         // Temp();
     }

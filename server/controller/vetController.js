@@ -40,7 +40,7 @@ export const getAppointments = async (req, res) => {
             petOwnerIds.push(element.petowner_id);
             petIdLists.push(element.petowner_id);
         });
-        // get all petwner details (order would change so for loops rearrange)
+        // get all petowner details (order would change so for loops rearrange)
         const petOwners2 = await models.petOwner.find({
             _id: { $in: petOwnerIds },
         });

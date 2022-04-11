@@ -198,7 +198,7 @@ export const postDeleteService = async (req, res) => {
 
 export const getServices = async (req, res) => {
   //vet_email required (any vet index (id etc) would work)
-  const vet_email = req;
+  const vet_email = req.body.email;
   try {
     let vet = await models.clinic.findOne({ email: vet_email });
     console.log(vet);
@@ -206,6 +206,68 @@ export const getServices = async (req, res) => {
     //where each service has name description and price
     return res.send(servicesList);
     //return res.send("Service removed!");
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+};
+
+export const postReportPetOwner = async (req, res) => {
+  //vet index, petowner index and report reason required
+  //naming conventions check
+  const vet_id = req.body.vet_id;
+  const petowner_id = req.body.petowner_id;
+  const reportReason = req.body.report_reason;
+
+  try {
+    await models
+      .reportPetOwner({
+        pet_owner_id: petowner_id,
+        report_reason: reportReason,
+        vet_id: vet_id,
+      })
+      .save()
+      .then((res) => {
+        console.log("Pet Owner reported", res);
+      });
+    return res.send("Pet Owner Reported!");
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+};
+
+export const postEditClinicProfile = async (req, res) => {
+  //vet id, phone, email, password, clinic name, about clinic required
+  const vet_id = req.body._id;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  // const password = req.body.password; //to do: password hashing
+  const clinicName = req.body.clinic_name;
+  const aboutClinic = req.body.about_clinic;
+
+  try {
+    //query the vet to be updated
+    let vet = await models.clinic.findById(vet_id);
+    //update fields
+    vet.phone = phone;
+    vet.email = email;
+    vet.clinic_name = clinicName;
+    // vet.password = password;
+    vet.about_clinic = aboutClinic;
+    //update the clinic in db
+    await models.clinic.updateOne({ _id: vet_id }, vet);
+    return res.send("Profile Updated!");
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+};
+
+export const getClinicDetails = async (req, res) => {
+  try {
+    //only clinic id required
+    const vet_id = req.body._id;
+    //fetch vet
+    const vet = await models.clinic.findById(vet_id);
+    return res.send(vet);
   } catch (err) {
     return res.status(422).send(err.message);
   }

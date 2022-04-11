@@ -10,4 +10,6 @@ petOwnerRoutes.post("/remove-pet", petOwnerController.postRemovePet);
 
 petOwnerRoutes.get("/profile", petOwnerController.getProfile);
 
+petOwnerRoutes.post("/profile-customization/general", petOwnerController.postUpdateProfileGeneral);
+
 export default petOwnerRoutes;

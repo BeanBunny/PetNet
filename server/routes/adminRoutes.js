@@ -10,9 +10,13 @@ adminRoutes.post("/signin", adminController.postSignIn);
 
 adminRoutes.get("/sign-up-requests", requireAuth, adminController.getSignUpRequests);
 
-adminRoutes.get("/signup", adminController.getSignup);
+adminRoutes.post("/accept-clinic", requireAuth, adminController.postAcceptRequest);
 
-adminRoutes.get("/ban-user", adminController.getBanUser);
+adminRoutes.post("/reject-clinic", requireAuth, adminController.postRejectRequest);
+
+// adminRoutes.get("/signup", adminController.getSignup);
+
+// adminRoutes.get("/ban-user", adminController.getBanUser);
 
 adminRoutes.post("/ban-user", adminController.postBanUser);
 

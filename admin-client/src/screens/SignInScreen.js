@@ -33,8 +33,12 @@ const SignInScreen = ({ navigation }) => {
 
     useEffect(async () => {
         const token = await AsyncStorage.getItem("token");
+        const userId = await AsyncStorage.getItem("userId");
         if (token) {
-            navigation.navigate("BottomTab");
+            navigation.navigate("BottomTab", {
+                screen: "Home",
+                params: { userId },
+            });
         } else {
             navigation.navigate("SignIn");
         }
@@ -51,13 +55,12 @@ const SignInScreen = ({ navigation }) => {
         try {
             const response = await restApi.post("/admin/signin", { email, password });
             await AsyncStorage.setItem("token", response.data.token);
+            await AsyncStorage.setItem("userId", response.data.userId);
             dispatch({ type: "token", payload: response.data.token });
             dispatch({ type: "userId", payload: response.data.userId });
-            console.log("Stateee", state);
-            console.log("RESPONSEEE", response.data);
             navigation.navigate("BottomTab", {
                 screen: "Home",
-                params: { userId: state.userId },
+                params: { userId: response.data.userId },
             });
         } catch (err) {
             dispatch({ type: "errorMessage", payload: "Your email or passsword was incorrect." });
@@ -92,7 +95,7 @@ const SignInScreen = ({ navigation }) => {
                     text="Login"
                     style={styles.button}
                     disabled={false}
-                    onSubmit={() => signin(state.email, state.password)}
+                    onSubmit={signin(state.email, state.password)}
                 />
             )}
             {state.errorMesaage ? <Text style={{ color: "red" }}>{state.errorMesaage}</Text> : null}

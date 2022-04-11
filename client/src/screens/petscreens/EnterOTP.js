@@ -12,7 +12,7 @@ const reducer = (state, action) => {
   }
 };
 
-const EnterOTP = () => {
+const EnterOTP = ({ navigation }) => {
   const [state, dispatch] = useReducer(reducer, { OTP: "" });
   return (
     <View>
@@ -31,6 +31,7 @@ const EnterOTP = () => {
       </View>
       <AlertButton
         style={styles.button}
+        navigation={navigation}
         text="Submit"
         route="CreatePassword"
         alert1="OTP Successfully Entered!"

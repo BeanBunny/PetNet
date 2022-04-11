@@ -19,6 +19,10 @@ const bannedClinic = new mongoose.Schema({
     required: [true, "Email missing"],
     maxlength: 255,
     unique: true,
+    match: [
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "invalid banned clinic email",
+    ],
   },
   phone: {
     type: String,
@@ -32,12 +36,21 @@ const bannedClinic = new mongoose.Schema({
   },
   reason: {
     type: String,
-    required: false,
+    required: true,
     maxlength: 255,
   },
 });
 
-export const banned_clinic_model = mongoose.model(
-  "banned clinic",
-  bannedClinic
-);
+const removeClinicCascade = async (clinicEmail) => {
+  // use email to find vet id
+  console.log(clinicEmail);
+  const clinic = await clinicModel.find({ email: clinicEmail });
+
+  console.log("CLINIC--->", clinic);
+  // remove that ID from appointments table (that are not completed)
+  // remove that ID from report vets table
+  // remove that ID from report vet owner table
+  // remove that ID from vet clinic table
+};
+
+export const bannedClinicModel = mongoose.model("banned clinic", bannedClinic);

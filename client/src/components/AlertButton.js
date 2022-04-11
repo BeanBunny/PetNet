@@ -1,21 +1,27 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
-import { withNavigation } from "react-navigation";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 
 const AlertButton = ({
   style,
   text,
   navigation,
-  alert1,
-  alert2,
-  alert3,
+  alertText1,
+  alertText2,
+  alertText3,
   route,
 }) => {
   return (
     <View style={style}>
       <TouchableOpacity
         onPress={() => {
-          showAlert(alert1, alert2, alert3, navigation, route);
+          showAlert(alertText1, alertText2, alertText3, navigation, route);
         }}
         style={styles.container}
       >
@@ -38,14 +44,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const showAlert = (alert1, alert2, alert3, navigation, route) =>
-  Alert.alert(alert1, alert2, [
+const showAlert = (alertText1, alertText2, alertText3, navigation, route) =>
+  Alert.alert(alertText1, alertText2, [
     {
-      text: alert3,
+      text: alertText3,
       onPress: () => {
         navigation.navigate(route);
       },
     },
   ]);
 
-export default withNavigation(AlertButton);
+export default AlertButton;

@@ -15,7 +15,7 @@ const reducer = (state, action) => {
   }
 };
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [state, dispatch] = useReducer(reducer, { Email: "", Password: "" });
   return (
     <View style={{ flex: 1 }}>
@@ -40,6 +40,7 @@ const LoginScreen = () => {
         />
         <Textbutton
           text="Forgot Password?"
+          navigation={navigation}
           marginLeft="38%"
           routeName="ForgotPassword"
         />
@@ -49,7 +50,12 @@ const LoginScreen = () => {
         <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
           Don't have an account?
         </Text>
-        <Textbutton text="Sign Up" marginLeft="29%" routeName="Signup" />
+        <Textbutton
+          text="Sign Up"
+          navigation={navigation}
+          marginLeft="29%"
+          routeName="SignUp"
+        />
       </View>
     </View>
   );

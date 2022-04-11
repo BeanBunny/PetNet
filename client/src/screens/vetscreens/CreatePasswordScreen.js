@@ -1,21 +1,10 @@
-import React, { useReducer } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../../components/InputBox";
 import AlertButton from "../../components/AlertButton";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "New":
-      return { ...state, New: action.payload };
-    case "Confirm":
-      return { ...state, Confirm: action.payload };
-    default:
-      return state;
-  }
-};
-
+// name, phone number, email, password, confirm password
 const CreatePassword = ({ navigation }) => {
-  const [state, dispatch] = useReducer(reducer, { New: "", Confirm: "" });
   return (
     <View>
       <Image
@@ -24,28 +13,26 @@ const CreatePassword = ({ navigation }) => {
       />
       <View style={styles.container}>
         <Input
-          label="New"
-          placeholder="New Password"
-          reducer={[state, dispatch]}
-          style={styles.input}
+          text="New Password"
+          text2="New Password"
+          style={styles.input2}
           secure={true}
         />
         <Input
-          label="Confirm"
-          placeholder="Confirm Password"
-          reducer={[state, dispatch]}
-          style={styles.input}
+          text="Confirm Password"
+          text2="Confirm Password"
+          style={styles.input2}
           secure={true}
         />
       </View>
       <AlertButton
         style={styles.button}
-        navigation={navigation}
         text="Confirm"
         route="Login"
-        alert1="Your new password has been created."
-        alert2="Login with your new password to continue."
-        alert3="Login!"
+        alertText1="Your new password has been created"
+        alertText2="Login with your new password to continue"
+        alertText3="Login!"
+        navigation={navigation}
       />
     </View>
   );
@@ -65,7 +52,11 @@ const styles = StyleSheet.create({
     marginHorizontal: "10%",
     marginTop: "10%",
   },
-  input: {
+  input1: {
+    marginHorizontal: "15%",
+    marginVertical: "5%",
+  },
+  input2: {
     marginHorizontal: "15%",
     marginVertical: "5%",
   },
@@ -73,8 +64,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     height: "30%",
+    // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
+  },
+  forgor: {
+    color: "blue",
+    marginLeft: "60%",
   },
   button: {
     marginTop: "5%",

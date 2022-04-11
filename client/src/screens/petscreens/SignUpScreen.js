@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 };
 
 // name, phone number, email, password, confirm password
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [state, dispatch] = useReducer(reducer, {
     Name: "",
     Email: "",
@@ -93,6 +93,7 @@ const SignUpScreen = () => {
       </View>
       <AlertButton
         style={styles.button}
+        navigation={navigation}
         text="Sign Up"
         route="Login"
         alert1="Your account has been created!"

@@ -1,19 +1,10 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../../components/InputBox";
 import AlertButton from "../../components/AlertButton";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "Email":
-      return { ...state, Email: action.payload };
-    default:
-      return state;
-  }
-};
-
-const ForgotPassword = ({ navigation }) => {
-  const [state, dispatch] = useReducer(reducer, { Email: "" });
+// name, phone number, email, password, confirm password
+const EnterOTP = ({ navigation }) => {
   return (
     <View>
       <Image
@@ -22,27 +13,26 @@ const ForgotPassword = ({ navigation }) => {
       />
       <View style={styles.container}>
         <Input
-          label="Email"
-          placeholder="example@gmail.com"
-          reducer={[state, dispatch]}
-          style={styles.input}
+          text="Enter OTP"
+          text2="123xy"
+          style={styles.input1}
           secure={false}
         />
       </View>
       <AlertButton
         style={styles.button}
+        text="Submit"
+        route="CreatePassword"
+        alertText1="OTP Successfully Entered"
+        // alertText2="Access it on your email or phone number"
+        alertText3="Enter New Password"
         navigation={navigation}
-        text="Send OTP"
-        route="EnterOTP"
-        alert1="An OTP has been generated."
-        alert2="Access it on your Email or Phone Number."
-        alert3="Enter OTP"
       />
     </View>
   );
 };
 
-ForgotPassword.navigationOptions = () => {
+EnterOTP.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -52,20 +42,29 @@ const styles = StyleSheet.create({
   img: {
     justifyContent: "center",
     resizeMode: "contain",
-    height: "30%",
+    height: "50%",
     marginHorizontal: "10%",
     marginTop: "10%",
   },
-  input: {
+  input1: {
+    marginHorizontal: "15%",
+    marginVertical: "5%",
+  },
+  input2: {
     marginHorizontal: "15%",
     marginVertical: "5%",
   },
   container: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: "30%",
+    height: "13%",
+    // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
+  },
+  forgor: {
+    color: "blue",
+    marginLeft: "60%",
   },
   button: {
     marginTop: "5%",
@@ -73,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgotPassword;
+export default EnterOTP;

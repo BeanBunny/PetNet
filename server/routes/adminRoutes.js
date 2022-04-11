@@ -2,11 +2,20 @@ import express from "express";
 // import requiresAuth from "express-openid-connect";
 // import auth0 from "auth0-js";
 import * as adminController from "../controller/adminController.js";
+import requireAuth from "../middleware/requireAuth.js";
 
-const adminAuthRoutes = express.Router();
+const adminRoutes = express.Router();
 
-adminAuthRoutes.post("/signup", adminController.postSignup);
+adminRoutes.post("/signin", adminController.postSignIn);
 
-adminAuthRoutes.get("/signup", adminController.getSignup);
+adminRoutes.get("/sign-up-requests", requireAuth, adminController.getSignUpRequests);
 
-export default adminAuthRoutes;
+adminRoutes.get("/signup", adminController.getSignup);
+
+adminRoutes.get("/ban-user", adminController.getBanUser);
+
+adminRoutes.post("/ban-user", adminController.postBanUser);
+
+//add routes for clinic accept reject
+
+export default adminRoutes;

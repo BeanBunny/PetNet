@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
-import { withNavigation } from "react-navigation";
 
 const button = ({ style, text, navigation, routeName }) => {
   return (
@@ -23,9 +22,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textStyle: {
-    fontSize: 30,
+    fontSize: 15,
     color: "white",
   },
 });
 
-export default withNavigation(button);
+export default button;

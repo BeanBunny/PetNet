@@ -40,7 +40,7 @@ const SignInScreen = ({ navigation }) => {
                 params: { userId },
             });
         } else {
-            navigation.navigate("SignIn");
+            navigation.navigate("Auth");
         }
     }, []);
 
@@ -51,7 +51,9 @@ const SignInScreen = ({ navigation }) => {
     };
     const validEmail = emailVerify(state.email);
 
-    const signin = async (email, password) => {
+    const signin = async () => {
+        const email = state.email;
+        const password = state.password;
         try {
             const response = await restApi.post("/admin/signin", { email, password });
             await AsyncStorage.setItem("token", response.data.token);
@@ -91,12 +93,7 @@ const SignInScreen = ({ navigation }) => {
             {validEmail === null ? (
                 <Button text="Login" style={styles.button} disabled />
             ) : (
-                <Button
-                    text="Login"
-                    style={styles.button}
-                    disabled={false}
-                    onSubmit={signin(state.email, state.password)}
-                />
+                <Button text="Login" style={styles.button} disabled={false} onSubmit={signin} />
             )}
             {state.errorMesaage ? <Text style={{ color: "red" }}>{state.errorMesaage}</Text> : null}
         </View>

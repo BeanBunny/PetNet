@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./src/screens/StartScreen";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -11,11 +11,31 @@ import CreatePasswordScreen from "./src/screens/CreatePasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
+// const MyTheme = {
+//     ...DefaultTheme,
+//     colors: {
+//         ...DefaultTheme.colors,
+//         card: "rgb(0, 0, 0)",
+//     },
+// };
+
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Start" component={StartScreen} />
+            <Stack.Navigator
+                defaultScreenOptions={{
+                    cardStyle: { backgroundColor: "tomato" },
+                    headerStyle: { backgroundColor: "tomato" },
+                }}
+            >
+                <Stack.Screen
+                    name="Start"
+                    component={StartScreen}
+                    options={{
+                        headerStyle: { backgroundColor: "tomato" },
+                        cardStyle: { backgroundColor: "tomato" },
+                    }}
+                />
                 <Stack.Screen name="SignUp" component={SignUpScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />

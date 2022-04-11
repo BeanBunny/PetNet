@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Title, Headline, Paragraph, Button } from "react-native-paper";
 import { View, StyleSheet, Alert, FlatList } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import restApi from "../api/restApi";
 
 const AcceptClinic = async (req, entireList, updateList) => {
@@ -67,7 +68,7 @@ const ClinicCard = ({ item, entireList, updateList }) => {
 };
 
 const HomeScreen = ({ route }) => {
-    const { userId } = route.params;
+    const userId = AsyncStorage.getItem("userId");
 
     const [listReq, setListReq] = useState([]);
     useEffect(async () => {

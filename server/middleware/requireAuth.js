@@ -2,10 +2,9 @@ import jwt from "jsonwebtoken";
 import { models } from "../models/models.js";
 
 export default function (req, res, next) {
+    console.log(req.headers);
     const { authorization } = req.headers;
-
     if (!authorization) {
-        console.log("aaaaaaaaaaaaaaaaaa");
         return res.status(401).send({ error: "You must be logged in" });
     }
 

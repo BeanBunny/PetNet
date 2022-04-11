@@ -86,7 +86,6 @@ export const postAcceptRequest = async (req, res) => {
     console.log("INSIDE post Accept Request");
     try {
         const { user } = req.body;
-        console.log(user);
         //remove from verification table
         await models.verificationClinic.deleteOne({ email: user.email });
         //add to clinic table

@@ -18,7 +18,7 @@ adminRoutes.post("/reject-clinic", requireAuth, adminController.postRejectReques
 
 // adminRoutes.get("/ban-user", adminController.getBanUser);
 
-adminRoutes.post("/ban-user", adminController.postBanUser);
+adminRoutes.post("/ban-user", requireAuth, adminController.postBanUser);
 
 //add routes for clinic accept reject
 

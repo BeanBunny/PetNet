@@ -3,6 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import vetRoutes from "./routes/vetRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import petOwnerRoutes from "./routes/petOwnerRoutes.js";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
 import { models } from "./models/models.js";
@@ -65,6 +66,8 @@ app.use(bodyParser.json());
 app.use("/vet", vetRoutes);
 
 app.use("/admin", adminRoutes);
+
+app.use("/petowner", petOwnerRoutes);
 
 // Start Server here
 const port = process.env.PORT;

@@ -15,6 +15,10 @@ const reducer = (state, action) => {
       return { ...state, Password: action.payload };
     case "Confirm":
       return { ...state, Confirm: action.payload };
+    case "Pet":
+      return { ...state, Pet: action.payload };
+    case "Type":
+      return { ...state, Type: action.payload };
     default:
       return state;
   }
@@ -28,6 +32,7 @@ const SignUpScreen = () => {
     Number: "",
     Password: "",
     Confirm: "",
+    Pet: "",
   });
   return (
     <View style={{ flex: 1 }}>
@@ -67,6 +72,20 @@ const SignUpScreen = () => {
         <Input
           label="Confirm"
           placeholder="Confirm Password"
+          reducer={[state, dispatch]}
+          style={styles.input2}
+          secure={true}
+        />
+        <Input
+          label="Pet"
+          placeholder="Pet Name"
+          reducer={[state, dispatch]}
+          style={styles.input2}
+          secure={true}
+        />
+        <Input
+          label="Type"
+          placeholder="Pet Type"
           reducer={[state, dispatch]}
           style={styles.input2}
           secure={true}

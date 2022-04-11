@@ -10,6 +10,7 @@ const StartScreen = () => {
       <View style={styles.line}></View>
       <ButtonComp text="Vet Clinic" routeName="" style={styles.button2} />
       <ButtonComp text="Home Screen" routeName="Home" style={styles.button2} />
+      <ButtonComp text="Apptime" routeName="Time" style={styles.button2} />
     </View>
   );
 };

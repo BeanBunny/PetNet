@@ -3,48 +3,30 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
 import ButtomComp from "../components/button";
 import Textbutton from "../components/TextOnlyButton";
+import AlertButton from "../components/AlertButton";
 
-const LoginScreen = ({ navigation }) => {
+// name, phone number, email, password, confirm password
+const EnterOTP = ({ navigation }) => {
     return (
         <View>
             <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
             <View style={styles.container}>
-                <Input
-                    text="Phone Number"
-                    text2="03XX-XXX-XXXX"
-                    style={styles.input1}
-                    secure={false}
-                />
-                <Input text="Password" text2="Password" style={styles.input2} secure={true} />
-                <Textbutton
-                    text="Forgot Password?"
-                    margin_left="38%"
-                    routeName="ForgotPassword"
-                    navigation={navigation}
-                />
+                <Input text="Enter OTP" text2="123xy" style={styles.input1} secure={false} />
             </View>
-            <ButtomComp
-                text="Login"
+            <AlertButton
                 style={styles.button}
+                text="Submit"
+                route="CreatePassword"
+                alertText1="OTP Successfully Entered"
+                // alertText2="Access it on your email or phone number"
+                alertText3="Enter New Password"
                 navigation={navigation}
-                routeName="Home"
             />
-            <View>
-                <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
-                    Don't have an account?
-                </Text>
-                <Textbutton
-                    text="Sign Up"
-                    margin_left="29%"
-                    routeName="SignUp"
-                    navigation={navigation}
-                />
-            </View>
         </View>
     );
 };
 
-LoginScreen.navigationOptions = () => {
+EnterOTP.navigationOptions = () => {
     return {
         headerShown: false,
     };
@@ -54,9 +36,9 @@ const styles = StyleSheet.create({
     img: {
         justifyContent: "center",
         resizeMode: "contain",
-        height: "30%",
+        height: "50%",
         marginHorizontal: "10%",
-        marginTop: "15%",
+        marginTop: "10%",
     },
     input1: {
         marginHorizontal: "15%",
@@ -69,7 +51,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
         borderRadius: 10,
-        height: "30%",
+        height: "13%",
         // width: "100%",
         marginTop: "20%",
         marginHorizontal: "10%",
@@ -84,4 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default EnterOTP;

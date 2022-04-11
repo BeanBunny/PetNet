@@ -3,48 +3,41 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Input from "../components/inputbox";
 import ButtomComp from "../components/button";
 import Textbutton from "../components/TextOnlyButton";
+import AlertButton from "../components/AlertButton";
 
-const LoginScreen = ({ navigation }) => {
+// name, phone number, email, password, confirm password
+const CreatePassword = ({ navigation }) => {
     return (
         <View>
             <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
             <View style={styles.container}>
                 <Input
-                    text="Phone Number"
-                    text2="03XX-XXX-XXXX"
-                    style={styles.input1}
-                    secure={false}
+                    text="New Password"
+                    text2="New Password"
+                    style={styles.input2}
+                    secure={true}
                 />
-                <Input text="Password" text2="Password" style={styles.input2} secure={true} />
-                <Textbutton
-                    text="Forgot Password?"
-                    margin_left="38%"
-                    routeName="ForgotPassword"
-                    navigation={navigation}
+                <Input
+                    text="Confirm Password"
+                    text2="Confirm Password"
+                    style={styles.input2}
+                    secure={true}
                 />
             </View>
-            <ButtomComp
-                text="Login"
+            <AlertButton
                 style={styles.button}
+                text="Confirm"
+                route="Login"
+                alertText1="Your new password has been created"
+                alertText2="Login with your new password to continue"
+                alertText3="Login!"
                 navigation={navigation}
-                routeName="Home"
             />
-            <View>
-                <Text style={{ marginLeft: "24%", fontSize: 16, marginTop: "3%" }}>
-                    Don't have an account?
-                </Text>
-                <Textbutton
-                    text="Sign Up"
-                    margin_left="29%"
-                    routeName="SignUp"
-                    navigation={navigation}
-                />
-            </View>
         </View>
     );
 };
 
-LoginScreen.navigationOptions = () => {
+CreatePassword.navigationOptions = () => {
     return {
         headerShown: false,
     };
@@ -56,7 +49,7 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         height: "30%",
         marginHorizontal: "10%",
-        marginTop: "15%",
+        marginTop: "10%",
     },
     input1: {
         marginHorizontal: "15%",
@@ -84,4 +77,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default CreatePassword;

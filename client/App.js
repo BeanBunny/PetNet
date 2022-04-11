@@ -1,43 +1,28 @@
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StartScreen from "./src/screens/StartScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import HomeScreen from "./src/screens/HomeScreen";
-import "react-native-gesture-handler";
 import SignUpScreen from "./src/screens/SignUpScreen";
-import ForgotPassword from "./src/screens/ForgotPassword";
-import EnterOTP from "./src/screens/EnterOTP";
-import CreatePassword from "./src/screens/CreatePassword";
-import App from "./src/screens/SetAppointmentCalendar";
+import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
+import EnterOTPScreen from "./src/screens/EnterOTPScreen";
+import CreatePasswordScreen from "./src/screens/CreatePasswordScreen";
 
+const Stack = createNativeStackNavigator();
 
-const defaultNavigationOptions = {
-  cardStyle: { backgroundColor: "#66C4D2" },
-};
-
-const navigator = createSwitchNavigator({
-  loginFlow: createStackNavigator(
-    {
-      SetAppointment: App,
-      // StartUp: StartScreen,
-      // Login: LoginScreen,
-      // Signup: SignUpScreen,
-      // ForgotPassword: ForgotPassword,
-      // EnterOTP: EnterOTP,
-      // CreatePassword: CreatePassword,
-    },
-    {
-      defaultNavigationOptions: defaultNavigationOptions,
-    }
-  ),
-  mainFlow: createStackNavigator(
-    {
-      Home: App,
-    },
-    {
-      defaultNavigationOptions: defaultNavigationOptions,
-    }
-  ),
-});
-
-export default createAppContainer(navigator);
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Start" component={StartScreen} />
+                <Stack.Screen name="SignUp" component={SignUpScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+                <Stack.Screen name="EnterOTP" component={EnterOTPScreen} />
+                <Stack.Screen name="CreatePassword" component={CreatePasswordScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}

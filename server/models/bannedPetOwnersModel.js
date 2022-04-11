@@ -11,6 +11,10 @@ const bannedPetowner = new mongoose.Schema({
     required: [true, "Email missing"],
     maxlength: 255,
     unique: true,
+    match: [
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "invalid banned pet owner email",
+    ],
   },
   phone: {
     type: String,
@@ -24,7 +28,7 @@ const bannedPetowner = new mongoose.Schema({
   },
 });
 
-export const banned_petowner_model = mongoose.model(
+export const bannedPetOwnersModel = mongoose.model(
   "banned petowner",
   bannedPetowner
 );

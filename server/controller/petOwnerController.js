@@ -52,3 +52,14 @@ export const postRemovePet = async (req, res) => {
         return res.status(422).send(err.message);
     }
 };
+
+// i assume i am getting user id from front end
+export const getProfile = async (req, res) => {
+    const id = req.body.userId;
+
+    try {
+        return res.send(await models.petOwner.findById(id));
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};

@@ -195,3 +195,18 @@ export const postDeleteService = async (req, res) => {
     return res.status(422).send(err.message);
   }
 };
+
+export const getServices = async (req, res) => {
+  //vet_email required (any vet index (id etc) would work)
+  const vet_email = req;
+  try {
+    let vet = await models.clinic.findOne({ email: vet_email });
+    console.log(vet);
+    let servicesList = vet.services;
+    //where each service has name description and price
+    return res.send(servicesList);
+    //return res.send("Service removed!");
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+};

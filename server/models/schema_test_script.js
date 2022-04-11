@@ -173,6 +173,22 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     }
     // test();
 
+    const getServices = async (req, res) => {
+      //vet_id required (any vet index would work)
+      const vet_email = req;
+      try {
+        let vet = await models.clinic.findOne({ email: vet_email });
+        console.log(vet);
+        let servicesList = vet.services;
+        //where each service has name description and price
+        console.log(servicesList);
+        //return res.send("Service removed!");
+      } catch (err) {
+        return res.status(422).send(err.message);
+      }
+    };
+    getServices("saadclinic2@gmail.com", 0);
+
     // script to check admin
     // models
     //   .admin({
@@ -201,23 +217,23 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     // //script to check clinic
     // models
     //   .clinic({
-    //     cnic: "4230142301555",
-    //     email: "saadclinic@gmail.com",
+    //     cnic: "4230142301505",
+    //     email: "saadclinic2@gmail.com",
     //     password: "saadkinglmao123$$",
-    //     phone: "03030303030",
-    //     clinic_name: "Saad Pets Clinic",
+    //     phone: "03000000000",
+    //     clinic_name: "Murda Pets Clinic",
     //     //about_clinic: "", //not mandatory
     //     clinic_location: {
     //       Lat: 121,
     //       Long: 555,
     //     },
-    //     PVMC_reg: {
+    //     pvmc_reg: {
     //       name: "Saad Malik",
     //       gender: "M",
-    //       reg_num: 445454646546468,
+    //       reg_num: 445004646546468,
     //       father_name: "Umair Yousaf",
     //     },
-    //     Services: [
+    //     services: [
     //       {
     //         service_name: "Deworming",
     //         description: "Worm nikaal jaani",

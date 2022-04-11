@@ -2,14 +2,29 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import ButtonComp from "../components/button";
 
-const StartScreen = () => {
+const StartScreen = ({ navigation }) => {
     return (
         <View>
             <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
-            <ButtonComp text="Pet Owner" routeName="Login" style={styles.button1} />
+            <ButtonComp
+                text="Pet Owner"
+                routeName="Login"
+                style={styles.button1}
+                navigation={navigation}
+            />
             <View style={styles.line}></View>
-            <ButtonComp text="Vet Clinic" routeName="" style={styles.button2} />
-            <ButtonComp text="Home Screen" routeName="Home" style={styles.button2} />
+            <ButtonComp
+                text="Vet Clinic"
+                routeName=""
+                style={styles.button2}
+                navigation={navigation}
+            />
+            <ButtonComp
+                text="Hoome Screen"
+                routeName="Home"
+                style={styles.button2}
+                navigation={navigation}
+            />
         </View>
     );
 };

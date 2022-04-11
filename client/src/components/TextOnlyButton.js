@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
 
-const button = ({ style, text, navigation, routeName }) => {
+const TextOnlyButton = ({ style, text, margin_left, routeName, navigation }) => {
+    console.log(routeName);
     return (
         <View style={style}>
             <TouchableOpacity
                 onPress={() => navigation.navigate(routeName)}
-                style={styles.container}
+                style={newstyle(margin_left)}
             >
                 <Text style={styles.textStyle}>{text}</Text>
             </TouchableOpacity>
@@ -14,17 +15,19 @@ const button = ({ style, text, navigation, routeName }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#326273",
+function newstyle(margin_left) {
+    return {
+        marginTop: "-9.75%",
+        marginLeft: margin_left,
         padding: "5%",
-        borderRadius: 20,
         alignItems: "center",
-    },
+    };
+}
+const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 15,
-        color: "white",
+        fontSize: 16,
+        color: "blue",
     },
 });
 
-export default button;
+export default TextOnlyButton;

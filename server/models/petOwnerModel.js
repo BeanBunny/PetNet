@@ -5,13 +5,13 @@ import { reportClinicModel } from "./reportClinicModel.js";
 import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 
 const petSchema = new mongoose.Schema({
-    pet_type: {
+    petType: {
         type: String,
         required: [true, "pet type missing"],
         trim: true,
         maxlength: 20,
     },
-    pet_name: {
+    petName: {
         type: String,
         required: [true, "pet name missing"],
         trim: true,

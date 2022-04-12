@@ -15,7 +15,7 @@ export const postAddPet = async (req, res) => {
         let petOwner = await models.petOwner.findById(id);
 
         if (petOwner.pet.length < 5) {
-            petOwner.pet.push({ pet_type: petType, pet_name: petName });
+            petOwner.pet.push({ petType: petType, petName: petName });
             await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
                 runValidators: true,
             });
@@ -147,10 +147,10 @@ export const postUpdatePetProfile = async (req, res) => {
         }
 
         if (newName) {
-            petOwner.pet[index].pet_name = newName;
+            petOwner.pet[index].petName = newName;
         }
         if (newType) {
-            petOwner.pet[index].pet_type = newType;
+            petOwner.pet[index].petType = newType;
         }
 
         await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
@@ -161,14 +161,41 @@ export const postUpdatePetProfile = async (req, res) => {
     }
 };
 
-// only returning completed appointments
+// returning all appointments
 export const getPastAppointments = async (req, res) => {
+    // fix pages issue --------------------------------
+
+    // // remove this ----------------------------------------
+    // const email = req.body.email;
+    // const temp = await models.petOwner.findOne({ email: email });
+    // const petOwnerId = temp._id;
+    // // ----------------------------------------------------
+
     const petOwnerId = req.body.userId;
 
     try {
         const pastAppointments = await models.appointment.find({ petowner_id: petOwnerId });
 
-        return res.send(pastAppointments);
+        let pendingList = [];
+        let otherList = [];
+
+        pastAppointments.forEach((appointment) => {
+            if (appointment.status === "pending") {
+                pendingList.push(appointment);
+            } else {
+                otherList.push(appointment);
+            }
+        });
+
+        pendingList.sort((a, b) => {
+            return a.date - b.date;
+        });
+
+        otherList.sort((a, b) => {
+            return a.date - b.date;
+        });
+
+        return res.send(pendingList.concat(otherList));
     } catch (err) {
         return res.status(422).send(err.message);
     }

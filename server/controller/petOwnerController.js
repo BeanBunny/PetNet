@@ -250,7 +250,7 @@ export const postSetAppointment = async (req, res) => {
 
         await models.appointment(appointmentData).save();
 
-        res.send(["DONE", appointmentData]);
+        res.send("Appointment set!");
     } catch (err) {
         return res.status(422).send(err.message);
     }

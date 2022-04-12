@@ -13,7 +13,7 @@ import VetLoginScreen from  "./src/screens/VetLoginScreen";
 import VetSignUpScreen from "./src/screens/VetSignUpScreen";
 import VetForgotPassword from "./src/screens/VetForgotPassword";
 import VetOTP from "./src/screens/VetOTP";
-
+import VetPendAppointments from "./src/screens/VetPendingRequestsScreen";
 
 const defaultNavigationOptions = {
   cardStyle: { backgroundColor: "#66C4D2" },
@@ -22,17 +22,18 @@ const defaultNavigationOptions = {
 const navigator = createSwitchNavigator({
   loginFlow: createStackNavigator(
     {
-     // SetAppointment: App,
-      StartUp: StartScreen,
-      VetLogin: VetLoginScreen,
-      Login: LoginScreen,
-      Signup: SignUpScreen,
-      ForgotPassword: ForgotPassword,
-      EnterOTP: EnterOTP,
-      CreatePassword: CreatePassword,
-      VetSignUp: VetSignUpScreen,
-      VetForgotPW: VetForgotPassword,
-      VetOTP: VetOTP,
+    //  // SetAppointment: App,
+    //   StartUp: StartScreen,
+    //   VetLogin: VetLoginScreen,
+    //   Login: LoginScreen,
+    //   Signup: SignUpScreen,
+    //   ForgotPassword: ForgotPassword,
+    //   EnterOTP: EnterOTP,
+    //   CreatePassword: CreatePassword,
+    //   VetSignUp: VetSignUpScreen,
+    //   VetForgotPW: VetForgotPassword,
+    //   VetOTP: VetOTP,
+      VetPendAppointments: VetPendAppointments,
       
     },
     {
@@ -41,7 +42,7 @@ const navigator = createSwitchNavigator({
   ),
   mainFlow: createStackNavigator(
     {
-      Home: StartScreen,
+      Home: VetPendAppointments,
     },
     {
       defaultNavigationOptions: defaultNavigationOptions,

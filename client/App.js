@@ -8,6 +8,7 @@ import SignUpScreen from "./src/screens/petscreens/SignUpScreen";
 import ForgotPasswordScreen from "./src/screens/petscreens/ForgotPassword";
 import EnterOTPScreen from "./src/screens/petscreens/EnterOTP";
 import CreatePasswordScreen from "./src/screens/petscreens/CreatePassword";
+import EditServiceScreen from "./src/screens/vetscreens/EditServiceScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="EditServices" component={EditServiceScreen} />
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />

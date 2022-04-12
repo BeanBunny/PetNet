@@ -33,10 +33,14 @@ const SignInScreen = ({ navigation }) => {
 
     useEffect(async () => {
         const token = await AsyncStorage.getItem("token");
+        const userId = await AsyncStorage.getItem("userId");
         if (token) {
-            navigation.navigate("BottomTab");
+            navigation.navigate("BottomTab", {
+                screen: "Home",
+                params: { userId },
+            });
         } else {
-            navigation.navigate("SignIn");
+            navigation.navigate("Auth");
         }
     }, []);
 
@@ -47,17 +51,18 @@ const SignInScreen = ({ navigation }) => {
     };
     const validEmail = emailVerify(state.email);
 
-    const signin = async (email, password) => {
+    const signin = async () => {
+        const email = state.email;
+        const password = state.password;
         try {
             const response = await restApi.post("/admin/signin", { email, password });
             await AsyncStorage.setItem("token", response.data.token);
+            await AsyncStorage.setItem("userId", response.data.userId);
             dispatch({ type: "token", payload: response.data.token });
             dispatch({ type: "userId", payload: response.data.userId });
-            console.log("Stateee", state);
-            console.log("RESPONSEEE", response.data);
             navigation.navigate("BottomTab", {
                 screen: "Home",
-                params: { userId: state.userId },
+                params: { userId: response.data.userId },
             });
         } catch (err) {
             dispatch({ type: "errorMessage", payload: "Your email or passsword was incorrect." });
@@ -88,12 +93,7 @@ const SignInScreen = ({ navigation }) => {
             {validEmail === null ? (
                 <Button text="Login" style={styles.button} disabled />
             ) : (
-                <Button
-                    text="Login"
-                    style={styles.button}
-                    disabled={false}
-                    onSubmit={() => signin(state.email, state.password)}
-                />
+                <Button text="Login" style={styles.button} disabled={false} onSubmit={signin} />
             )}
             {state.errorMesaage ? <Text style={{ color: "red" }}>{state.errorMesaage}</Text> : null}
         </View>

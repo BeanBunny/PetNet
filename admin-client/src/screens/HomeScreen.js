@@ -1,34 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Card, Title, Headline, Paragraph, Button } from "react-native-paper";
 import { View, StyleSheet, Alert, FlatList } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import restApi from "../api/restApi";
 
-const AcceptClinic = async (req) => {
-    await restApi.post("/ad");
+const AcceptClinic = async (req, entireList, updateList) => {
+    try {
+        await restApi.post("/admin/accept-clinic", { user: req });
+        updateList(entireList.splice(entireList.indexOf(req), 1));
+    } catch (err) {
+        console.log(err);
+    }
+};
+const RejectClinic = async (req, entireList, updateList) => {
+    try {
+        await restApi.post("/admin/reject-clinic", { user: req });
+        updateList(entireList.splice(entireList.indexOf(req), 1));
+    } catch (err) {
+        console.log(err);
+    }
 };
 
-const AcceptAlert = (req) => {
+const AcceptAlert = (req, entireList, updateList) => {
     Alert.alert("Are you sure you want to allow this Clinic?", "", [
         {
             text: "No",
             onPress: () => {},
             style: "cancel",
         },
-        { text: "Yes", onPress: () => console.log("Ok pressed") },
+        { text: "Yes", onPress: () => AcceptClinic(req, entireList, updateList) },
     ]);
 };
-const RejectAlert = () => {
+
+const RejectAlert = (req, entireList, updateList) => {
     Alert.alert("Are you sure you want to reject this Clinic?", "", [
         {
             text: "No",
             onPress: () => {},
             style: "cancel",
         },
-        { text: "Yes", onPress: () => console.log("Ok pressed") },
+        { text: "Yes", onPress: () => RejectClinic(req, entireList, updateList) },
     ]);
 };
 
-const ClinicCard = ({ item }) => {
+const ClinicCard = ({ item, entireList, updateList }) => {
     const [req, setReq] = useState(item);
     const { cnic, email, phone, clinic_name, clinic_location, pvmc_reg } = item;
     return (
@@ -42,15 +57,15 @@ const ClinicCard = ({ item }) => {
                 <Paragraph>PVMC Registraion: {JSON.stringify(pvmc_reg)}</Paragraph>
             </Card.Content>
             <Card.Actions>
-                <Button onPress={() => AcceptAlert(req)}>Accept</Button>
-                <Button onPress={RejectAlert}> Reject</Button>
+                <Button onPress={() => AcceptAlert(req, entireList, updateList)}>Accept</Button>
+                <Button onPress={() => RejectAlert(req, entireList, updateList)}> Reject</Button>
             </Card.Actions>
         </Card>
     );
 };
 
 const HomeScreen = ({ route }) => {
-    const { userId } = route.params;
+    const userId = AsyncStorage.getItem("userId");
 
     const [listReq, setListReq] = useState([]);
     useEffect(async () => {
@@ -65,7 +80,13 @@ const HomeScreen = ({ route }) => {
                 keyExtractor={(item) => item.email}
                 data={listReq}
                 renderItem={({ item }) => {
-                    return <ClinicCard item={item} />;
+                    return (
+                        <ClinicCard
+                            item={item}
+                            entireList={listReq}
+                            updateList={() => setListReq(listReq.splice(listReq.indexOf(item), 1))}
+                        />
+                    );
                 }}
             />
         </View>

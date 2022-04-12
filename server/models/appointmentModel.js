@@ -8,7 +8,7 @@ const appointmentSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true, //format "Dec 11 2022 16:30"
+    required: true,
   },
   status: {
     type: String,

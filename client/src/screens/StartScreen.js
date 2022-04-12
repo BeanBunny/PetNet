@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import ButtonComp from "../components/button";
+import ButtonComp from "../components/Button";
+import { Context as AuthContext } from "../context/AuthContext";
 
-const StartScreen = () => {
+const StartScreen = ({ navigation }) => {
+    const { _, isPetOrVet } = useContext(AuthContext);
     return (
         <View>
             <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
-            <ButtonComp text="Pet Owner" routeName="Login" style={styles.button1} />
+            <ButtonComp
+                text="Pet Owner"
+                routeName="Login"
+                style={styles.button1}
+                navigation={navigation}
+                onChange={() => isPetOrVet(false)}
+            />
             <View style={styles.line}></View>
-            <ButtonComp text="Vet Clinic" routeName="" style={styles.button2} />
-            <ButtonComp text="Home Screen" routeName="Home" style={styles.button2} />
+            <ButtonComp
+                text="Vet Clinic"
+                routeName="Login"
+                style={styles.button2}
+                navigation={navigation}
+                onChange={() => isPetOrVet(true)}
+            />
         </View>
     );
 };

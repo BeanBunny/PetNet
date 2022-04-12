@@ -1,6 +1,7 @@
 import { models } from "../models/models.js";
 import bcrypt from "bcrypt";
 
+// give me req.body such that is contains only fields required for signup
 export const postSignup = async (req, res) => {
   try {
     const signup = models.verificationClinic(req.body);
@@ -14,6 +15,7 @@ export const postSignup = async (req, res) => {
 
 export const getSignup = (req, res) => {
   // render signup page
+
   res.send("INSIDE SIGNUP - GET");
 };
 
@@ -50,20 +52,6 @@ export const getAppointments = async (req, res) => {
         if (petOwners2[j]._id.equals(petOwnerIds[i])) {
           petOwners.push(petOwners2[j]);
           break;
-        }
-      }
-    }
-    let result = [];
-    //get all pet types
-    let petTypes = [];
-
-    //for every petowner, go through the list of pets and match the id from appointment to get pet type
-    for (let i = 0; i < petOwners.length; i++) {
-      let listOfPets = petOwners[i].pet;
-      let appointmentPetId = appointmentsList[i].pet_id;
-      for (let j = 0; j < listOfPets.length; j++) {
-        if (appointmentPetId.equals(listOfPets[j]._id)) {
-          petTypes.push(listOfPets[j].pet_type);
         }
       }
       // console.log(petTypes);

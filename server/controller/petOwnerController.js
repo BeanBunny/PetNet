@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 export const postSignUp = async (req, res) => {
     const { name, email, password, pet, phone, location } = req.body;
     try {
-        const petOwner = new petOwnerModel({ email, password, name, pet, phone, location });
+        const petOwner = new models.petOwner({ email, password, name, pet, phone, location });
         await petOwner.save();
         const token = jwt.sign({ userId: petOwner._id }, process.env.SECRET);
         res.send({ token, userId: petOwner._id });

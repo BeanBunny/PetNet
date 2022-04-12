@@ -125,28 +125,30 @@ export const postUpdateProfileGeneral = async (req, res) => {
 };
 
 export const postUpdateProfilePassword = async (req, res) => {
-    // remove this ----------------------------------------
-    const email = req.body.email;
-    const temp = await models.petOwner.findOne({ email: email });
-    const petOwnerId = temp._id;
-    // ----------------------------------------------------
-
     const newPassword = req.body.newPassword;
-    const newConfirmPassword = req.body.newConfirmPassword;
-    // const petOwnerId = req.body.userId;
+    const petOwnerId = req.body.userId;
 
     try {
         let petOwner = await models.petOwner.findById(petOwnerId);
 
-        if (!(newPassword === newConfirmPassword)) {
-            throw false;
-        }
+        bcrypt.genSalt(10, (err, salt) => {
+            if (err) {
+                return res.status(422).send(err);
+            }
 
-        // bcrypt with what salt????????? or already bcrypted when recieved? ---> in that case bcrypt.compare and await function
+            bcrypt.hash(newPassword, salt, async (err, hash) => {
+                if (err) {
+                    return res.status(422).send(err);
+                }
+                petOwner.password = hash;
 
-        // await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+                await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
+                    runValidators: true,
+                });
 
-        return res.send("Updates successful!");
+                return res.send("Updates successful!");
+            });
+        });
     } catch (err) {
         if (!err) {
             return res.status(422).send("Passwords do not match!");
@@ -192,15 +194,15 @@ export const postUpdatePetProfile = async (req, res) => {
 
 // returning all appointments
 export const getPastAppointments = async (req, res) => {
-    // fix pages issue --------------------------------
+    // fix pages issue ----------------------------------------------------------------
 
-    // // remove this ----------------------------------------
-    // const email = req.body.email;
-    // const temp = await models.petOwner.findOne({ email: email });
-    // const petOwnerId = temp._id;
-    // // ----------------------------------------------------
+    // remove this ----------------------------------------
+    const email = req.body.email;
+    const temp = await models.petOwner.findOne({ email: email });
+    const petOwnerId = temp._id;
+    // ----------------------------------------------------
 
-    const petOwnerId = req.body.userId;
+    // const petOwnerId = req.body.userId;
 
     try {
         const pastAppointments = await models.appointment.find({ petowner_id: petOwnerId });
@@ -225,6 +227,30 @@ export const getPastAppointments = async (req, res) => {
         });
 
         return res.send(pendingList.concat(otherList));
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+// getting vetId and petOwnerId and petId
+export const postSetAppointment = async (req, res) => {
+    const { petId, vetId, petOwnerId, type, date } = req.body;
+
+    try {
+        const status = "pending";
+
+        const appointmentData = {
+            type: type,
+            date: new Date(date),
+            status: status,
+            petowner_id: petOwnerId,
+            pet_id: petId,
+            vet_id: vetId,
+        };
+
+        await models.appointment(appointmentData).save();
+
+        res.send(["DONE", appointmentData]);
     } catch (err) {
         return res.status(422).send(err.message);
     }

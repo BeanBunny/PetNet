@@ -1,5 +1,6 @@
 import { models } from "../models/models.js";
 
+// give me req.body such that is contains only fields required for signup
 export const postSignup = async (req, res) => {
     try {
         const signup = models.verificationClinic(req.body);

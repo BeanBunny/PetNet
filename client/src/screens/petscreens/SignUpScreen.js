@@ -37,11 +37,11 @@ const SignUpScreen = ({ navigation }) => {
         Password: "",
         Confirm: "",
         Pet: "",
+        Type: "",
         City: "",
     });
 
     const { state, signupPet } = useContext(AuthContext);
-    console.log(state);
     return (
         <View style={{ flex: 1 }}>
             <Image style={styles.img} source={require("../../../assets/Logo1.jpeg")} />
@@ -104,10 +104,10 @@ const SignUpScreen = ({ navigation }) => {
                 />
             </ScrollView>
             <ButtonComp
-                text="Login"
+                text="Signup"
                 style={styles.button}
                 disabled={false}
-                onChange={() =>
+                onChange={() => {
                     signupPet({
                         name: reducerState.Name,
                         email: reducerState.Email,
@@ -116,8 +116,8 @@ const SignUpScreen = ({ navigation }) => {
                         pet: { petName: reducerState.Pet, petType: reducerState.Type },
                         location: { city: reducerState.City },
                         isVet: state.isVet,
-                    })
-                }
+                    });
+                }}
             />
         </View>
     );

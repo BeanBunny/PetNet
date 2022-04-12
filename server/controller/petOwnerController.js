@@ -1,6 +1,8 @@
 import { models } from "../models/models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId;
 
 // assuming that i am getting ObjectId() of pet owner
 // i am also getting name and type of new pet to be added
@@ -154,6 +156,19 @@ export const postUpdatePetProfile = async (req, res) => {
         await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
 
         return res.send("Pet profile updated!");
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+// only returning completed appointments
+export const getPastAppointments = async (req, res) => {
+    const petOwnerId = req.body.userId;
+
+    try {
+        const pastAppointments = await models.appointment.find({ petowner_id: petOwnerId });
+
+        return res.send(pastAppointments);
     } catch (err) {
         return res.status(422).send(err.message);
     }

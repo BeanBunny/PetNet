@@ -19,4 +19,6 @@ petOwnerRoutes.post(
 
 petOwnerRoutes.post("/profile-customization/pet", petOwnerController.postUpdatePetProfile);
 
+petOwnerRoutes.get("/past-appointments", petOwnerController.getPastAppointments);
+
 export default petOwnerRoutes;

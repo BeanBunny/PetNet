@@ -1,8 +1,12 @@
 import express from "express";
 import * as petOwnerController from "../controller/petOwnerController.js";
-import requireAuth from "../middleware/requireAuth.js";
+import { petOwnerRequireAuth as requireAuth } from "../middleware/requireAuth.js";
 
 const petOwnerRoutes = express.Router();
+
+petOwnerRoutes.post("/signup", petOwnerController.postSignUp);
+
+petOwnerRoutes.post("/signin", petOwnerController.postSignIn);
 
 petOwnerRoutes.post("/add-pet", petOwnerController.postAddPet);
 

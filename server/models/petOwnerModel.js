@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 import { appointmentModel } from "./appointmentModel.js";
 import { reportClinicModel } from "./reportClinicModel.js";
 import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
 
 const petSchema = new mongoose.Schema({
-    pet_type: {
+    petType: {
         type: String,
         required: [true, "pet type missing"],
         trim: true,
         maxlength: 20,
     },
-    pet_name: {
+    petName: {
         type: String,
         required: [true, "pet name missing"],
         trim: true,
@@ -60,6 +61,21 @@ function petLimit(val) {
     return val.length <= 5;
 }
 
+petOwnerSchema.pre("save", function (next) {
+    const user = this;
+    if (!user.isModified("password")) return next();
+
+    bcrypt.genSalt(10, function (err, salt) {
+        if (err) return next(err);
+
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) return next(err);
+            user.password = hash;
+            next();
+        });
+    });
+});
+
 petOwnerSchema.pre("remove", async function (next) {
     const user = this;
 
@@ -72,5 +88,17 @@ petOwnerSchema.pre("remove", async function (next) {
 
     next();
 });
+
+petOwnerSchema.methods.comparePassword = function (inputPassword) {
+    const user = this;
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(inputPassword, user.password, (err, isMatch) => {
+            if (err) return reject(err);
+            if (!isMatch) return reject(false);
+
+            resolve(true);
+        });
+    });
+};
 
 export const petOwnerModel = mongoose.model("pet owner", petOwnerSchema);

@@ -2,6 +2,35 @@ import { models } from "../models/models.js";
 import { petOwnerModel } from "../models/petOwnerModel.js";
 import jwt from "jsonwebtoken";
 
+export const postSignUp = async (req, res) => {
+    const { name, email, password, pet, phone, location } = req.body;
+    try {
+        const petOwner = new petOwnerModel({ email, password, name, pet, phone, location });
+        await petOwner.save();
+        const token = jwt.sign({ userId: petOwner._id }, process.env.SECRET);
+        res.send({ token, userId: petOwner._id });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postSignIn = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
+
+    const user = await models.petOwner.findOne({ email: email });
+    if (!user) return res.status(422).send({ error: "Invalid email address" });
+    try {
+        await user.comparePassword(password);
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET);
+        res.send({ token, userId: user._id });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).send({ error: err.message });
+    }
+};
+
 // assuming that i am getting ObjectId() of pet owner
 // i am also getting name and type of new pet to be added
 export const postAddPet = async (req, res) => {

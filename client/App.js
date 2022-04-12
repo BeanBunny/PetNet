@@ -5,9 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import * as AsyncStorage from "expo-secure-store";
-
 import PetOwnerFlow from "./src/navigators/PetOwnerNavigator";
-
 import StartScreen from "./src/screens/StartScreen";
 // import LoginScreen from "./src/screens/petscreens/LoginScreen";
 // import ClinicsScreen from "./src/screens/petscreens/HomeScreen";
@@ -17,7 +15,7 @@ import EnterOTPScreen from "./src/screens/petscreens/EnterOTP";
 import CreatePasswordScreen from "./src/screens/petscreens/CreatePassword";
 import EditServiceScreen from "./src/screens/vetscreens/EditServiceScreen";
 import SetAppointmentCalendarScreen from "./src/screens/petscreens/SetAppointmentCalendarScreen";
-import LogoutScreen from "./src/screens/petscreens/LogoutScreen";
+import AccountScreen from "./src/screens/petscreens/AccountScreen";
 import {
   Provider as AuthProvider,
   Context as AuthContext,

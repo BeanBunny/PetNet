@@ -7,6 +7,8 @@ import ClinicsScreen from "../screens/petscreens/HomeScreen";
 import SetAppointmentCalendarScreen from "../screens/petscreens/SetAppointmentCalendarScreen";
 import AccountScreen from "../screens/petscreens/AccountScreen";
 import HistoryScreen from "../screens/petscreens/HistoryScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
 
 const PetOwnerNav = createNativeStackNavigator();
 const PetOwnerBottomTab = createMaterialBottomTabNavigator();
@@ -14,13 +16,15 @@ const SetAppFlow = createNativeStackNavigator();
 
 const AppointmentFlow = ({ navigation }) => {
   return (
-    <SetAppFlow.Navigator initialRouteName="Clinics">
-      <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
-      <SetAppFlow.Screen
-        name="AppDate"
-        component={SetAppointmentCalendarScreen}
-      />
-    </SetAppFlow.Navigator>
+    <View style={{ flex: 1 }} collapsable={false}>
+      <SetAppFlow.Navigator initialRouteName="Clinics">
+        <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
+        <PetOwnerBottomTab.Screen
+          name="AppDate"
+          component={SetAppointmentCalendarScreen}
+        />
+      </SetAppFlow.Navigator>
+    </View>
   );
 };
 
@@ -70,7 +74,11 @@ const PetOwnerFlow = () => {
     <PetOwnerNav.Navigator screenOptions={{ headerShown: false }}>
       <PetOwnerNav.Screen name="SignUp" component={petSignUpScreen} />
       <PetOwnerNav.Screen name="Login" component={LoginScreen} />
-      <PetOwnerNav.Screen name="Home" component={PetOwnerBottomTabFlow} />
+      <PetOwnerNav.Screen
+        name="Home"
+        component={PetOwnerBottomTabFlow}
+        screenOptions={{ headerShown: false }}
+      />
     </PetOwnerNav.Navigator>
   );
 };

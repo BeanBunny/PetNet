@@ -107,10 +107,13 @@ const SignUpScreen = ({ navigation }) => {
           secure={false}
         /> */}
         <Picker
-          selectedValue={reducerState}
+          selectedValue={reducerState.Type}
           style={styles.input2}
-          onValueChange={(itemValue, itemIndex) => dispatch(itemValue)}
+          onValueChange={(itemValue, itemIndex) =>
+            dispatch({ type: "Type", payload: itemValue })
+          }
         >
+          <Picker.Item label="--" value="" />
           <Picker.Item label="Cat" value="Cat" />
           <Picker.Item label="Dog" value="Dog" />
           <Picker.Item label="Bird" value="Bird" />
@@ -118,7 +121,7 @@ const SignUpScreen = ({ navigation }) => {
         </Picker>
       </ScrollView>
       <ButtonComp
-        text="Login"
+        text="Sign Up"
         style={styles.button}
         disabled={false}
         onChange={() =>

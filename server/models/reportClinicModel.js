@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const reportClinicSchema = new mongoose.Schema({
-  pet_owner_id: {
+  petowner_id: {
     type: ObjectId,
     required: true,
   },

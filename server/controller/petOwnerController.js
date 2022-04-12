@@ -255,3 +255,23 @@ export const postSetAppointment = async (req, res) => {
         return res.status(422).send(err.message);
     }
 };
+
+export const postReportVet = async (req, res) => {
+    const { petOwnerId, vetId, reason } = req.body;
+
+    try {
+        const reportData = {
+            petowner_id: petOwnerId,
+            vet_id: vetId,
+            report_reason: reason,
+        };
+
+        console.log(reportData);
+
+        await models.reportClinic(reportData).save();
+
+        return res.send("Reported!");
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};

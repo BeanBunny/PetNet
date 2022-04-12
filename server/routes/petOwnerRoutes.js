@@ -14,19 +14,31 @@ petOwnerRoutes.post("/remove-pet", petOwnerController.postRemovePet);
 
 petOwnerRoutes.get("/profile", petOwnerController.getProfile);
 
-petOwnerRoutes.post("/profile-customization/general", petOwnerController.postUpdateProfileGeneral);
+petOwnerRoutes.post(
+    "/profile-customization/general",
+    petOwnerController.postUpdateProfileGeneral
+);
 
 petOwnerRoutes.post(
     "/profile-customization/password",
     petOwnerController.postUpdateProfilePassword
 );
 
-petOwnerRoutes.post("/profile-customization/pet", petOwnerController.postUpdatePetProfile);
+petOwnerRoutes.post(
+    "/profile-customization/pet",
+    petOwnerController.postUpdatePetProfile
+);
 
-petOwnerRoutes.get("/past-appointments", petOwnerController.getPastAppointments);
+petOwnerRoutes.get(
+    "/past-appointments",
+    requireAuth,
+    petOwnerController.getPastAppointments
+);
 
 petOwnerRoutes.post("/set-appointment", petOwnerController.postSetAppointment);
 
 petOwnerRoutes.post("/report-vet", petOwnerController.postReportVet);
+
+petOwnerRoutes.post("/get-clinics", requireAuth, petOwnerController.getClinics);
 
 export default petOwnerRoutes;

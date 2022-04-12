@@ -7,7 +7,15 @@ const ObjectId = mongoose.Types.ObjectId;
 export const postSignUp = async (req, res) => {
     const { name, email, password, pet, phone, location } = req.body;
     try {
-        const petOwner = new models.petOwner({ email, password, name, pet, phone, location });
+        console.log(req.body);
+        const petOwner = new models.petOwner({
+            email,
+            password,
+            name,
+            pet,
+            phone,
+            location,
+        });
         await petOwner.save();
         const token = jwt.sign({ userId: petOwner._id }, process.env.SECRET);
         res.send({ token, userId: petOwner._id });
@@ -19,7 +27,8 @@ export const postSignUp = async (req, res) => {
 
 export const postSignIn = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
+    if (!email || !password)
+        return res.status(422).send({ error: "Invalid login: No input seen" });
 
     const user = await models.petOwner.findOne({ email: email });
     // if (!user) return res.status(422).send({ error: "Invalid email address" });
@@ -80,7 +89,9 @@ export const postRemovePet = async (req, res) => {
         }
 
         petOwner.pet.splice(index, 1);
-        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
+            runValidators: true,
+        });
 
         return res.send("Pet Removed successfully!");
     } catch (err) {
@@ -118,7 +129,9 @@ export const postUpdateProfileGeneral = async (req, res) => {
             petOwner.name = newName;
         }
 
-        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
+            runValidators: true,
+        });
 
         return res.send("Updates successful!");
     } catch (err) {
@@ -144,9 +157,13 @@ export const postUpdateProfilePassword = async (req, res) => {
                 }
                 petOwner.password = hash;
 
-                await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
-                    runValidators: true,
-                });
+                await models.petOwner.updateOne(
+                    { _id: petOwner._id },
+                    petOwner,
+                    {
+                        runValidators: true,
+                    }
+                );
 
                 return res.send("Updates successful!");
             });
@@ -186,7 +203,9 @@ export const postUpdatePetProfile = async (req, res) => {
             petOwner.pet[index].petType = newType;
         }
 
-        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
+            runValidators: true,
+        });
 
         return res.send("Pet profile updated!");
     } catch (err) {
@@ -198,16 +217,12 @@ export const postUpdatePetProfile = async (req, res) => {
 export const getPastAppointments = async (req, res) => {
     // fix pages issue ----------------------------------------------------------------
 
-    // remove this ----------------------------------------
-    const email = req.body.email;
-    const temp = await models.petOwner.findOne({ email: email });
-    const petOwnerId = temp._id;
-    // ----------------------------------------------------
-
-    // const petOwnerId = req.body.userId;
+    const petOwnerId = req.body.userId;
 
     try {
-        const pastAppointments = await models.appointment.find({ petowner_id: petOwnerId });
+        const pastAppointments = await models.appointment.find({
+            petowner_id: petOwnerId,
+        });
 
         let pendingList = [];
         let otherList = [];
@@ -227,8 +242,8 @@ export const getPastAppointments = async (req, res) => {
         otherList.sort((a, b) => {
             return a.date - b.date;
         });
-
-        return res.send(pendingList.concat(otherList));
+        const finalList = [pendingList, otherList];
+        return res.send(finalList);
     } catch (err) {
         return res.status(422).send(err.message);
     }
@@ -274,6 +289,22 @@ export const postReportVet = async (req, res) => {
 
         return res.send("Reported!");
     } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const getClinics = async (req, res) => {
+    const petOwnerID = req.body.id;
+    try {
+        console.log(petOwnerID, "<<--- iddd");
+        //get pet owner's city
+        const petOwner = await models.petOwner.findById(petOwnerID);
+        const city = petOwner.location;
+        //get all vets of this city
+        const nearbyVets = await models.clinic.find({ clinic_location: city });
+        res.send(nearbyVets);
+    } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };

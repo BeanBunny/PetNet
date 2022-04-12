@@ -165,12 +165,12 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
             }
             console.log(result);
         };
-        async function test() {
-            const vet = await models.clinic.findOne({
-                email: "saadclinic@gmail.com",
-            });
-            getAppointments(vet, 2);
-        }
+        // async function test() {
+        //     const vet = await models.clinic.findOne({
+        //         email: "saadclinic@gmail.com",
+        //     });
+        // getAppointments(vet, 2);
+        // }
         // test();
 
         // const getServices = async (req, res) => {
@@ -214,49 +214,89 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         //   .catch((err) =>
         //     console.log("Err in saving pet owner report", err.message)
         //   );
-        // //script to check clinic
-        // models
-        //   .clinic({
-        //     cnic: "4230142301505",
-        //     email: "saadclinic2@gmail.com",
-        //     password: "saadkinglmao123$$",
-        //     phone: "03000000000",
-        //     clinic_name: "Murda Pets Clinic",
-        //     //about_clinic: "", //not mandatory
-        //     clinic_location: {
-        //       Lat: 121,
-        //       Long: 555,
-        //     },
-        //     pvmc_reg: {
-        //       name: "Saad Malik",
-        //       gender: "M",
-        //       reg_num: 445004646546468,
-        //       father_name: "Umair Yousaf",
-        //     },
-        //     services: [
-        //       {
-        //         service_name: "Deworming",
-        //         description: "Worm nikaal jaani",
-        //         price: 500,
-        //       },
-        //       {
-        //         service_name: "Vaccination",
-        //         description:
-        //           "Get your pet vaccinated, price includes all annual vaccinations",
-        //         price: 2000,
-        //       },
-        //       {
-        //         service_name: "Grooming",
-        //         description: "Haircut and nails cut",
-        //         price: 1000,
-        //       },
-        //     ],
-        //   })
-        //   .save()
-        //   .then((res) => {
-        //     console.log("New clinic saved:", res);
-        //   })
-        //   .catch((err) => console.log("Err in saving clinic", err.message));
+        //script to check clinic
+        models
+            .clinic({
+                cnic: "4230142301695",
+                email: "saadclinic69@gmail.com",
+                password: "saadking69123$$",
+                phone: "03000000069",
+                image_url:
+                    "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                clinic_name: "Murda Zindabad Pets Clinic",
+                //about_clinic: "", //not mandatory
+                clinic_location: "Peshawar",
+                pvmc_reg: {
+                    name: "Saad Malik",
+                    gender: "M",
+                    reg_num: 445004646696968,
+                    father_name: "Umair Yousaf",
+                },
+                services: [
+                    {
+                        service_name: "Deworming",
+                        description: "Worm nikaal jaani",
+                        price: 500,
+                    },
+                    {
+                        service_name: "Vaccination",
+                        description:
+                            "Get your pet vaccinated, price includes all annual vaccinations",
+                        price: 2000,
+                    },
+                    {
+                        service_name: "Grooming",
+                        description: "Haircut and nails cut",
+                        price: 1000,
+                    },
+                ],
+            })
+            .save()
+            .then((res) => {
+                console.log("New clinic saved:", res);
+            })
+            .catch((err) => console.log("Err in saving clinic", err.message));
+        models
+            .clinic({
+                cnic: "4230142101505",
+                email: "saanic2@gmail.com",
+                password: "saadkino123$$",
+                phone: "03006900000",
+                image_url:
+                    "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+                clinic_name: "Murda Pets Clinic",
+                //about_clinic: "", //not mandatory
+                clinic_location: "Lahore",
+                pvmc_reg: {
+                    name: "Saad Malik",
+                    gender: "M",
+                    reg_num: 445004626246468,
+                    father_name: "Umair Yousaf",
+                },
+                services: [
+                    {
+                        service_name: "Deworming",
+                        description: "Worm nikaal jaani",
+                        price: 500,
+                    },
+                    {
+                        service_name: "Vaccination",
+                        description:
+                            "Get your pet vaccinated, price includes all annual vaccinations",
+                        price: 2000,
+                    },
+                    {
+                        service_name: "Grooming",
+                        description: "Haircut and nails cut",
+                        price: 1000,
+                    },
+                ],
+            })
+            .save()
+            .then((res) => {
+                console.log("New clinic saved:", res);
+            })
+            .catch((err) => console.log("Err in saving clinic", err.message));
         // models
         //     .verificationClinic({
         //         cnic: "4230142301111",

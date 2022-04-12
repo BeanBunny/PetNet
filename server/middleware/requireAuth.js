@@ -10,7 +10,8 @@ export const adminRequireAuth = (req, res, next) => {
 
     const token = authorization.replace("Bearer ", "");
     jwt.verify(token, process.env.SECRET, async (err, payload) => {
-        if (err) return res.status(401).send({ error: "You must be logged in" });
+        if (err)
+            return res.status(401).send({ error: "You must be logged in" });
         const { userId } = payload;
         const user = await models.admin.findById(userId);
         req.user = user;
@@ -26,10 +27,12 @@ export const petOwnerRequireAuth = (req, res, next) => {
 
     const token = authorization.replace("Bearer ", "");
     jwt.verify(token, process.env.SECRET, async (err, payload) => {
-        if (err) return res.status(401).send({ error: "You must be logged in" });
+        if (err)
+            return res.status(401).send({ error: "You must be logged in" });
         const { userId } = payload;
         const user = await models.petOwner.findById(userId);
         req.user = user;
+        console.log("-------------------");
         next();
     });
 };

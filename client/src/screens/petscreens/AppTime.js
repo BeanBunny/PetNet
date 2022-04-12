@@ -5,8 +5,6 @@ import TopBar from "../../components/TopBar";
 import Button from "../../components/Button";
 
 const apptime = () => {
-  // const state = contextUser();
-  // const setState = setContextUser();
   const [state, setTime] = useState("");
   const [petstate, setPet] = useState("");
   const list1 = ["3:00 PM", "8:00 AM"];

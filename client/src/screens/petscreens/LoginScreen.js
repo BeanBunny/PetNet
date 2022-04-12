@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     height: "30%",
-    // width: "100%",
     marginTop: "20%",
     marginHorizontal: "10%",
   },

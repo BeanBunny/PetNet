@@ -99,13 +99,6 @@ const SignUpScreen = ({ navigation }) => {
           style={styles.input2}
           secure={false}
         />
-        {/* <Input
-          label="Type"
-          placeholder="Pet Type"
-          reducer={[reducerState, dispatch]}
-          style={styles.input2}
-          secure={false}
-        /> */}
         <Picker
           selectedValue={reducerState.Type}
           style={styles.input2}

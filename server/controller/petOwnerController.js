@@ -1,6 +1,6 @@
 import { models } from "../models/models.js";
-import { petOwnerModel } from "../models/petOwnerModel.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 // assuming that i am getting ObjectId() of pet owner
 // i am also getting name and type of new pet to be added
@@ -67,18 +67,10 @@ export const getProfile = async (req, res) => {
 };
 
 export const postUpdateProfileGeneral = async (req, res) => {
-    // // remove this ----------------------------------------
-    // const email = req.body.email;
-    // const temp = await models.petOwner.findOne({ email: email });
-    // const petOwnerId = temp._id;
-    // // ----------------------------------------------------
-
     const petOwnerId = req.body.userId;
     const newPhone = req.body.newPhone;
     const newEmail = req.body.newEmail;
     const newName = req.body.newName;
-
-    console.log(req.body);
 
     try {
         let petOwner = await models.petOwner.findById(petOwnerId);
@@ -96,6 +88,72 @@ export const postUpdateProfileGeneral = async (req, res) => {
         await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
 
         return res.send("Updates successful!");
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postUpdateProfilePassword = async (req, res) => {
+    // remove this ----------------------------------------
+    const email = req.body.email;
+    const temp = await models.petOwner.findOne({ email: email });
+    const petOwnerId = temp._id;
+    // ----------------------------------------------------
+
+    const newPassword = req.body.newPassword;
+    const newConfirmPassword = req.body.newConfirmPassword;
+    // const petOwnerId = req.body.userId;
+
+    try {
+        let petOwner = await models.petOwner.findById(petOwnerId);
+
+        if (!(newPassword === newConfirmPassword)) {
+            throw false;
+        }
+
+        // bcrypt with what salt????????? or already bcrypted when recieved? ---> in that case bcrypt.compare and await function
+
+        // await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+
+        return res.send("Updates successful!");
+    } catch (err) {
+        if (!err) {
+            return res.status(422).send("Passwords do not match!");
+        }
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postUpdatePetProfile = async (req, res) => {
+    const newName = req.body.newName;
+    const newType = req.body.newType;
+    const petOwnerId = req.body.userId;
+    const petId = req.body.petId;
+
+    try {
+        let petOwner = await models.petOwner.findById(petOwnerId);
+        let index = -1;
+
+        for (let i = 0; i < petOwner.pet.length; i++) {
+            if (petOwner.pet[i]._id.equals(petId)) {
+                index = i;
+            }
+        }
+
+        if (index === -1) {
+            return res.status(422).send("Pet not found!");
+        }
+
+        if (newName) {
+            petOwner.pet[index].pet_name = newName;
+        }
+        if (newType) {
+            petOwner.pet[index].pet_type = newType;
+        }
+
+        await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, { runValidators: true });
+
+        return res.send("Pet profile updated!");
     } catch (err) {
         return res.status(422).send(err.message);
     }

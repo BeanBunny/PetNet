@@ -12,4 +12,11 @@ petOwnerRoutes.get("/profile", petOwnerController.getProfile);
 
 petOwnerRoutes.post("/profile-customization/general", petOwnerController.postUpdateProfileGeneral);
 
+petOwnerRoutes.post(
+    "/profile-customization/password",
+    petOwnerController.postUpdateProfilePassword
+);
+
+petOwnerRoutes.post("/profile-customization/pet", petOwnerController.postUpdatePetProfile);
+
 export default petOwnerRoutes;

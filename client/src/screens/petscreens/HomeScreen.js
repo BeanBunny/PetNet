@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View, Text, StyleSheet } from "react-native";
+import { FlatList, View, Text, StyleSheet, Image } from "react-native";
 import { Provider } from "react-native-paper";
 import Bar from "../../components/Bar";
 import TopBar from "../../components/TopBar";
@@ -7,7 +7,9 @@ import Search from "../../components/SearchBar";
 
 const HomeScreen = () => {
   const queryRes = [
-    { uri: "https://images.app.goo.gl/ivrBUR8q6T6SuDvT6" },
+    {
+      uri: "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+    },
     { uri: "https://images.app.goo.gl/EPHJMsV1NoXGpxG16" },
     { uri: "https://images.app.goo.gl/9CCMAykjgLqNkNYa9" },
   ];
@@ -25,14 +27,7 @@ const HomeScreen = () => {
         data={queryRes}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <Text>{item.uri}</Text>
-              {/* <Image style={styles.horiz} source={item} /> */}
-            </View>
-          );
-        }}
+        renderItem={({ item }) => <Image style={styles.horiz} source={item} />}
       />
       <FlatList
         keyExtractor={(x) => x.uri}
@@ -46,7 +41,6 @@ const HomeScreen = () => {
           );
         }}
       />
-      <Bar style={styles.lowbar} />
     </Provider>
   );
 };
@@ -62,7 +56,10 @@ const styles = StyleSheet.create({
     marginTop: "3%",
     marginHorizontal: "8%",
   },
-  horiz: {},
+  horiz: {
+    height: 200,
+    width: 300,
+  },
   vertic: {},
   text: {
     marginLeft: "31%",
@@ -72,10 +69,6 @@ const styles = StyleSheet.create({
   bar: {
     backgroundColor: "#326273",
     marginTop: "5%",
-  },
-  lowbar: {
-    marginBottom: "1%",
-    height: "5%",
   },
 });
 

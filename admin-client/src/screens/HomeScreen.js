@@ -46,9 +46,6 @@ const RejectAlert = (req, entireList, updateList) => {
 const ClinicCard = ({ item, entireList, updateList }) => {
     const [req, setReq] = useState(item);
     const { cnic, email, phone, clinic_name, clinic_location, pvmc_reg } = item;
-    console.log(req);
-    console.log("-----------------------------");
-    console.log(item);
     return (
         <Card>
             <Card.Content>

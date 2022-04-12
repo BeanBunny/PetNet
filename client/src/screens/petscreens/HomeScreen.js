@@ -39,7 +39,6 @@ const HomeScreen = () => {
                     );
                 }}
             />
-            <Bar style={styles.lowbar} />
         </Provider>
     );
 };
@@ -68,10 +67,6 @@ const styles = StyleSheet.create({
     bar: {
         backgroundColor: "#326273",
         marginTop: "5%",
-    },
-    lowbar: {
-        marginBottom: "1%",
-        height: "5%",
     },
 });
 

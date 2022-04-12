@@ -22,14 +22,16 @@ export const postSignIn = async (req, res) => {
     if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
 
     const user = await models.petOwner.findOne({ email: email });
-    if (!user) return res.status(422).send({ error: "Invalid email address" });
+    // if (!user) return res.status(422).send({ error: "Invalid email address" });
+    if (!user) return res.send({ err: "Invalid email address" });
     try {
         await user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, process.env.SECRET);
         res.send({ token, userId: user._id });
     } catch (err) {
-        console.log(err);
-        return res.status(422).send({ error: err.message });
+        // res.set("Content-Type", "text/plain");
+        // return res.status(400).send("Incorrect password");
+        res.send({ err: "Incorrect password" });
     }
 };
 

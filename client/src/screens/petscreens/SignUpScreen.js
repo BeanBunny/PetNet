@@ -41,7 +41,7 @@ const SignUpScreen = ({ navigation }) => {
     });
 
     const { state, signupPet } = useContext(AuthContext);
-
+    console.log(state);
     return (
         <View style={{ flex: 1 }}>
             <Image style={styles.img} source={require("../../../assets/Logo1.jpeg")} />
@@ -115,6 +115,7 @@ const SignUpScreen = ({ navigation }) => {
                         password: reducerState.Password,
                         pet: { petName: reducerState.Pet, petType: reducerState.Type },
                         location: { city: reducerState.City },
+                        isVet: state.isVet,
                     })
                 }
             />

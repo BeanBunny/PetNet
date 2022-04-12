@@ -16,7 +16,7 @@ const authReducer = (state, action) => {
         case "clear_error_message":
             return { ...state, errorMessage: "" };
         case "signout":
-            return { token: null, userId: "", errorMessage: "" };
+            return { token: null, userId: "", errorMessage: "", isVet: null };
         default:
             return state;
     }
@@ -41,7 +41,7 @@ const clearErrorMessage = (dispatch) => () => {
 
 const signupPet =
     (dispatch) =>
-    async ({ name, email, password, pet, phone, location }) => {
+    async ({ name, email, password, pet, phone, location, isVet }) => {
         try {
             const response = await restApi.post("/petowner/signup", {
                 name,
@@ -55,10 +55,12 @@ const signupPet =
             await AsyncStorage.setItemAsync("token", response.data.token);
             await AsyncStorage.setItemAsync("userId", response.data.userId);
             dispatch({ type: "signin", payload: response.data.token });
-            dispatch({ type: "signin", payload: response.data.userId });
+            dispatch({ type: "userId", payload: response.data.userId });
 
             //-----------NAVIGATE TO HOME SCREEN-------------------
-            navigate("Home");
+            const param = { screen: "Home" };
+            const navigator = isVet ? "Vet" : "PetOwner";
+            navigate(navigator, param);
         } catch (err) {
             console.log(err);
             dispatch({
@@ -74,13 +76,19 @@ const signin =
         try {
             const url = isVet ? "/vet/signin" : "/petowner/signin";
             const response = await restApi.post(url, { email, password });
-            await AsyncStorage.setItemAsync("token", response.data.token);
-            await AsyncStorage.setItemAsync("userId", response.data.userId);
-            dispatch({ type: "signin", payload: response.data.token });
-            dispatch({ type: "signin", payload: response.data.userId });
-            navigate("Home");
+            if (response.data.token) {
+                await AsyncStorage.setItemAsync("token", response.data.token);
+                await AsyncStorage.setItemAsync("userId", response.data.userId);
+                dispatch({ type: "signin", payload: response.data.token });
+                dispatch({ type: "userId", payload: response.data.userId });
+                navigate("Home");
+            } else {
+                dispatch({
+                    type: "add_error",
+                    payload: response.data.err,
+                });
+            }
         } catch (err) {
-            console.log(err);
             dispatch({
                 type: "add_error",
                 payload: "Something went wrong with sign in",
@@ -92,16 +100,18 @@ const signout = (dispatch) => async () => {
     await AsyncStorage.deleteItemAsync("token");
     await AsyncStorage.deleteItemAsync("userId");
     dispatch({ type: "signout" });
-    navigate("loginFlow");
+    navigate("Start");
 };
 
-const isPetOrVet = (dispatch) => async (bool, routeName) => {
+const isPetOrVet = (dispatch) => async (bool) => {
     dispatch({ type: "isVet", payload: bool });
-    navigate("Login");
+    const param = { screen: "Login" };
+    const navigator = bool ? "Vet" : "PetOwner";
+    navigate(navigator, param);
 };
 
 export const { Provider, Context } = createDataContext(
     authReducer,
     { signin, signout, signupPet, clearErrorMessage, tryLocalSignin, isPetOrVet },
-    { token: null, errorMessage: "", userId: "", isVet: false }
+    { token: null, errorMessage: "", userId: "", isVet: null }
 );

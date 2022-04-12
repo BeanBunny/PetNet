@@ -23,12 +23,6 @@ const StartScreen = ({ navigation }) => {
                 navigation={navigation}
                 onChange={() => isPetOrVet(true)}
             />
-            <ButtonComp
-                text="Home Screen"
-                routeName="Home"
-                style={styles.button2}
-                navigation={navigation}
-            />
         </View>
     );
 };

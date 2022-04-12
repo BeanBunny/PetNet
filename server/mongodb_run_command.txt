@@ -2,3 +2,5 @@ C:\Users\shaya\mongodb\bin/mongod.exe --dbpath=C:\Users\shaya\mongodb-data
 .\mongod.exe --dbpath=C:\Users\shaya\mongodb-data
 
 umair: C:/Users/Umair/mongodb/bin/mongod.exe --dbpath=C:/Users/umair/mongodb-data
+
+C:\Users\ahmad\Desktop\BetNet2.0\DB\mongodb\bin\mongod.exe --dbpath=C:\Users\ahmad\Desktop\BetNet2.0\DB\mongodb\mongodb-data

@@ -3,8 +3,6 @@ import { View, StyleSheet, Text } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import TopBar from "../../components/TopBar";
 import Button from "../../components/Button";
-import { contextUser, setContextUser } from "./timeContext";
-import { StateProvider } from "./timeContext";
 
 const apptime = () => {
   // const state = contextUser();

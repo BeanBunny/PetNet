@@ -8,17 +8,21 @@ import SignUpScreen from "./src/screens/petscreens/SignUpScreen";
 import ForgotPasswordScreen from "./src/screens/petscreens/ForgotPassword";
 import EnterOTPScreen from "./src/screens/petscreens/EnterOTP";
 import CreatePasswordScreen from "./src/screens/petscreens/CreatePassword";
-import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { Provider as AuthProvider, Context as AuthContext } from "./src/context/AuthContext";
 import { navigationRef } from "./src/navigationRef";
-const Stack = createNativeStackNavigator();
 
-// const MyTheme = {
-//     ...DefaultTheme,
-//     colors: {
-//         ...DefaultTheme.colors,
-//         card: "rgb(0, 0, 0)",
-//     },
-// };
+const Stack = createNativeStackNavigator();
+const VetNav = createNativeStackNavigator();
+const PetOwnerNav = createNativeStackNavigator();
+
+const PetOwnerFlow = () => {
+    return (
+        <PetOwnerFlow.Navigator>
+            <PetOwnerFlow.Screen name="Login" component={LoginScreen} />
+            <PetOwnerFlow.Screen name="SignUp" component={SignUpScreen} />
+        </PetOwnerFlow.Navigator>
+    );
+};
 
 export default function App() {
     return (

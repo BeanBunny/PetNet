@@ -51,9 +51,9 @@ const signupPet =
         phone,
         location,
       });
-      console.log(response.data);
       await AsyncStorage.setItemAsync("token", response.data.token);
       await AsyncStorage.setItemAsync("userId", response.data.userId);
+      await AsyncStorage.setItemAsync("isVet", isVet.toString());
       dispatch({ type: "signin", payload: response.data.token });
       dispatch({ type: "userId", payload: response.data.userId });
 
@@ -79,6 +79,7 @@ const signin =
       if (response.data.token) {
         await AsyncStorage.setItemAsync("token", response.data.token);
         await AsyncStorage.setItemAsync("userId", response.data.userId);
+        await AsyncStorage.setItemAsync("isVet", isVet.toString());
         dispatch({ type: "signin", payload: response.data.token });
         dispatch({ type: "userId", payload: response.data.userId });
         navigate("Home");
@@ -99,6 +100,7 @@ const signin =
 const signout = (dispatch) => async () => {
   await AsyncStorage.deleteItemAsync("token");
   await AsyncStorage.deleteItemAsync("userId");
+  await AsyncStorage.deleteItemAsync("isVet");
   dispatch({ type: "signout" });
   navigate("Start");
 };

@@ -1,4 +1,5 @@
 import { models } from "../models/models.js";
+import bcrypt from "bcrypt";
 
 export const postSignup = async (req, res) => {
   try {
@@ -255,27 +256,42 @@ export const postReportPetOwner = async (req, res) => {
 
 export const postEditClinicProfile = async (req, res) => {
   //vet id, phone, email, password, clinic name, about clinic required
+  //if they are undefined then they arent updated
   const vet_id = req.body._id;
   const phone = req.body.phone;
   const email = req.body.email;
-  // const password = req.body.password; //to do: password hashing
+  const password = req.body.password; //to do: password hashing
   const clinicName = req.body.clinic_name;
   const aboutClinic = req.body.about_clinic;
 
   try {
     //query the vet to be updated
     let vet = await models.clinic.findById(vet_id);
-    //update fields
-    vet.phone = phone;
-    vet.email = email;
-    vet.clinic_name = clinicName;
-    // vet.password = password;
-    vet.about_clinic = aboutClinic;
-    //update the clinic in db
-    await models.clinic.updateOne({ _id: vet_id }, vet, {
-      runValidators: true,
-    });
-    return res.send("Profile Updated!");
+
+    //update fields which arent undefined
+    if (phone) vet.phone = phone;
+    if (email) vet.email = email;
+    if (clinicName) vet.clinic_name = clinicName;
+    if (aboutClinic) vet.about_clinic = aboutClinic;
+
+    if (password) {
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        if (error) return res.status(422).send(err);
+        bcrypt.hash(password, salt, async function (err, hash) {
+          if (error) return res.status(422).send(err);
+          vet.password = hash;
+          await models.clinic.updateOne({ _id: vet_id }, vet, {
+            runValidators: true,
+          });
+          return res.send("Profile Updated!");
+        });
+      });
+    } else {
+      await models.clinic.updateOne({ _id: vet_id }, vet, {
+        runValidators: true,
+      });
+      return res.send("Profile Updated!");
+    }
   } catch (err) {
     return res.status(422).send(err.message);
   }

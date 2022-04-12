@@ -42,15 +42,9 @@ const Editserv = () => {
             );
           }}
         />
-        {/* <TouchableOpacity style={styles.addserv} onPress={() => {}}>
-          <Text style={styles.datatext}>Add Service</Text>
-        </TouchableOpacity> */}
         <CompButton text="Add Service" style={styles.addserv} />
       </View>
       <CompButton text="Save" style={styles.savebutton} />
-      {/* <TouchableOpacity style={styles.savebutton} onPress={() => {}}>
-        <Text style={styles.savetext}>Save</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
@@ -79,12 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   addserv: {
-    // marginVertical: "5%",
-    // backgroundColor: "white",
-    // marginHorizontal: "30%",
-    // justifyContent: "center",
-    // fontSize: 20,
-    // borderRadius: 10,
     marginHorizontal: "20%",
     marginVertical: "10%",
   },

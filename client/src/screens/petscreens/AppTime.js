@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import TopBar from "../../components/TopBar";
 import Button from "../../components/Button";
 
-const apptime = () => {
+const Apptime = () => {
   const [state, setTime] = useState("");
   const [petstate, setPet] = useState("");
   const list1 = ["3:00 PM", "8:00 AM"];
@@ -20,7 +20,7 @@ const apptime = () => {
         <View style={styles.input}>
           <Picker
             selectedValue={state}
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             onValueChange={(itemValue, itemIndex) => setTime(itemValue)}
           >
             <Picker.Item label="3:00 PM" value="3:00 PM" />
@@ -32,7 +32,7 @@ const apptime = () => {
         <View style={styles.input}>
           <Picker
             selectedValue={petstate}
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             onValueChange={(itemValue, itemIndex) => setPet(itemValue)}
           >
             <Picker.Item label="doggie" value="doggie" />
@@ -46,7 +46,7 @@ const apptime = () => {
   );
 };
 
-apptime.navigationOptions = () => {
+Apptime.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -54,10 +54,10 @@ apptime.navigationOptions = () => {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "#326273",
+    backgroundColor: "white",
   },
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#326273",
     marginHorizontal: "5%",
     marginTop: "10%",
     padding: "5%",
@@ -75,9 +75,10 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontSize: 30,
+    color: "white",
     alignItems: "center",
   },
   button: { marginHorizontal: "30%", marginTop: "10%" },
 });
 
-export default apptime;
+export default Apptime;

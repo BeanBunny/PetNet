@@ -24,6 +24,7 @@ const HomeScreen = () => {
       <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
       <Search style={styles.input} />
       <FlatList
+        style={{ marginTop: "2%" }}
         keyExtractor={(x) => x.uri}
         data={queryRes}
         showsVerticalScrollIndicator={false}

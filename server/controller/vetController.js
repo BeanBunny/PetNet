@@ -13,7 +13,6 @@ export const postSignup = async (req, res) => {
 
 export const getSignup = (req, res) => {
   // render signup page
-
   res.send("INSIDE SIGNUP - GET");
 };
 
@@ -72,10 +71,16 @@ export const getAppointments = async (req, res) => {
         pet_type: petTypes[i],
         petowner_name: petOwners[i].name,
         petowner_phone: petOwners[i].phone,
-        appointment_time: appointmentsList[i].date,
+        date: appointmentsList[i].date,
         appointment_status: appointmentsList[i].status,
       });
-    } //todo result according to time then send
+    }
+
+    //return sorted result
+    result.sort(function (a, b) {
+      return a.date - b.date;
+    });
+
     return res.send(result);
   } catch (err) {
     return res.status(422).send(err.message);
@@ -89,7 +94,8 @@ export const postAcceptAppointment = async (req, res) => {
     //update appointment by id
     await models.appointment.updateOne(
       { _id: appointmentId },
-      { status: "accepted" }
+      { status: "accepted" },
+      { runValidators: true }
     );
     return res.send("Appointment updated");
   } catch (err) {
@@ -138,7 +144,11 @@ export const postAddService = async (req, res) => {
     servicesList.push(newService);
 
     //update vet record
-    await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+    await models.clinic.updateOne(
+      { _id: vet._id },
+      { services: servicesList },
+      { runValidators: true }
+    );
     return res.send("Service Added!");
   } catch (err) {
     return res.status(422).send(err.message);
@@ -163,7 +173,11 @@ export const postEditService = async (req, res) => {
       }
     }
     //update record by repacing with the updated service list
-    await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+    await models.clinic.updateOne(
+      { _id: vet._id },
+      { services: servicesList },
+      { runValidators: true }
+    );
     return res.send("Service Updated!");
   } catch (err) {
     return res.status(422).send(err.message);
@@ -189,7 +203,11 @@ export const postDeleteService = async (req, res) => {
     servicesList.splice(deleteIndex, 1);
 
     //update record by repacing with the updated service list
-    await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+    await models.clinic.updateOne(
+      { _id: vet._id },
+      { services: servicesList },
+      { runValidators: true }
+    );
     return res.send("Service removed!");
   } catch (err) {
     return res.status(422).send(err.message);
@@ -254,7 +272,9 @@ export const postEditClinicProfile = async (req, res) => {
     // vet.password = password;
     vet.about_clinic = aboutClinic;
     //update the clinic in db
-    await models.clinic.updateOne({ _id: vet_id }, vet);
+    await models.clinic.updateOne({ _id: vet_id }, vet, {
+      runValidators: true,
+    });
     return res.send("Profile Updated!");
   } catch (err) {
     return res.status(422).send(err.message);

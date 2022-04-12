@@ -112,7 +112,7 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
       // query appointments table for the particular clinic
       const appointmentsList = await models.appointment.find({
         vet_id: vetId,
-        status: "completed", //change
+        // status: "completed", //change
       });
       if (appointmentsList.length == 0) {
         return res.send([]);
@@ -163,6 +163,9 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
           appointment_status: appointmentsList[i].status,
         };
       }
+      result.sort((a, b) => {
+        return b.appointment_time - a.appointment_time;
+      });
       console.log(result);
     };
     async function test() {
@@ -187,7 +190,7 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         return res.status(422).send(err.message);
       }
     };
-    getServices("saadclinic2@gmail.com", 0);
+    // getServices("saadclinic2@gmail.com", 0);
 
     // script to check admin
     // models

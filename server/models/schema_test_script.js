@@ -86,17 +86,17 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
 
         async function InsertApppointmnet() {
             const petOwner = await models.petOwner.findOne({
-                name: "Martin S",
+                name: "Shayaan",
             });
             const vet = await models.clinic.findOne({
-                email: "saadclinic@gmail.com",
+                email: "saanic2@gmail.com",
             });
             const appointmentPetowner = await models
                 .appointment({
-                    type: "death",
+                    type: "Zinda hai",
                     date: new Date(),
                     time: new Date(),
-                    status: "approved",
+                    status: "pending",
                     petowner_id: petOwner._id,
                     pet_id: petOwner.pet[0]._id,
                     vet_id: vet._id,
@@ -105,7 +105,7 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
                 .catch((err) => console.log(err.message));
         }
 
-        // InsertApppointmnet();
+        InsertApppointmnet();
         const getAppointments = async (req, res) => {
             //vet object received
             const vetId = req._id; //change

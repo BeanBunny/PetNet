@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import { models } from "../models/models.js";
 
 export const adminRequireAuth = (req, res, next) => {
-    console.log(req.headers);
     const { authorization } = req.headers;
     if (!authorization) {
         return res.status(401).send({ error: "You must be logged in" });
@@ -19,7 +18,6 @@ export const adminRequireAuth = (req, res, next) => {
     });
 };
 export const petOwnerRequireAuth = (req, res, next) => {
-    console.log(req.headers);
     const { authorization } = req.headers;
     if (!authorization) {
         return res.status(401).send({ error: "You must be logged in" });
@@ -32,7 +30,6 @@ export const petOwnerRequireAuth = (req, res, next) => {
         const { userId } = payload;
         const user = await models.petOwner.findById(userId);
         req.user = user;
-        console.log("-------------------");
         next();
     });
 };

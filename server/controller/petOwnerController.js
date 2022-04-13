@@ -32,7 +32,7 @@ export const postSignIn = async (req, res) => {
 
     const user = await models.petOwner.findOne({ email: email });
     // if (!user) return res.status(422).send({ error: "Invalid email address" });
-    if (!user) return res.send({ err: "Invalid email address" });
+    if (!user) return res.send({ err: "Incorrect email address" });
     try {
         await user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, process.env.SECRET);
@@ -216,22 +216,43 @@ export const postUpdatePetProfile = async (req, res) => {
 // returning all appointments
 export const getPastAppointments = async (req, res) => {
     // fix pages issue ----------------------------------------------------------------
-
-    const petOwnerId = req.body.userId;
+    const petsList = req.user.pet;
+    const petOwnerId = req.user._id;
 
     try {
-        const pastAppointments = await models.appointment.find({
-            petowner_id: petOwnerId,
-        });
-
+        const pastAppointments = await models.appointment
+            .find({
+                petowner_id: petOwnerId,
+            })
+            .lean();
         let pendingList = [];
         let otherList = [];
 
+        for (let i = 0; i < pastAppointments.length; i++) {
+            let key = pastAppointments[i];
+            const pet_id = key.pet_id;
+            const petName = petsList.filter((val) => pet_id.equals(val._id))[0]
+                .petName;
+            key.petName = petName;
+            pastAppointments[i] = key;
+        }
+
+        let arr = await Promise.all(
+            pastAppointments.map(async (val) => {
+                let temp = await models.clinic.findById(val.vet_id);
+                return temp.clinic_name;
+            })
+        );
+
+        for (let i = 0; i < pastAppointments.length; i++) {
+            pastAppointments[i].clinicName = arr[i];
+        }
+        console.log("past appointments-->", pastAppointments);
         pastAppointments.forEach((appointment) => {
-            if (appointment.status === "pending") {
-                pendingList.push(appointment);
-            } else {
+            if (appointment.status === "completed") {
                 otherList.push(appointment);
+            } else {
+                pendingList.push(appointment);
             }
         });
 
@@ -242,9 +263,17 @@ export const getPastAppointments = async (req, res) => {
         otherList.sort((a, b) => {
             return a.date - b.date;
         });
+
+        pendingList = pendingList.map((val) => {
+            return { ...val, date: val.date.toString().split(" ").slice(0, 5) };
+        });
+        otherList = otherList.map((val) => {
+            return { ...val, date: val.date.toString().split(" ").slice(0, 5) };
+        });
         const finalList = [pendingList, otherList];
-        return res.send(finalList);
+        return res.send({ finalList });
     } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };
@@ -294,11 +323,8 @@ export const postReportVet = async (req, res) => {
 };
 
 export const getClinics = async (req, res) => {
-    const petOwnerID = req.body.id;
     try {
-        console.log(petOwnerID, "<<--- iddd");
-        //get pet owner's city
-        const petOwner = await models.petOwner.findById(petOwnerID);
+        const petOwner = req.user;
         const city = petOwner.location;
         //get all vets of this city
         const nearbyVets = await models.clinic.find({ clinic_location: city });

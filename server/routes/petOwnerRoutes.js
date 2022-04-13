@@ -39,6 +39,6 @@ petOwnerRoutes.post("/set-appointment", petOwnerController.postSetAppointment);
 
 petOwnerRoutes.post("/report-vet", petOwnerController.postReportVet);
 
-petOwnerRoutes.post("/get-clinics", requireAuth, petOwnerController.getClinics);
+petOwnerRoutes.get("/get-clinics", requireAuth, petOwnerController.getClinics);
 
 export default petOwnerRoutes;

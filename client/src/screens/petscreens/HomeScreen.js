@@ -2,46 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Provider, Card, Headline } from "react-native-paper";
 import restApi from "../../api/restApi";
-import { Context as AuthContext } from "../../context/AuthContext";
 import TopBar from "../../components/TopBar";
 import Search from "../../components/SearchBar";
-
-const HomeScreen = () => {
-    const { state } = useContext(AuthContext);
-    const [queryRes, setQueryRes] = useState([]);
-    const [resp, setResp] = useState("Loading");
-    useEffect(async () => {
-        const id = state.UserId;
-        const response = await restApi.post("/petowner/get-clinics", { id });
-        setQueryRes(response.data);
-        if (response.data.length === 0)
-            setResp("No clinics in your city. Sorry paaein");
-    }, []);
-
-    return (
-        <Provider>
-            <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
-            <Search style={styles.input} />
-            {queryRes.length != 0 ? (
-                <FlatList
-                    style={{ marginTop: "2%" }}
-                    keyExtractor={(x) => x._id}
-                    data={queryRes}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item }) => {
-                        return (
-                            <View>
-                                <Mycard prop={item} />
-                            </View>
-                        );
-                    }}
-                />
-            ) : (
-                <Headline>{resp}</Headline>
-            )}
-        </Provider>
-    );
-};
+import FlatListComponent from "../../components/FlatListComponent";
 
 const Mycard = ({ prop }) => {
     return (
@@ -56,11 +19,26 @@ const Mycard = ({ prop }) => {
         </View>
     );
 };
+const HomeScreen = () => {
+    const [queryRes, setQueryRes] = useState([]);
+    const [resp, setResp] = useState("Loading");
+    useEffect(async () => {
+        const response = await restApi.get("/petowner/get-clinics");
+        if (response.data.length === 0) setResp("No clinics in your city yet.");
+        setQueryRes(response.data);
+    }, []);
 
-HomeScreen.navigationOptions = () => {
-    return {
-        headerShown: false,
-    };
+    return (
+        <Provider>
+            <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
+            <Search style={styles.input} />
+            {queryRes.length != 0 ? (
+                <FlatListComponent Child={Mycard} list={queryRes} />
+            ) : (
+                <Headline>{resp}</Headline>
+            )}
+        </Provider>
+    );
 };
 
 const styles = StyleSheet.create({

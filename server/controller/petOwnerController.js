@@ -293,3 +293,20 @@ export const postReportVet = async (req, res) => {
     return res.status(422).send(err.message);
   }
 };
+
+//faizan
+// petowner id needed
+export const getClinics = async (req, res) => {
+  const petOwnerID = req.body.id;
+  try {
+    //get pet owner's city
+    const petOwner = await models.petOwner.findById(petOwnerID);
+    const city = petOwner.location;
+
+    //get all vets of this city
+    const nearbyVets = await models.clinic.find({ clinic_location: city });
+    res.send(nearbyVets);
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+};

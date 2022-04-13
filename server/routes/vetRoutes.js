@@ -1,6 +1,7 @@
 import express from "express";
-// import requiresAuth from "express-openid-connect";
-// import auth0 from "auth0-js";
+import * as vetController from "../controller/vetController.js";
+import { vetRequireAuth as requireAuth } from "../middleware/requireAuth.js";
+
 import * as vetController from "../controller/vetController.js";
 
 const vetRoutes = express.Router();

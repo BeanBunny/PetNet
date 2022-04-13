@@ -51,7 +51,7 @@ const clinicSchema = new mongoose.Schema({
   },
 
   clinic_location: {
-    type: Object,
+    type: String,
     required: true,
   },
 

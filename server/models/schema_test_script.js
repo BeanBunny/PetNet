@@ -248,20 +248,17 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     // //script to check clinic
     // models
     //   .clinic({
-    //     cnic: "4230142301505",
-    //     email: "saadclinic2@gmail.com",
-    //     password: "saadkinglmao123$$",
-    //     phone: "03000000000",
+    //     cnic: "4130142101505",
+    //     email: "saa1dclini1c2@gmail.com",
+    //     password: "saa1dkinglmao123$$",
+    //     phone: "03110000000",
     //     clinic_name: "Murda Pets Clinic",
     //     //about_clinic: "", //not mandatory
-    //     clinic_location: {
-    //       Lat: 121,
-    //       Long: 555,
-    //     },
+    //     clinic_location: "Lahore",
     //     pvmc_reg: {
     //       name: "Saad Malik",
     //       gender: "M",
-    //       reg_num: 445004646546468,
+    //       reg_num: 415004646046468,
     //       father_name: "Umair Yousaf",
     //     },
     //     services: [
@@ -314,9 +311,33 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     //     await models.admin.deleteOne({ email: temp.email }); // temp.remove();
     // };
     // Temp();
+    //   const getClinics = async (req, res) => {
+    //     //const petOwnerID = req.body.id;
+    //     try {
+    //       // //get pet owner's city
+    //       // const petOwner = await models.petOwner.findById(petOwnerID);
+    //       // const city = petOwner.location.city;
+    //       console.log(res);
+    //       //get all vets of this city
+    //       const nearbyVets = await models.clinic.find({ clinic_location: res });
+    //       console.log(nearbyVets);
+    //       //res.send(nearbyVets);
+    //     } catch (err) {
+    //       console.log(err);
+    //       // return res.status(422).send(err.message);
+    //     }
+    //   };
+    //   getClinics(1, "Lahore");
+    // }
   }
 });
 
 //Ignore
 //.\mongod.exe --dbpath=C:\Users\HP\mongodb-data
 //C:\Users\HP\mongodb\bin
+
+// await Promise.all(list.map(async (val) => {
+//   temp = await models.clinic.findbyId(val)
+//   return
+// }
+// ))

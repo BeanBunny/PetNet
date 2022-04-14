@@ -1,26 +1,26 @@
-import React, { useReducer, useContext } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import Input from "../../components/InputBox";
+import React, { useContext, useReducer } from "react";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
+import Input from "../../components/Button";
 import ButtonComp from "../../components/Button";
-import { Picker } from "@react-native-picker/picker";
 import { Context as AuthContext } from "../../context/AuthContext";
+import { Picker } from "@react-native-picker/picker";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "Name":
-      return { ...state, Name: action.payload };
+    case "CNIC":
+      return { ...state, CNIC: action.payload };
     case "Email":
       return { ...state, Email: action.payload };
-    case "Number":
-      return { ...state, Number: action.payload };
     case "Password":
       return { ...state, Password: action.payload };
     case "Confirm":
       return { ...state, Confirm: action.payload };
-    case "Pet":
-      return { ...state, Pet: action.payload };
-    case "Type":
-      return { ...state, Type: action.payload };
+    case "Number":
+      return { ...state, Number: action.payload };
+    case "Clinic":
+      return { ...state, Clinic: action.payload };
+    case "About":
+      return { ...state, About: action.payload };
     case "City":
       return { ...state, City: action.payload };
     default:
@@ -28,21 +28,19 @@ const reducer = (state, action) => {
   }
 };
 
-// name, phone number, email, password, confirm password
-const SignUpScreen = ({ navigation }) => {
+const ClinicSignUpScreen = ({ navigation }) => {
   const [reducerState, dispatch] = useReducer(reducer, {
-    Name: "",
+    CNIC: "",
     Email: "",
-    Number: "",
     Password: "",
     Confirm: "",
-    Pet: "",
-    Type: "",
+    Number: "",
+    Clinic: "",
+    About: "",
     City: "",
   });
 
-  const { state, signupPet } = useContext(AuthContext);
-  console.log(reducerState);
+  const { state, signupClinic } = useContext(AuthContext);
   return (
     <View style={{ flex: 1 }}>
       <Image
@@ -51,22 +49,15 @@ const SignUpScreen = ({ navigation }) => {
       />
       <ScrollView style={styles.container}>
         <Input
-          label="Name"
-          placeholder="Full Name"
-          reducer={[reducerState, dispatch]}
-          style={styles.input}
-          secure={false}
-        />
-        <Input
-          label="Number"
-          placeholder="03XXXXXXXXX"
+          label="CNIC"
+          placeholder="CNIC"
           reducer={[reducerState, dispatch]}
           style={styles.input}
           secure={false}
         />
         <Input
           label="Email"
-          placeholder="example@gmail.com"
+          placeholder="Email"
           reducer={[reducerState, dispatch]}
           style={styles.input}
           secure={false}
@@ -85,13 +76,27 @@ const SignUpScreen = ({ navigation }) => {
           style={styles.input}
           secure={true}
         />
-        {/* <Input
-                    label="City"
-                    placeholder="Your City"
-                    reducer={[reducerState, dispatch]}
-                    style={styles.input2}
-                    secure={false}
-                /> */}
+        <Input
+          label="Number"
+          placeholder="03XX-XXXX-XXX"
+          reducer={[reducerState, dispatch]}
+          style={styles.input}
+          secure={false}
+        />
+        <Input
+          label="Clinic"
+          placeholder="Clinic Name"
+          reducer={[reducerState, dispatch]}
+          style={styles.input}
+          secure={false}
+        />
+        <Input
+          label="About"
+          placeholder="About Clinic"
+          reducer={[reducerState, dispatch]}
+          style={styles.input}
+          secure={false}
+        />
         <Picker
           selectedValue={reducerState.City}
           style={styles.input}
@@ -104,42 +109,20 @@ const SignUpScreen = ({ navigation }) => {
           <Picker.Item label="Karachi" value="Karachi" />
           <Picker.Item label="Islamabad" value="Islamabad" />
         </Picker>
-        <Input
-          label="Pet"
-          placeholder="Pet Name"
-          reducer={[reducerState, dispatch]}
-          style={styles.input}
-          secure={false}
-        />
-        <Picker
-          selectedValue={reducerState.Type}
-          style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>
-            dispatch({ type: "Type", payload: itemValue })
-          }
-        >
-          <Picker.Item label="--" value="" />
-          <Picker.Item label="Cat" value="Cat" />
-          <Picker.Item label="Dog" value="Dog" />
-          <Picker.Item label="Bird" value="Bird" />
-          <Picker.Item label="Other" value="Other" />
-        </Picker>
       </ScrollView>
       <ButtonComp
         text="Sign Up"
         style={styles.button}
         disabled={false}
         onChange={() =>
-          signupPet({
-            name: reducerState.Name,
+          signupClinic({
+            CNIC: reducerState.CNIC,
             email: reducerState.Email,
             phone: reducerState.Number,
             password: reducerState.Password,
-            pet: {
-              petName: reducerState.Pet,
-              petType: reducerState.Type,
-            },
             location: reducerState.City,
+            clinic: reducerState.clinic,
+            about: reducerState.About,
             isVet: state.isVet,
           })
         }
@@ -148,7 +131,7 @@ const SignUpScreen = ({ navigation }) => {
   );
 };
 
-SignUpScreen.navigationOptions = () => {
+ClinicSignUpScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -179,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default ClinicSignUpScreen;

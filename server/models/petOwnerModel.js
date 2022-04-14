@@ -52,7 +52,7 @@ const petOwnerSchema = new mongoose.Schema({
         validate: [petLimit, "Pets can not be more than 5"],
     },
     location: {
-        type: Object,
+        type: String,
         required: true,
     },
 });

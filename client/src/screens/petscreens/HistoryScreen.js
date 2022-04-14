@@ -32,11 +32,19 @@ const Mycard = ({ prop }) => {
                         <Paragraph style={{ flex: 1 }}>
                             {date2} {month} {time}
                         </Paragraph>
+                    </View>
+                    <View style={styles.dateStatusView}>
                         <Paragraph>Status: </Paragraph>
                         <Paragraph style={styleStatus}>{status}</Paragraph>
                     </View>
                     <View style={styles.petNameView}>
-                        <View>
+                        <View
+                            style={{
+                                flex: 1,
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
                             <Paragraph>
                                 Your Appointment is set for {petName} due to{" "}
                                 {type}{" "}
@@ -59,12 +67,12 @@ const HistoryScreen = () => {
     useEffect(async () => {
         const response = await restApi.get("/petowner/past-appointments");
         const { finalList } = response.data;
-        const [currentAppointments, pastAppointments] = finalList;
+        let [currentAppointments, pastAppointments] = finalList;
 
         currentAppointments.length === 0
             ? setCurrentAppointmentsHeading("No current Appointments to show")
             : null;
-        completedAppointments.length === 0
+        pastAppointments.length === 0
             ? setCompletedAppointmentsHeading(
                   "No completed Appointments to show"
               )
@@ -129,9 +137,9 @@ const styles = StyleSheet.create({
         marginTop: "5%",
         marginHorizontal: "5%",
     },
-    currAppView: { flex: 0.6, backgroundColor: "grey", margin: "5%" },
-    pastAppView: { flex: 0.4, backgroundColor: "grey", margin: "5%" },
-    FlatListView2: { flex: 0.9, backgroundColor: "grey", margin: "5%" },
+    currAppView: { flex: 0.6, backgroundColor: "#326273", margin: "5%" },
+    pastAppView: { flex: 0.4, backgroundColor: "#326273", margin: "5%" },
+    FlatListView2: { flex: 0.9, backgroundColor: "#326273", margin: "5%" },
     headingView: { alignItems: "center" },
     clinicNameView: {
         alignItems: "center",

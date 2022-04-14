@@ -14,16 +14,12 @@ import restApi from "../../api/restApi";
 const Mycard = ({ prop }) => {
     const { clinicName, date, petName, status, type } = prop;
     const [day, month, date2, year, time] = date;
-    // console.log(date);
-    console.log(day, month, date2, year, time);
-    // let date2 = DATE.toString();
     let styleStatus =
         status === "approved"
             ? styles.approvedStatus
             : status === "pending"
             ? styles.pendingStatus
             : styles.completedStatus;
-    // console.log(date);
     return (
         <View style={styles.list}>
             <TouchableOpacity onPress={() => {}}>
@@ -87,8 +83,8 @@ const HistoryScreen = () => {
                 <View
                     style={
                         completedAppointments.length === 0
-                            ? styles.FlatListView
-                            : styles.FlatListView2
+                            ? styles.FlatListView2
+                            : styles.currAppView
                     }
                 >
                     <FlatListComponent
@@ -105,8 +101,8 @@ const HistoryScreen = () => {
                 <View
                     style={
                         currentAppointments.length === 0
-                            ? styles.FlatListView
-                            : styles.FlatListView2
+                            ? styles.FlatListView2
+                            : styles.pastAppView
                     }
                 >
                     <FlatListComponent
@@ -120,14 +116,6 @@ const HistoryScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    input: {
-        marginTop: "3%",
-        marginHorizontal: "8%",
-    },
-    horiz: {
-        height: 200,
-        width: 300,
-    },
     text: {
         marginLeft: "31%",
         color: "white",
@@ -137,14 +125,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#326273",
         marginTop: "5%",
     },
-    image: {
-        fontSize: 20,
-    },
     list: {
         marginTop: "5%",
         marginHorizontal: "5%",
     },
-    FlatListView: { flex: 0.5, backgroundColor: "grey", margin: "5%" },
+    currAppView: { flex: 0.6, backgroundColor: "grey", margin: "5%" },
+    pastAppView: { flex: 0.4, backgroundColor: "grey", margin: "5%" },
     FlatListView2: { flex: 0.9, backgroundColor: "grey", margin: "5%" },
     headingView: { alignItems: "center" },
     clinicNameView: {

@@ -247,7 +247,6 @@ export const getPastAppointments = async (req, res) => {
         for (let i = 0; i < pastAppointments.length; i++) {
             pastAppointments[i].clinicName = arr[i];
         }
-        console.log("past appointments-->", pastAppointments);
         pastAppointments.forEach((appointment) => {
             if (appointment.status === "completed") {
                 otherList.push(appointment);

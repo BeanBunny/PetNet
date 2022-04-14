@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import TopBar from "../components/TopBar";
 import Button from "../components/Button";
 import TextButton from "../components/TextOnlyButton";
-// import ServicesButton from "../components/ServicesButton";
 
 const ClinicInfo = () => {
-  const [state, setTime] = useState("");
-  const [petstate, setPet] = useState("");
-  const list1 = ["3:00 PM", "8:00 AM"];
-  const list2 = ["Betsie", "Doggie"];
   return (
     <View>
       <TopBar

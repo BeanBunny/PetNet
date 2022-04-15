@@ -7,9 +7,32 @@ export const postSignup = async (req, res) => {
     const details = req.body;
     try {
         console.log(req.body);
-        // have to do same for all unique details such as cnic pvmc deets etc.
-        const user = await models.clinic.findOne({ email: req.body.email });
-        if (user) return res.send({ err: "Invalid email address" });
+        const checkExist = await models.clinic.find({
+            $or: [
+                { email: req.body.email },
+                { phone: req.body.phone },
+                { cnic: req.body.cnic },
+                { "pvmc_reg.reg_num": req.body.pvmc_reg.reg_num },
+            ],
+        });
+        if (checkExist.length !== 0) {
+            const EMAIL = "EMAIL, ";
+            const PHONE = "Phone number, ";
+            const CNIC = "CNIC, ";
+            const PVMC = "Reg num of PVMC, ";
+            let err = "";
+            checkExist.forEach((val) => {
+                if (val.email === req.body.email) err += EMAIL;
+                if (val.phone === req.body.phone) err += PHONE;
+                if (val.cnic === req.body.cnic) err += CNIC;
+                if (val.pvmc_reg.reg_num === req.body.pvmc_reg.reg_num)
+                    err += PVMC;
+            });
+            console.log(err);
+            return res.send({
+                err: err + " is/are in use with another account",
+            });
+        }
         const clinicModel = new models.verificationClinic(details);
         await clinicModel.save();
         const token = jwt.sign({ userId: clinicModel._id }, process.env.SECRET);
@@ -18,12 +41,6 @@ export const postSignup = async (req, res) => {
         console.log(err);
         return res.status(422).send(err.message);
     }
-};
-
-export const getSignup = (req, res) => {
-    // render signup page
-
-    res.send("INSIDE SIGNUP - GET");
 };
 
 export const postSignin = async (req, res) => {

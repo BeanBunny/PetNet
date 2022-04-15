@@ -66,7 +66,6 @@ const signupPet =
 
 const signupVet = (dispatch) => async (details) => {
     try {
-        console.log(details);
         const response = await restApi.post("/vet/signup", details);
         if (response.data.token) {
             await AsyncStorage.setItemAsync("token", response.data.token);
@@ -99,7 +98,6 @@ const signin =
             if (response.data.token) {
                 await AsyncStorage.setItemAsync("token", response.data.token);
                 await AsyncStorage.setItemAsync("isVet", isVet.toString());
-                console.log(response.data.UserId);
                 dispatch({ type: "signin", payload: response.data.token });
                 dispatch({ type: "isVet", payload: isVet });
                 navigate("Home");

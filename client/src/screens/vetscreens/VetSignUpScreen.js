@@ -1,9 +1,18 @@
 import React, { useContext, useReducer } from "react";
 import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import Input from "../../components/InputBox";
 import ButtonComp from "../../components/Button";
 import { Context as AuthContext } from "../../context/AuthContext";
-import { Picker } from "@react-native-picker/picker";
+import ErrorTextComponent from "../../components/ErrorTextComponent";
+import {
+    errorEmail,
+    errorNumber,
+    errorRequired,
+    errorName,
+    errorEqual,
+    errorPVMC,
+} from "../../inputvalidation/validators";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -27,6 +36,10 @@ const VetSignUpScreen = ({ navigation }) => {
         Gender: "",
         Father: "",
     });
+    const errorMsgPVMC = errorPVMC(reducerState.PVMC);
+    const errorMsgName = errorName(reducerState.Name);
+    const errorMsgGender = errorRequired(reducerState.Gender, "Gender");
+    const errorMsgFather = errorRequired(reducerState.Father, "Father");
     const { state, signupVet } = useContext(AuthContext);
     return (
         <View style={{ flex: 1 }}>
@@ -42,6 +55,9 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgName != null ? (
+                    <ErrorTextComponent error={errorMsgName} />
+                ) : null}
                 <Input
                     label="PVMC"
                     placeholder="PVMC Registration Number"
@@ -49,6 +65,9 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgPVMC != null ? (
+                    <ErrorTextComponent error={errorMsgPVMC} />
+                ) : null}
                 <Picker
                     selectedValue={reducerState.Gender}
                     style={styles.input}
@@ -56,10 +75,13 @@ const VetSignUpScreen = ({ navigation }) => {
                         dispatch({ type: "Gender", payload: itemValue })
                     }
                 >
-                    <Picker.Item label="--" value="" />
+                    <Picker.Item label="Gender" value="" />
                     <Picker.Item label="Male" value="M" />
                     <Picker.Item label="Female" value="F" />
                 </Picker>
+                {errorMsgGender != null ? (
+                    <ErrorTextComponent error={errorMsgGender} />
+                ) : null}
                 <Input
                     label="Father"
                     placeholder="Father's Name"
@@ -67,23 +89,33 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgFather != null ? (
+                    <ErrorTextComponent error={errorMsgFather} />
+                ) : null}
             </ScrollView>
-            <ButtonComp
-                text="Continue"
-                style={styles.button}
-                disabled={false}
-                onChange={() =>
-                    navigation.navigate("clinicSignUp", {
-                        pvmc_reg: {
-                            name: reducerState.Name,
-                            gender: reducerState.Gender,
-                            reg_num: reducerState.PVMC,
-                            father_name: reducerState.Father,
-                        },
-                        isVet: state.isVet,
-                    })
-                }
-            />
+            {errorMsgFather ||
+            errorMsgName ||
+            errorMsgGender ||
+            errorMsgPVMC ? (
+                <ButtonComp text="Continue" style={styles.button} disabled />
+            ) : (
+                <ButtonComp
+                    text="Continue"
+                    style={styles.button}
+                    disabled={false}
+                    onChange={() =>
+                        navigation.navigate("clinicSignUp", {
+                            pvmc_reg: {
+                                name: reducerState.Name,
+                                gender: reducerState.Gender,
+                                reg_num: reducerState.PVMC,
+                                father_name: reducerState.Father,
+                            },
+                            isVet: state.isVet,
+                        })
+                    }
+                />
+            )}
         </View>
     );
 };

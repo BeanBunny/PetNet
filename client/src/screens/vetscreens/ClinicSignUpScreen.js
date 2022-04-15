@@ -1,9 +1,18 @@
 import React, { useContext, useReducer } from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { View, StyleSheet, Image, ScrollView, Text } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import Input from "../../components/InputBox";
 import ButtonComp from "../../components/Button";
+import ErrorTextComponent from "../../components/ErrorTextComponent";
+import {
+    errorEmail,
+    errorNumber,
+    errorRequired,
+    errorName,
+    errorEqual,
+    errorCNIC,
+} from "../../inputvalidation/validators";
 import { Context as AuthContext } from "../../context/AuthContext";
-import { Picker } from "@react-native-picker/picker";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -39,8 +48,26 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
         About: "",
         City: "",
     });
+
+    const errorMsgCNIC = errorCNIC(reducerState.CNIC);
+    const errorMsgEmail = errorEmail(reducerState.Email);
+    const errorMsgNumber = errorNumber(reducerState.Number);
+    const errorMsgPassword = errorRequired(reducerState.Password, "Password");
+    const errorMsgConfirmPassword = errorRequired(
+        reducerState.Confirm,
+        "Confirm Password"
+    );
+    const errorMsgEqualPassword = errorEqual(
+        reducerState.Password,
+        reducerState.Confirm
+    );
+    const errorMsgCity = errorRequired(reducerState.City, "Your City");
+    const errorMsgClinic = errorRequired(reducerState.Clinic, "Clinic name");
+
     const { pvmc_reg, isVet } = route.params;
-    const { state, signupVet } = useContext(AuthContext);
+    const { state, signupVet, clearErrorMessage } = useContext(AuthContext);
+    navigation.addListener("focus", clearErrorMessage);
+
     return (
         <View style={{ flex: 1 }}>
             <Image
@@ -55,6 +82,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgCNIC != null ? (
+                    <ErrorTextComponent error={errorMsgCNIC} />
+                ) : null}
                 <Input
                     label="Email"
                     placeholder="Email"
@@ -62,6 +92,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgEmail != null ? (
+                    <ErrorTextComponent error={errorMsgEmail} />
+                ) : null}
                 <Input
                     label="Password"
                     placeholder="Password"
@@ -69,6 +102,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={true}
                 />
+                {errorMsgPassword != null ? (
+                    <ErrorTextComponent error={errorMsgPassword} />
+                ) : null}
                 <Input
                     label="Confirm"
                     placeholder="Confirm Password"
@@ -76,6 +112,12 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={true}
                 />
+                {errorMsgConfirmPassword != null ? (
+                    <ErrorTextComponent error={errorMsgConfirmPassword} />
+                ) : null}
+                {errorMsgEqualPassword != null ? (
+                    <ErrorTextComponent error={errorMsgEqualPassword} />
+                ) : null}
                 <Input
                     label="Number"
                     placeholder="03XXXXXXXXX"
@@ -83,6 +125,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgNumber != null ? (
+                    <ErrorTextComponent error={errorMsgNumber} />
+                ) : null}
                 <Input
                     label="Clinic"
                     placeholder="Clinic Name"
@@ -90,6 +135,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
+                {errorMsgClinic != null ? (
+                    <ErrorTextComponent error={errorMsgClinic} />
+                ) : null}
                 <Input
                     label="About"
                     placeholder="About Clinic"
@@ -109,24 +157,42 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     <Picker.Item label="Karachi" value="Karachi" />
                     <Picker.Item label="Islamabad" value="Islamabad" />
                 </Picker>
+                {errorMsgCity != null ? (
+                    <ErrorTextComponent error={errorMsgCity} />
+                ) : null}
             </ScrollView>
-            <ButtonComp
-                text="Sign Up"
-                style={styles.button}
-                disabled={false}
-                onChange={() =>
-                    signupVet({
-                        cnic: reducerState.CNIC,
-                        email: reducerState.Email,
-                        phone: reducerState.Number,
-                        password: reducerState.Password,
-                        clinic_location: reducerState.City,
-                        clinic_name: reducerState.Clinic,
-                        about_clinic: reducerState.About,
-                        pvmc_reg,
-                    })
-                }
-            />
+            {state.errorMessage ? (
+                <Text style={{ color: "red" }}>{state.errorMessage}</Text>
+            ) : null}
+            {errorMsgEmail ||
+            errorMsgPassword ||
+            errorMsgCity ||
+            errorMsgConfirmPassword ||
+            errorMsgEqualPassword ||
+            errorMsgNumber ||
+            errorMsgPassword ||
+            errorMsgClinic ||
+            errorMsgCNIC ? (
+                <ButtonComp text="Signup" style={styles.button} disabled />
+            ) : (
+                <ButtonComp
+                    text="Sign Up"
+                    style={styles.button}
+                    disabled={false}
+                    onChange={() =>
+                        signupVet({
+                            cnic: reducerState.CNIC,
+                            email: reducerState.Email,
+                            phone: reducerState.Number,
+                            password: reducerState.Password,
+                            clinic_location: reducerState.City,
+                            clinic_name: reducerState.Clinic,
+                            about_clinic: reducerState.About,
+                            pvmc_reg,
+                        })
+                    }
+                />
+            )}
         </View>
     );
 };

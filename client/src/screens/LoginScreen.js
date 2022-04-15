@@ -35,10 +35,12 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Image
-                style={styles.img}
-                source={require("../../assets/Logo1.jpeg")}
-            />
+            <View style={{ flex: 0.2 }}>
+                <Image
+                    style={styles.img}
+                    source={require("../../assets/Logo1.jpeg")}
+                />
+            </View>
             <View style={styles.container}>
                 <Input
                     label="Email"
@@ -47,10 +49,6 @@ const LoginScreen = ({ navigation }) => {
                     style={styles.input1}
                     secure={false}
                 />
-                {/* TELLS IF THE EMAIL IS INCORRECT */}
-                {errorMessageEmail != null ? (
-                    <ErrorTextComponent error={errorMessageEmail} />
-                ) : null}
                 <Input
                     label="Password"
                     placeholder="Password"
@@ -58,46 +56,59 @@ const LoginScreen = ({ navigation }) => {
                     style={styles.input2}
                     secure={true}
                 />
-                {errorMessagePassword != null ? (
+                <View style={styles.forgor}>
+                    <Textbutton
+                        text="Forgot Password?"
+                        navigation={navigation}
+                        marginLeft="38%"
+                        routeName="ForgotPassword"
+                        textStyle={{ fontSize: 14, color: "blue" }}
+                    />
+                </View>
+                {/* <View> */}
+                {errorMessageEmail ? (
+                    <ErrorTextComponent error={errorMessageEmail} />
+                ) : errorMessagePassword ? (
                     <ErrorTextComponent error={errorMessagePassword} />
                 ) : null}
-                <Textbutton
-                    text="Forgot Password?"
-                    navigation={navigation}
-                    marginLeft="38%"
-                    routeName="ForgotPassword"
-                />
+                {/* </View> */}
+
                 {state.errorMessage ? (
                     <ErrorTextComponent error={state.errorMessage} />
                 ) : null}
             </View>
-            {errorMessageEmail || errorMessagePassword ? (
-                <ButtonComp text="Login" style={styles.button} disabled />
-            ) : (
-                <ButtonComp
-                    text="Login"
-                    style={styles.button}
-                    disabled={false}
-                    onChange={() =>
-                        signin({
-                            email: reducerState.Email,
-                            password: reducerState.Password,
-                            isVet: state.isVet,
-                        })
-                    }
-                />
-            )}
-            <View>
-                <Text
-                    style={{ marginLeft: "10%", fontSize: 16, marginTop: "3%" }}
-                >
-                    Don't have an account?
-                </Text>
+            <View style={{ flex: 0.3 }}>
+                {errorMessageEmail || errorMessagePassword ? (
+                    <ButtonComp text="Login" style={styles.button} disabled />
+                ) : (
+                    <ButtonComp
+                        text="Signup"
+                        style={styles.button}
+                        disabled={false}
+                        onChange={() =>
+                            signin({
+                                email: reducerState.Email,
+                                password: reducerState.Password,
+                                isVet: state.isVet,
+                            })
+                        }
+                    />
+                )}
+            </View>
+            <View
+                style={{
+                    flex: 0.1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                {/* <Text style={{ fontSize: 16 }}>Don't have an account?</Text> */}
                 <Textbutton
                     text="Sign Up"
                     navigation={navigation}
                     marginLeft="29%"
                     routeName="SignUp"
+                    textStyle={{ fontSize: 18, color: "blue" }}
                 />
             </View>
         </View>
@@ -114,29 +125,29 @@ const styles = StyleSheet.create({
     img: {
         justifyContent: "center",
         resizeMode: "contain",
-        height: "30%",
+        height: "80%",
         marginHorizontal: "10%",
         marginTop: "15%",
     },
     input1: {
         marginHorizontal: "15%",
-        marginVertical: "5%",
+        marginVertical: "2%",
     },
     input2: {
         marginHorizontal: "15%",
-        marginVertical: "5%",
+        marginVertical: "2%",
     },
     container: {
-        flex: 1,
+        flex: 0.4,
         backgroundColor: "white",
-        borderRadius: 10,
+        // borderRadius: 10,
         // height: "30%",
         marginTop: "20%",
         marginHorizontal: "10%",
     },
     forgor: {
         color: "blue",
-        marginLeft: "60%",
+        marginTop: "4%",
     },
     button: {
         marginTop: "5%",

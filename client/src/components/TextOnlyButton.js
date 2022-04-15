@@ -1,14 +1,21 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
 
-const TextOnlyButton = ({ style, text, margin_left, routeName, navigation }) => {
+const TextOnlyButton = ({
+    style,
+    text,
+    margin_left,
+    routeName,
+    navigation,
+    textStyle,
+}) => {
     return (
         <View style={style}>
             <TouchableOpacity
                 onPress={() => navigation.navigate(routeName)}
                 style={newstyle(margin_left)}
             >
-                <Text style={styles.textStyle}>{text}</Text>
+                <Text style={textStyle}>{text}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -24,7 +31,7 @@ function newstyle(margin_left) {
 }
 const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 16,
+        fontSize: 18,
         color: "blue",
     },
 });

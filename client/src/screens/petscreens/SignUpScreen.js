@@ -1,5 +1,6 @@
 import React, { useReducer, useContext } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { Headline } from "react-native-paper";
 import { Picker } from "@react-native-picker/picker";
 import Input from "../../components/InputBox";
 import ButtonComp from "../../components/Button";
@@ -73,10 +74,15 @@ const SignUpScreen = ({ navigation }) => {
     navigation.addListener("focus", clearErrorMessage);
     return (
         <View style={{ flex: 1 }}>
-            <Image
+            <Headline
+                style={{ marginLeft: "30%", marginTop: "3%", color: "#326273" }}
+            >
+                Pet Owner Sign Up
+            </Headline>
+            {/* <Image
                 style={styles.img}
                 source={require("../../../assets/Logo1.jpeg")}
-            />
+            /> */}
             <ScrollView style={styles.container}>
                 <Input
                     label="Name"
@@ -85,9 +91,9 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgName != null ? (
+                {/* {errorMsgName != null ? (
                     <ErrorTextComponent error={errorMsgName} />
-                ) : null}
+                ) : null} */}
                 <Input
                     label="Number"
                     placeholder="03XXXXXXXXX"
@@ -95,9 +101,9 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgNumber != null ? (
+                {/* {errorMsgNumber != null ? (
                     <ErrorTextComponent error={errorMsgNumber} />
-                ) : null}
+                ) : null} */}
                 <Input
                     label="Email"
                     placeholder="example@gmail.com"
@@ -105,9 +111,9 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgEmail != null ? (
+                {/* {errorMsgEmail != null ? (
                     <ErrorTextComponent error={errorMsgEmail} />
-                ) : null}
+                ) : null} */}
 
                 <Input
                     label="Password"
@@ -116,9 +122,9 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={true}
                 />
-                {errorMsgPassword != null ? (
+                {/* {errorMsgPassword != null ? (
                     <ErrorTextComponent error={errorMsgPassword} />
-                ) : null}
+                ) : null} */}
                 <Input
                     label="Confirm"
                     placeholder="Confirm Password"
@@ -126,12 +132,12 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={true}
                 />
-                {errorMsgConfirmPassword != null ? (
+                {/* {errorMsgConfirmPassword != null ? (
                     <ErrorTextComponent error={errorMsgConfirmPassword} />
                 ) : null}
                 {errorMsgEqualPassword != null ? (
                     <ErrorTextComponent error={errorMsgEqualPassword} />
-                ) : null}
+                ) : null} */}
                 <Picker
                     selectedValue={reducerState.City}
                     style={styles.input}
@@ -144,9 +150,9 @@ const SignUpScreen = ({ navigation }) => {
                     <Picker.Item label="Karachi" value="Karachi" />
                     <Picker.Item label="Islamabad" value="Islamabad" />
                 </Picker>
-                {errorMsgCity != null ? (
+                {/* {errorMsgCity != null ? (
                     <ErrorTextComponent error={errorMsgCity} />
-                ) : null}
+                ) : null} */}
                 <Input
                     label="Pet"
                     placeholder="Pet Name"
@@ -154,9 +160,9 @@ const SignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgPetName != null ? (
+                {/* {errorMsgPetName != null ? (
                     <ErrorTextComponent error={errorMsgPetName} />
-                ) : null}
+                ) : null} */}
                 <Picker
                     selectedValue={reducerState.Type}
                     style={styles.input}
@@ -170,13 +176,34 @@ const SignUpScreen = ({ navigation }) => {
                     <Picker.Item label="Bird" value="Bird" />
                     <Picker.Item label="Other" value="Other" />
                 </Picker>
-                {errorMsgPetType != null ? (
+                {/* {errorMsgPetType != null ? (
                     <ErrorTextComponent error={errorMsgPetType} />
-                ) : null}
+                ) : null} */}
             </ScrollView>
             {state.errorMessage ? (
                 <ErrorTextComponent error={state.errorMessage} />
             ) : null}
+
+            {errorMsgName ? (
+                <ErrorTextComponent error={errorMsgName} />
+            ) : errorMsgNumber ? (
+                <ErrorTextComponent error={errorMsgNumber} />
+            ) : errorMsgEmail ? (
+                <ErrorTextComponent error={errorMsgEmail} />
+            ) : errorMsgPassword ? (
+                <ErrorTextComponent error={errorMsgPassword} />
+            ) : errorMsgConfirmPassword ? (
+                <ErrorTextComponent error={errorMsgConfirmPassword} />
+            ) : errorMsgEqualPassword ? (
+                <ErrorTextComponent error={errorMsgEqualPassword} />
+            ) : errorMsgCity ? (
+                <ErrorTextComponent error={errorMsgCity} />
+            ) : errorMsgPetName ? (
+                <ErrorTextComponent error={errorMsgPetName} />
+            ) : errorMsgPetType ? (
+                <ErrorTextComponent error={errorMsgPetType} />
+            ) : null}
+
             {errorMsgEmail ||
             errorMsgPassword ||
             errorMsgCity ||

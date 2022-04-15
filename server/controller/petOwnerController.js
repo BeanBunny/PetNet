@@ -7,7 +7,6 @@ const ObjectId = mongoose.Types.ObjectId;
 export const postSignUp = async (req, res) => {
     const { name, email, password, pet, phone, location } = req.body;
     try {
-        console.log(req.body);
         const petOwner = new models.petOwner({
             email,
             password,

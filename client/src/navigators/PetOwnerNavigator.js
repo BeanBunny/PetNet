@@ -16,7 +16,10 @@ const SetAppFlow = createNativeStackNavigator();
 const AppointmentFlow = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }} collapsable={false}>
-            <SetAppFlow.Navigator initialRouteName="Clinics">
+            <SetAppFlow.Navigator
+                initialRouteName="Clinics"
+                screenOptions={{ headerShown: false }}
+            >
                 <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
                 <PetOwnerBottomTab.Screen
                     name="AppDate"
@@ -32,6 +35,7 @@ const PetOwnerBottomTabFlow = ({ props }) => {
         <PetOwnerBottomTab.Navigator
             activeColor="#f0edf6"
             inactiveColor="#3e2465"
+            screenOptions={{ headerShown: false }}
         >
             <PetOwnerBottomTab.Screen
                 name="AppFlow"

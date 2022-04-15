@@ -65,6 +65,7 @@ const signupPet =
     };
 
 const signupVet = (dispatch) => async (details) => {
+    console.log(details);
     try {
         const response = await restApi.post("/vet/signup", details);
         if (response.data.token) {

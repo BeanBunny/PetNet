@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
 const ButtonWithGivenColour = (props) => {
   return (
     <View style={props.style}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => console.log("button pressed")}>
         <Text style={styles.textStyle}>{props.text}</Text>
       </TouchableOpacity>
     </View>

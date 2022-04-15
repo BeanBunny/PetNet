@@ -4,15 +4,17 @@ import { createStackNavigator } from "react-navigation-stack";
 // import LoginScreen from "./src/screens/LoginScreen";
 // import SignUpScreen from "./src/screens/SignUpScreen";
 import ClinicInfoScreen from "./src/screens/ClinicInfoScreen";
+import VetPendingRequestsScreen from "./src/screens/VetPendingRequestsScreen";
 
 const navigator = createStackNavigator(
   {
     ClinicInfo: ClinicInfoScreen,
+    VetPendingRequests: VetPendingRequestsScreen,
     // Login: LoginScreen,
     // SignUp: SignUpScreen,
   },
   {
-    initialRouteName: "ClinicInfo",
+    initialRouteName: "VetPendingRequests",
     defaultNavigationOptions: {
       title: "App",
       cardStyle: { backgroundColor: "#66C4D2" },

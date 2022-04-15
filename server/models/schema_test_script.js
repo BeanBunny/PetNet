@@ -330,3 +330,9 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
 //Ignore
 //.\mongod.exe --dbpath=C:\Users\HP\mongodb-data
 //C:\Users\HP\mongodb\bin
+
+// await Promise.all(list.map(async (val) => {
+//   temp = await models.clinic.findbyId(val)
+//   return
+// }
+// ))

@@ -39,7 +39,6 @@ const signupPet =
     (dispatch) =>
     async ({ name, email, password, pet, phone, location, isVet }) => {
         try {
-            console.log(name, email, password, pet, phone, location, isVet);
             const response = await restApi.post("/petowner/signup", {
                 name,
                 email,
@@ -51,6 +50,7 @@ const signupPet =
             await AsyncStorage.setItemAsync("token", response.data.token);
             await AsyncStorage.setItemAsync("isVet", isVet.toString());
             dispatch({ type: "signin", payload: response.data.token });
+            dispatch({ type: "isVet", payload: false });
 
             const param = { screen: "Home" };
             const navigator = isVet ? "Vet" : "PetOwner";
@@ -64,6 +64,32 @@ const signupPet =
         }
     };
 
+const signupVet = (dispatch) => async (details) => {
+    try {
+        console.log(details);
+        const response = await restApi.post("/vet/signup", details);
+        if (response.data.token) {
+            await AsyncStorage.setItemAsync("token", response.data.token);
+            await AsyncStorage.setItemAsync("isVet", "true");
+            dispatch({ type: "signin", payload: response.data.token });
+            dispatch({ type: "isVet", payload: true });
+
+            navigate("AfterSignUp");
+        } else {
+            dispatch({
+                type: "add_error",
+                payload: response.data.err,
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        dispatch({
+            type: "add_error",
+            payload: "Something went wrong with sign up",
+        });
+    }
+};
+
 const signin =
     (dispatch) =>
     async ({ email, password, isVet }) => {
@@ -75,6 +101,7 @@ const signin =
                 await AsyncStorage.setItemAsync("isVet", isVet.toString());
                 console.log(response.data.UserId);
                 dispatch({ type: "signin", payload: response.data.token });
+                dispatch({ type: "isVet", payload: isVet });
                 navigate("Home");
             } else {
                 dispatch({
@@ -110,6 +137,7 @@ export const { Provider, Context } = createDataContext(
         signin,
         signout,
         signupPet,
+        signupVet,
         clearErrorMessage,
         tryLocalSignin,
         isPetOrVet,

@@ -2,38 +2,37 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import LoginScreen from "../screens/LoginScreen";
-import petSignUpScreen from "../screens/petscreens/SignUpScreen";
-import ClinicsScreen from "../screens/petscreens/HomeScreen";
-import SetAppointmentCalendarScreen from "../screens/petscreens/SetAppointmentCalendarScreen";
-import AccountScreen from "../screens/petscreens/AccountScreen";
-import HistoryScreen from "../screens/petscreens/HistoryScreen";
+import VetSignUpScreen from "../screens/vetscreens/VetSignUpScreen";
+import ClinicSignUpScreen from "../screens/vetscreens/ClinicSignUpScreen";
+import AfterSignUpScreen from "../screens/vetscreens/AfterSignUpScreen";
+import ViewAppointmentScreen from "../screens/vetscreens/ViewAppointmentScreen";
 import { View } from "react-native";
 
-const PetOwnerNav = createNativeStackNavigator();
-const PetOwnerBottomTab = createMaterialBottomTabNavigator();
+const VetOwnerNav = createNativeStackNavigator();
+const VetOwnerBottomTab = createMaterialBottomTabNavigator();
 const SetAppFlow = createNativeStackNavigator();
 
-const AppointmentFlow = ({ navigation }) => {
-    return (
-        <View style={{ flex: 1 }} collapsable={false}>
-            <SetAppFlow.Navigator initialRouteName="Clinics">
-                <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
-                <PetOwnerBottomTab.Screen
-                    name="AppDate"
-                    component={SetAppointmentCalendarScreen}
-                />
-            </SetAppFlow.Navigator>
-        </View>
-    );
-};
+// const AppointmentFlow = ({ navigation }) => {
+//   return (
+//     <View style={{ flex: 1 }} collapsable={false}>
+//       <SetAppFlow.Navigator initialRouteName="Clinics">
+//         <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
+//         <VetOwnerBottomTab.Screen
+//           name="AppDate"
+//           component={SetAppointmentCalendarScreen}
+//         />
+//       </SetAppFlow.Navigator>
+//     </View>
+//   );
+// };
 
-const PetOwnerBottomTabFlow = ({ props }) => {
+const VetOwnerBottomTabFlow = ({ props }) => {
     return (
-        <PetOwnerBottomTab.Navigator
+        <VetOwnerBottomTab.Navigator
             activeColor="#f0edf6"
             inactiveColor="#3e2465"
         >
-            <PetOwnerBottomTab.Screen
+            <VetOwnerBottomTab.Screen
                 name="AppFlow"
                 component={AppointmentFlow}
                 options={{
@@ -47,7 +46,7 @@ const PetOwnerBottomTabFlow = ({ props }) => {
                     ),
                 }}
             />
-            <PetOwnerBottomTab.Screen
+            <VetOwnerBottomTab.Screen
                 name="History"
                 component={HistoryScreen}
                 options={{
@@ -61,7 +60,7 @@ const PetOwnerBottomTabFlow = ({ props }) => {
                     ),
                 }}
             />
-            <PetOwnerBottomTab.Screen
+            <VetOwnerBottomTab.Screen
                 name="Logout"
                 component={AccountScreen}
                 options={{
@@ -75,22 +74,30 @@ const PetOwnerBottomTabFlow = ({ props }) => {
                     ),
                 }}
             />
-        </PetOwnerBottomTab.Navigator>
+        </VetOwnerBottomTab.Navigator>
     );
 };
 
-const PetOwnerFlow = () => {
+const VetFlow = () => {
     return (
-        <PetOwnerNav.Navigator screenOptions={{ headerShown: false }}>
-            <PetOwnerNav.Screen name="SignUp" component={petSignUpScreen} />
-            <PetOwnerNav.Screen name="Login" component={LoginScreen} />
-            <PetOwnerNav.Screen
+        <VetOwnerNav.Navigator screenOptions={{ headerShown: false }}>
+            <VetOwnerNav.Screen name="SignUp" component={VetSignUpScreen} />
+            <VetOwnerNav.Screen
+                name="clinicSignUp"
+                component={ClinicSignUpScreen}
+            />
+            <VetOwnerNav.Screen name="Login" component={LoginScreen} />
+            <VetOwnerNav.Screen
+                name="AfterSignUp"
+                component={AfterSignUpScreen}
+            />
+            <VetOwnerNav.Screen
                 name="Home"
-                component={PetOwnerBottomTabFlow}
+                component={ViewAppointmentScreen}
                 screenOptions={{ headerShown: false }}
             />
-        </PetOwnerNav.Navigator>
+        </VetOwnerNav.Navigator>
     );
 };
 
-export default PetOwnerFlow;
+export default VetFlow;

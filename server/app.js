@@ -30,10 +30,6 @@ db.on("disconnected", function () {
 // Init an Express App.
 const app = express();
 
-// ----------------------------------------------
-// SEE THE LINES YOU WANNA ADD FROM YOUR COURSE
-//----------------------------------------------
-
 // Use your dependencies here
 // use all controllers(APIs) here
 

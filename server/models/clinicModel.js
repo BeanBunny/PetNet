@@ -5,6 +5,7 @@ import { services } from "./servicesModel.js";
 import { appointmentModel } from "./appointmentModel.js";
 import { reportClinicModel } from "./reportClinicModel.js";
 import { reportPetOwnerModel } from "./reportPetOwnerModel.js";
+import bcrypt from "bcrypt";
 
 const clinicSchema = new mongoose.Schema({
     cnic: {
@@ -85,5 +86,17 @@ clinicSchema.pre("remove", async function (next) {
 
     next();
 });
+
+clinicSchema.methods.comparePassword = function (inputPassword) {
+    const user = this;
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(inputPassword, user.password, (err, isMatch) => {
+            if (err) return reject(err);
+            if (!isMatch) return reject(false);
+
+            resolve(true);
+        });
+    });
+};
 
 export const clinicModel = mongoose.model("Vet clinic", clinicSchema);

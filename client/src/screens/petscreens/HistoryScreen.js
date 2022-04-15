@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-    View,
-    FlatList,
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-} from "react-native";
-import { Card, Headline, Provider, Title, Paragraph } from "react-native-paper";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { Card, Provider, Title, Paragraph } from "react-native-paper";
 import TopBar from "../../components/TopBar";
 import FlatListComponent from "../../components/FlatListComponent";
 import restApi from "../../api/restApi";

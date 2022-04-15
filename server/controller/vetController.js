@@ -1,13 +1,21 @@
 import { models } from "../models/models.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // give me req.body such that is contains only fields required for signup
 export const postSignup = async (req, res) => {
+    const details = req.body;
     try {
-        const signup = models.verificationClinic(req.body);
-        await signup.save();
-
-        return res.send("DONE!!!!!!!!!!!!!!!");
+        console.log(req.body);
+        // have to do same for all unique details such as cnic pvmc deets etc.
+        const user = await models.clinic.findOne({ email: req.body.email });
+        if (user) return res.send({ err: "Invalid email address" });
+        const clinicModel = new models.verificationClinic(details);
+        await clinicModel.save();
+        const token = jwt.sign({ userId: clinicModel._id }, process.env.SECRET);
+        res.send({ token, userId: clinicModel._id });
     } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };
@@ -18,7 +26,26 @@ export const getSignup = (req, res) => {
     res.send("INSIDE SIGNUP - GET");
 };
 
-export const postLogin = (req, res) => {};
+export const postSignin = async (req, res) => {
+    const { email, password } = req.body;
+    console.log(email);
+    console.log(password);
+    if (!email || !password)
+        return res.status(422).send({ error: "Invalid login: No input seen" });
+
+    const user = await models.clinic.findOne({ email: email });
+    // if (!user) return res.status(422).send({ error: "Invalid email address" });
+    if (!user) return res.send({ err: "Invalid email address" });
+    try {
+        await user.comparePassword(password);
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET);
+        res.send({ token, userId: user._id });
+    } catch (err) {
+        // res.set("Content-Type", "text/plain");
+        // return res.status(400).send("Incorrect password");
+        res.send({ err: "Incorrect password" });
+    }
+};
 
 //king function
 export const getAppointments = async (req, res) => {
@@ -53,30 +80,22 @@ export const getAppointments = async (req, res) => {
                     break;
                 }
             }
-        }
-        let result = [];
-        //get all pet types
-        let petTypes = [];
-
-        //for every petowner, go through the list of pets and match the id from appointment to get pet type
-        for (let i = 0; i < petOwners.length; i++) {
-            let listOfPets = petOwners[i].pet;
-            let appointmentPetId = appointmentsList[i].pet_id;
-            for (let j = 0; j < listOfPets.length; j++) {
-                if (appointmentPetId.equals(listOfPets[j]._id)) {
-                    petTypes.push(listOfPets[j].pet_type);
-                }
-            }
             // console.log(petTypes);
             result.push({
                 appointment_type: appointmentsList[i].type,
                 pet_type: petTypes[i],
                 petowner_name: petOwners[i].name,
                 petowner_phone: petOwners[i].phone,
-                appointment_time: appointmentsList[i].date,
+                date: appointmentsList[i].date,
                 appointment_status: appointmentsList[i].status,
             });
-        } //todo result according to time then send
+        }
+
+        //return sorted result
+        result.sort(function (a, b) {
+            return a.date - b.date;
+        });
+
         return res.send(result);
     } catch (err) {
         return res.status(422).send(err.message);
@@ -88,7 +107,11 @@ export const postAcceptAppointment = async (req, res) => {
     const appointmentId = req.body._id;
     try {
         //update appointment by id
-        await models.appointment.updateOne({ _id: appointmentId }, { status: "accepted" });
+        await models.appointment.updateOne(
+            { _id: appointmentId },
+            { status: "accepted" },
+            { runValidators: true }
+        );
         return res.send("Appointment updated");
     } catch (err) {
         return res.status(422).send(err.message);
@@ -136,7 +159,11 @@ export const postAddService = async (req, res) => {
         servicesList.push(newService);
 
         //update vet record
-        await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+        await models.clinic.updateOne(
+            { _id: vet._id },
+            { services: servicesList },
+            { runValidators: true }
+        );
         return res.send("Service Added!");
     } catch (err) {
         return res.status(422).send(err.message);
@@ -161,7 +188,11 @@ export const postEditService = async (req, res) => {
             }
         }
         //update record by repacing with the updated service list
-        await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+        await models.clinic.updateOne(
+            { _id: vet._id },
+            { services: servicesList },
+            { runValidators: true }
+        );
         return res.send("Service Updated!");
     } catch (err) {
         return res.status(422).send(err.message);
@@ -187,7 +218,11 @@ export const postDeleteService = async (req, res) => {
         servicesList.splice(deleteIndex, 1);
 
         //update record by repacing with the updated service list
-        await models.clinic.updateOne({ _id: vet._id }, { services: servicesList });
+        await models.clinic.updateOne(
+            { _id: vet._id },
+            { services: servicesList },
+            { runValidators: true }
+        );
         return res.send("Service removed!");
     } catch (err) {
         return res.status(422).send(err.message);
@@ -196,7 +231,7 @@ export const postDeleteService = async (req, res) => {
 
 export const getServices = async (req, res) => {
     //vet_email required (any vet index (id etc) would work)
-    const vet_email = req;
+    const vet_email = req.body.email;
     try {
         let vet = await models.clinic.findOne({ email: vet_email });
         console.log(vet);
@@ -204,6 +239,85 @@ export const getServices = async (req, res) => {
         //where each service has name description and price
         return res.send(servicesList);
         //return res.send("Service removed!");
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postReportPetOwner = async (req, res) => {
+    //vet index, petowner index and report reason required
+    //naming conventions check
+    const vet_id = req.body.vet_id;
+    const petowner_id = req.body.petowner_id;
+    const reportReason = req.body.report_reason;
+
+    try {
+        await models
+            .reportPetOwner({
+                pet_owner_id: petowner_id,
+                report_reason: reportReason,
+                vet_id: vet_id,
+            })
+            .save()
+            .then((res) => {
+                console.log("Pet Owner reported", res);
+            });
+        return res.send("Pet Owner Reported!");
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const postEditClinicProfile = async (req, res) => {
+    //vet id, phone, email, password, clinic name, about clinic required
+    //if they are undefined then they arent updated
+    const vet_id = req.body._id;
+    const phone = req.body.phone;
+    const email = req.body.email;
+    const password = req.body.password; //to do: password hashing
+    const clinicName = req.body.clinic_name;
+    const aboutClinic = req.body.about_clinic;
+
+    try {
+        //query the vet to be updated
+        let vet = await models.clinic.findById(vet_id);
+
+        //update fields which arent undefined
+        if (phone) vet.phone = phone;
+        if (email) vet.email = email;
+        if (clinicName) vet.clinic_name = clinicName;
+        if (aboutClinic) vet.about_clinic = aboutClinic;
+
+        if (password) {
+            bcrypt.genSalt(saltRounds, function (err, salt) {
+                if (error) return res.status(422).send(err);
+                bcrypt.hash(password, salt, async function (err, hash) {
+                    if (error) return res.status(422).send(err);
+                    vet.password = hash;
+                    await models.clinic.updateOne({ _id: vet_id }, vet, {
+                        runValidators: true,
+                    });
+                    return res.send("Profile Updated!");
+                });
+            });
+        } else {
+            await models.clinic.updateOne({ _id: vet_id }, vet, {
+                runValidators: true,
+            });
+            return res.send("Profile Updated!");
+        }
+    } catch (err) {
+        return res.status(422).send(err.message);
+    }
+};
+
+export const getClinicDetails = async (req, res) => {
+    try {
+        //only clinic id required
+        const vet_id = req.body._id;
+        //fetch vet
+        const vet = await models.clinic.findById(vet_id);
+        return res.send(vet);
     } catch (err) {
         return res.status(422).send(err.message);
     }

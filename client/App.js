@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import * as AsyncStorage from "expo-secure-store";
 import PetOwnerFlow from "./src/navigators/PetOwnerNavigator";
+import VetFlow from "./src/navigators/VetNavigator";
 import StartScreen from "./src/screens/StartScreen";
 // import LoginScreen from "./src/screens/petscreens/LoginScreen";
 // import ClinicsScreen from "./src/screens/petscreens/HomeScreen";
@@ -36,17 +37,9 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator name="MainNav" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="AddPetsScreen" component={AddPetsScreen} />
-          <Stack.Screen name="EditPets" component={EditPets} />
-          <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen
-            name="EditServiceScreen"
-            component={EditServiceScreen}
-          />
-          <Stack.Screen name="AddServiceScreen" component={AddServiceScreen} />
-          <Stack.Screen name="AppTime" component={AppTime} />
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="PetOwner" component={PetOwnerFlow} />
+          <Stack.Screen name="Vet" component={VetFlow} />
           {/* <Stack.Screen name="Log" component={LoginScreen} /> // LOGOUT HERE  */}
           {/* ----------pet owner flow here--------------------- */}
           <Stack.Screen
@@ -58,6 +51,13 @@ export default function App() {
             name="CreatePassword"
             component={CreatePasswordScreen}
           />
+          <Stack.Screen name="EditProfile" component={EditProfile} />
+          <Stack.Screen name="AddServiceScreen" component={AddServiceScreen} />
+          <Stack.Screen
+            name="EditServiceScreen"
+            component={EditServiceScreen}
+          />
+          <Stack.Screen name="AppTime" component={AppTime} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

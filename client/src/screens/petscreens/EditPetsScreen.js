@@ -1,25 +1,17 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 import TopBar from "../../components/TopBar";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import CompButton from "../../components/Button";
 
-const Editserv = () => {
+const EditPets = () => {
   const datalist = [
-    { _id: 1, name: "Grooming", price: 300 },
-    { _id: 2, name: "Deworming", price: 400 },
-    { _id: 3, name: "Haircut", price: 200 },
+    { _id: 1, name: "Bird", type: "Bird" },
+    { _id: 2, name: "Cat", type: "Cat" },
+    { _id: 3, name: "Dog", type: "Dog" },
   ];
   return (
     <View>
-      <TopBar text="Edit Service" textStyle={styles.text} style={styles.bar} />
+      <TopBar text="Edit My Pets" textStyle={styles.text} style={styles.bar} />
       <View style={styles.bigcontainer}>
         <FlatList
           keyExtractor={(x) => x._id}
@@ -29,21 +21,21 @@ const Editserv = () => {
               <View style={{ flexDirection: "row" }}>
                 <View style={styles.container}>
                   <Text style={styles.datatext}>{item.name}</Text>
-                  <Text style={styles.datatext}>Rs. {item.price}</Text>
+                  <Text style={styles.datatext}>{item.type}</Text>
                 </View>
                 <CompButton text="Delete" style={{ marginVertical: "5%" }} />
               </View>
             );
           }}
         />
-        <CompButton text="Add Service" style={styles.addserv} />
+        <CompButton text="Add Pet" style={styles.addpet} />
       </View>
       <CompButton text="Save" style={styles.savebutton} />
     </View>
   );
 };
 
-Editserv.navigationOptions = () => {
+EditPets.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -68,10 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  addserv: {
-    marginHorizontal: "20%",
-    marginVertical: "10%",
-  },
   bigcontainer: {
     backgroundColor: "#324273",
     marginVertical: "10%",
@@ -83,9 +71,9 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 20,
   },
-  savetext: {
-    color: "black",
-    fontSize: 20,
+  addpet: {
+    marginHorizontal: "20%",
+    marginVertical: "10%",
   },
   savebutton: {
     marginVertical: "5%",
@@ -93,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Editserv;
+export default EditPets;

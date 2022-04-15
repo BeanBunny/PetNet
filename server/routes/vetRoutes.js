@@ -6,6 +6,8 @@ const vetRoutes = express.Router();
 
 vetRoutes.post("/signup", vetController.postSignup);
 
+vetRoutes.post("/signin", vetController.postSignin);
+
 vetRoutes.get("/signup", vetController.getSignup);
 
 export default vetRoutes;

@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 
 export const postSignIn = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
+    if (!email || !password)
+        return res.status(422).send({ error: "Invalid login: No input seen" });
     const user = await models.admin.findOne({ email: email });
     if (!user) return res.status(422).send({ error: "Invalid email address" });
     try {
@@ -69,7 +70,9 @@ export const postBanUser = async (req, res) => {
             console.log("INSIDE BANNED PET OWNER");
             console.log(user);
 
-            const petOwner = await models.petOwner.findOne({ email: user.email });
+            const petOwner = await models.petOwner.findOne({
+                email: user.email,
+            });
 
             await petOwner.remove();
             await models.bannedPetOwners(bannedUser).save();
@@ -97,7 +100,7 @@ export const postAcceptRequest = async (req, res) => {
                 password: user.password,
                 phone: user.phone,
                 clinic_name: user.clinic_name,
-                about_clinic: "",
+                about_clinic: user.about_clinic,
                 clinic_location: user.clinic_location,
                 pvmc_reg: {
                     name: user.pvmc_reg.name,
@@ -111,6 +114,7 @@ export const postAcceptRequest = async (req, res) => {
 
         return res.send("Clinic accepted!");
     } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };

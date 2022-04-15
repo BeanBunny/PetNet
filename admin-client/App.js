@@ -27,7 +27,11 @@ const BottomTab = () => {
                 options={{
                     tabBarLabel: "Sign Up Reqs",
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={26} />
+                        <MaterialCommunityIcons
+                            name="account"
+                            color={color}
+                            size={26}
+                        />
                     ),
                 }}
             />
@@ -38,7 +42,11 @@ const BottomTab = () => {
                 options={{
                     tabBarLabel: "Logout",
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="logout" color={color} size={26} />
+                        <MaterialCommunityIcons
+                            name="logout"
+                            color={color}
+                            size={26}
+                        />
                     ),
                 }}
             />

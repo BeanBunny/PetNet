@@ -18,7 +18,9 @@ import SetAppointmentCalendarScreen from "./src/screens/petscreens/SetAppointmen
 import AccountScreen from "./src/screens/petscreens/AccountScreen";
 import AddServiceScreen from "./src/screens/vetscreens/AddServiceScreen";
 import AppTime from "./src/screens/petscreens/AppTime";
-import EditProfile from "./src/screens/vetscreens/EditProfile";
+import EditProfile from "./src/screens/petscreens/EditProfile";
+import EditPets from "./src/screens/petscreens/EditPetsScreen";
+import AddPetsScreen from "./src/screens/petscreens/AddPetsScreen";
 
 import {
   Provider as AuthProvider,
@@ -34,12 +36,14 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator name="MainNav" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="AddPetsScreen" component={AddPetsScreen} />
+          <Stack.Screen name="EditPets" component={EditPets} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="AddServiceScreen" component={AddServiceScreen} />
           <Stack.Screen
             name="EditServiceScreen"
             component={EditServiceScreen}
           />
+          <Stack.Screen name="AddServiceScreen" component={AddServiceScreen} />
           <Stack.Screen name="AppTime" component={AppTime} />
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="PetOwner" component={PetOwnerFlow} />

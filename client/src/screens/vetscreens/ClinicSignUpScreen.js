@@ -47,11 +47,6 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
         Clinic: "",
         About: "",
         City: "",
-        image_url: [
-            "../../assets/vet-clinic1.jpg",
-            "../../assets/vet-clinic2.jpg",
-            "../../assets/vet-clinic3.jpg",
-        ],
     });
 
     const errorMsgCNIC = errorCNIC(reducerState.CNIC);
@@ -193,13 +188,6 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                             clinic_location: reducerState.City,
                             clinic_name: reducerState.Clinic,
                             about_clinic: reducerState.About,
-                            image_url:
-                                reducerState.image_url[
-                                    Math.floor(
-                                        Math.random() *
-                                            reducerState.image_url.length
-                                    )
-                                ],
                             pvmc_reg,
                         })
                     }

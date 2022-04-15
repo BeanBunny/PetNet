@@ -1,15 +1,15 @@
 import ButtomComp from "../components/button";
 import React, { useState } from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Image } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import TopBar from "../components/TopBar";
-import Button from "../components/button";
 import TextButton from "../components/Textonlybutton";
 import ServicesButton from "../components/ServicesButton";
+import BackgroundButton from "../components/ButtonWithGivenColour";
 
 var array = new Array();
 var twodarray = new Array();
-array.push("Spikey");
+array.push("Buddy");
 array.push("Deworming");
 array.push("Dog");
 array.push("SarahDar");
@@ -24,10 +24,20 @@ function VetPendAppointments() {
         style={styles.bar}
       />
       <View style={{ flexDirection: "row" }}>
-        <ButtomComp style={styles.buttonContainerGreen} text="Accept All" />
-        <ButtomComp style={styles.buttonContainerRed} text="Reject All" />
+        <BackgroundButton
+          style={styles.buttonContainerGreen}
+          text="   Accept All"
+        />
+        <BackgroundButton style={styles.buttonContainerRed} text="Reject All" />
       </View>
       <View style={styles.container}>
+        <View style={styles.container1}>
+          <Image
+            style={styles.container}
+            source={require("../../assets/buddy.png")}
+          />
+          <Text style={styles.baseText}>{twodarray[0][0]}</Text>
+        </View>
         <Text style={styles.baseText}>
           {twodarray[0][0]} for {twodarray[0][1]} {"\n"}
           {twodarray[0][2]} owned by {twodarray[0][3]}
@@ -45,42 +55,50 @@ VetPendAppointments.navigationOptions = () => {
 
 const styles = StyleSheet.create({
   baseText: {
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: "Helvetica",
-    marginRight: 20,
+    color: "white",
+    fontWeight: "bold",
   },
   container: {
-    height: 110,
-    width: 350,
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
+    width: "85%",
+    marginTop: "10%",
+    marginBottom: "10%",
+    marginLeft: "7%",
     backgroundColor: "white",
     borderRadius: 5,
     borderColor: "blue",
-    padding: 5,
   },
-  button1: {
-    marginLeft: 30,
+  container1: {
+    width: "24%",
+    marginTop: "7%",
+    marginBottom: "10%",
+    marginLeft: "7%",
+    backgroundColor: "#326273",
+    borderRadius: 5,
+    padding: "2%",
+  },
+  imageformatting: {
+    marginLeft: "10%",
   },
   buttonContainerGreen: {
     backgroundColor: "green",
     padding: "5%",
     borderRadius: 20,
-    alignItems: "center",
-    width: 120,
-    marginTop: 120,
-    marginLeft: 60,
+    width: "40%",
+    marginTop: "15%",
+    marginLeft: "5%",
+    height: "55%",
   },
   buttonContainerRed: {
     backgroundColor: "#B22222",
     padding: "5%",
     borderRadius: 20,
     alignItems: "center",
-    width: 120,
-    marginTop: 120,
-    marginLeft: 20,
-    height: 70,
+    width: "40%",
+    marginTop: "15%",
+    marginLeft: "8%",
+    height: "55%",
   },
 });
 

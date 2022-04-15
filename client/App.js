@@ -28,6 +28,7 @@ import {
   Context as AuthContext,
 } from "./src/context/AuthContext";
 import { navigationRef } from "./src/navigationRef";
+import ClinicInfo from "./src/screens/petscreens/ClinicInfoScreen";
 
 const Stack = createNativeStackNavigator();
 const VetNav = createNativeStackNavigator();
@@ -37,6 +38,7 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator name="MainNav" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="ClinicInfo" component={ClinicInfo} />
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="PetOwner" component={PetOwnerFlow} />
           <Stack.Screen name="Vet" component={VetFlow} />

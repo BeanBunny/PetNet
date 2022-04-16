@@ -24,8 +24,8 @@ import EditPets from "./src/screens/petscreens/EditPetsScreen";
 import AddPetsScreen from "./src/screens/petscreens/AddPetsScreen";
 
 import {
-  Provider as AuthProvider,
-  Context as AuthContext,
+    Provider as AuthProvider,
+    Context as AuthContext,
 } from "./src/context/AuthContext";
 import { navigationRef } from "./src/navigationRef";
 import ClinicInfo from "./src/screens/petscreens/ClinicInfoScreen";
@@ -34,34 +34,39 @@ const Stack = createNativeStackNavigator();
 const VetNav = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator name="MainNav" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="ClinicInfo" component={ClinicInfo} />
-          <Stack.Screen name="Start" component={StartScreen} />
-          <Stack.Screen name="PetOwner" component={PetOwnerFlow} />
-          <Stack.Screen name="Vet" component={VetFlow} />
-          {/* <Stack.Screen name="Log" component={LoginScreen} /> // LOGOUT HERE  */}
-          {/* ----------pet owner flow here--------------------- */}
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPasswordScreen}
-          />
-          <Stack.Screen name="EnterOTP" component={EnterOTPScreen} />
-          <Stack.Screen
-            name="CreatePassword"
-            component={CreatePasswordScreen}
-          />
-          <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="AddServiceScreen" component={AddServiceScreen} />
-          <Stack.Screen
-            name="EditServiceScreen"
-            component={EditServiceScreen}
-          />
-          <Stack.Screen name="AppTime" component={AppTime} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <NavigationContainer ref={navigationRef}>
+                <Stack.Navigator
+                    name="MainNav"
+                    screenOptions={{ headerShown: false }}
+                >
+                    <Stack.Screen name="Start" component={StartScreen} />
+                    <Stack.Screen name="PetOwner" component={PetOwnerFlow} />
+                    <Stack.Screen name="Vet" component={VetFlow} />
+                    {/* <Stack.Screen name="Log" component={LoginScreen} /> // LOGOUT HERE  */}
+                    {/* ----------pet owner flow here--------------------- */}
+                    <Stack.Screen
+                        name="ForgotPassword"
+                        component={ForgotPasswordScreen}
+                    />
+                    <Stack.Screen name="EnterOTP" component={EnterOTPScreen} />
+                    <Stack.Screen
+                        name="CreatePassword"
+                        component={CreatePasswordScreen}
+                    />
+                    <Stack.Screen name="EditProfile" component={EditProfile} />
+                    <Stack.Screen
+                        name="AddServiceScreen"
+                        component={AddServiceScreen}
+                    />
+                    <Stack.Screen
+                        name="EditServiceScreen"
+                        component={EditServiceScreen}
+                    />
+                    <Stack.Screen name="AppTime" component={AppTime} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </AuthProvider>
+    );
 }

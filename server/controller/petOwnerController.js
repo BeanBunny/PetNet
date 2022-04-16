@@ -100,10 +100,8 @@ export const postRemovePet = async (req, res) => {
 
 // i assume i am getting user id from front end
 export const getProfile = async (req, res) => {
-    const petOwnerId = req.body.userId;
-
     try {
-        return res.send(await models.petOwner.findById(petOwnerId));
+        return res.send(req.user);
     } catch (err) {
         return res.status(422).send(err.message);
     }
@@ -278,8 +276,11 @@ export const getPastAppointments = async (req, res) => {
 
 // getting vetId and petOwnerId and petId
 export const postSetAppointment = async (req, res) => {
-    const { petId, vetId, petOwnerId, type, date } = req.body;
-
+    const { petId, vetId, type, date } = req.body;
+    const petOwnerId = req.user._id;
+    console.log(req.user);
+    console.log(petId, vetId, type, petOwnerId);
+    console.log("dateee-->", date);
     try {
         const status = "pending";
 
@@ -296,6 +297,7 @@ export const postSetAppointment = async (req, res) => {
 
         res.send("Appointment set!");
     } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };

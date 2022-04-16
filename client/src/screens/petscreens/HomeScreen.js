@@ -6,11 +6,15 @@ import TopBar from "../../components/TopBar";
 import Search from "../../components/SearchBar";
 import FlatListComponent from "../../components/FlatListComponent";
 
-const Mycard = ({ prop }) => {
-    console.log(prop);
+const Mycard = ({ prop, navigation }) => {
     return (
         <View style={styles.list}>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate("ClinicInfo", { clinicInfo: prop });
+                    console.log("presssed");
+                }}
+            >
                 <Card>
                     <Card.Cover
                         source={{
@@ -24,7 +28,7 @@ const Mycard = ({ prop }) => {
         </View>
     );
 };
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const [queryRes, setQueryRes] = useState([]);
     const [resp, setResp] = useState("Loading");
     useEffect(async () => {
@@ -38,7 +42,11 @@ const HomeScreen = () => {
             <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
             <Search style={styles.input} />
             {queryRes.length != 0 ? (
-                <FlatListComponent Child={Mycard} list={queryRes} />
+                <FlatListComponent
+                    Child={Mycard}
+                    list={queryRes}
+                    navigation={navigation}
+                />
             ) : (
                 <Headline>{resp}</Headline>
             )}

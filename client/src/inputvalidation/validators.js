@@ -71,3 +71,6 @@ export const errorCNIC = (val) =>
         : val.length > 13
         ? "CNIC" + LENGTH_CHECK + "13 characters"
         : null;
+
+export const errorNull = (val, str) =>
+    val === null ? str + ERROR_STRING : null;

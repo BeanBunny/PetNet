@@ -7,40 +7,36 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
         console.log("DB connection can not be established");
     } else {
         // console.log("DB connected");
-        // //check petowner insertion
-        // models
-        //   .petOwner({
-        //     name: "Martin Scorsese",
-        //     phone: "03009988770", //check regex
-        //     email: "scorcese@gmail.com", //invalid email
-        //     password: "qwertyuiop123$$",
-        //     pet: [
-        //       {
-        //         pet_type: "Dog",
-        //         pet_name: "De Niro",
-        //       },
-        //       {
-        //         pet_type: "Dog",
-        //         pet_name: "De Liro",
-        //       },
-        //       {
-        //         pet_type: "Cat",
-        //         pet_name: "Billo Raani",
-        //       },
-        //     ],
-        //     location: {
-        //       lat: 3000,
-        //       long: 898,
-        //       city: "Lahore",
-        //     },
-        //   })
-        //   .save()
-        //   .then((res) => {
-        //     console.log("Pet owner1 added", res);
-        //   })
-        //   .catch((err) => {
-        //     console.log("Error in adding pet owner1", err.message);
-        //   });
+        //check petowner insertion
+        models
+            .petOwner({
+                name: "Martin Scorsese",
+                phone: "03009988770", //check regex
+                email: "scorcese@gmail.com", //invalid email
+                password: "qwertyuiop123$$",
+                pet: [
+                    {
+                        petType: "Dog",
+                        petName: "De Niro",
+                    },
+                    {
+                        petType: "Dog",
+                        petName: "De Liro",
+                    },
+                    {
+                        petType: "Cat",
+                        petName: "Billo Raani",
+                    },
+                ],
+                location: "Lahore",
+            })
+            .save()
+            .then((res) => {
+                console.log("Pet owner1 added", res);
+            })
+            .catch((err) => {
+                console.log("Error in adding pet owner1", err.message);
+            });
         // models
         //   .petOwner({
         //     name: "Martin S",
@@ -224,12 +220,12 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
                 image_url:
                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
                 clinic_name: "Murda Zindabad Pets Clinic",
-                //about_clinic: "", //not mandatory
-                clinic_location: "Peshawar",
+                about_clinic: "My clinic best clinic", //not mandatory
+                clinic_location: "Lahore",
                 pvmc_reg: {
                     name: "Saad Malik",
                     gender: "M",
-                    reg_num: 445004646696968,
+                    reg_num: 44505,
                     father_name: "Umair Yousaf",
                 },
                 services: [

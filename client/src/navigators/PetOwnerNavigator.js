@@ -7,6 +7,8 @@ import ClinicsScreen from "../screens/petscreens/HomeScreen";
 import SetAppointmentCalendarScreen from "../screens/petscreens/SetAppointmentCalendarScreen";
 import AccountScreen from "../screens/petscreens/AccountScreen";
 import HistoryScreen from "../screens/petscreens/HistoryScreen";
+import ClinicInfo from "../screens/petscreens/ClinicInfoScreen";
+import AppTime from "../screens/petscreens/AppTime";
 import { View } from "react-native";
 
 const PetOwnerNav = createNativeStackNavigator();
@@ -21,10 +23,12 @@ const AppointmentFlow = ({ navigation }) => {
                 screenOptions={{ headerShown: false }}
             >
                 <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
-                <PetOwnerBottomTab.Screen
+                <SetAppFlow.Screen name="ClinicInfo" component={ClinicInfo} />
+                <SetAppFlow.Screen
                     name="AppDate"
                     component={SetAppointmentCalendarScreen}
                 />
+                <SetAppFlow.Screen name="AppTime" component={AppTime} />
             </SetAppFlow.Navigator>
         </View>
     );

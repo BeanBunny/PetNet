@@ -1,11 +1,8 @@
-import ButtomComp from "../components/button";
+import ButtomComp from "../../components/Button";
 import React, { useState } from "react";
 import { View, StyleSheet, Text, ScrollView, Image } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import TopBar from "../components/TopBar";
-import TextButton from "../components/Textonlybutton";
-import ServicesButton from "../components/ServicesButton";
-import BackgroundButton from "../components/ButtonWithGivenColour";
+import TopBar from "../../components/TopBar";
 
 var array = new Array();
 var twodarray = new Array();
@@ -40,7 +37,7 @@ function VetPendAppointments() {
           <View style={styles.container1}>
             <Image
               style={styles.imageformatting}
-              source={require("../../assets/buddy.png")}
+              source={require("../../../assets/buddy.png")}
             />
             <Text style={styles.baseText}>{twodarray[0][0]}</Text>
           </View>
@@ -52,12 +49,12 @@ function VetPendAppointments() {
         <ButtomComp style={styles.singleAcceptGreen} />
         <Image
           style={styles.imageformattingtick}
-          source={require("../../assets/tick.png")}
+          source={require("../../../assets/tick.png")}
         />
         <ButtomComp style={styles.singleAcceptRed} />
         <Image
           style={styles.imageformattingcross}
-          source={require("../../assets/cross.png")}
+          source={require("../../../assets/cross.png")}
         />
       </View>
     </View>
@@ -73,7 +70,7 @@ VetPendAppointments.navigationOptions = () => {
 const styles = StyleSheet.create({
   baseText: {
     fontSize: 20,
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "white",
     fontWeight: "bold",
     marginLeft: "13%",
@@ -81,7 +78,7 @@ const styles = StyleSheet.create({
   },
   timetext: {
     fontSize: 30,
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "#326273",
     fontWeight: "bold",
     marginLeft: "57%",
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
   },
   day: {
     fontSize: 13,
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "#326273",
     fontWeight: "bold",
     marginLeft: "57%",
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 13,
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "#326273",
     fontWeight: "bold",
     marginLeft: "57%",
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: "4.5%",
     marginTop: "3%",
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "white",
     fontWeight: "bold",
   },
@@ -115,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: "40%",
     marginTop: "25%",
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "white",
     fontWeight: "bold",
   },
@@ -123,14 +120,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: "45%",
     marginTop: "5%",
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "white",
   },
   baseText4: {
     fontSize: 15,
     marginLeft: "10.5%",
     marginTop: "5%",
-    fontFamily: "Helvetica",
+    // fontFamily: "Helvetica",
     color: "white",
     fontWeight: "bold",
   },

@@ -17,7 +17,13 @@ const Apptime = ({ navigation, route }) => {
 
     const mapper = (list) => {
         return list.map((val) => {
-            return <Picker.Item label={val.petName} value={val._id} />;
+            return (
+                <Picker.Item
+                    label={val.petName}
+                    value={val._id}
+                    key={val._id}
+                />
+            );
         });
     };
 
@@ -25,7 +31,7 @@ const Apptime = ({ navigation, route }) => {
         return list.map((val) => {
             let label = val + ":00 PM";
             let value = val + 12 + ":00:00";
-            return <Picker.Item label={label} value={value} />;
+            return <Picker.Item label={label} value={value} key={value} />;
         });
     };
 
@@ -63,8 +69,12 @@ const Apptime = ({ navigation, route }) => {
                             setTime(itemValue)
                         }
                     >
-                        <Picker.Item label="Time" value="" />
-                        <Picker.Item label="12:00 PM" value="12:00:00" />
+                        <Picker.Item label="Time" value="" key={""} />
+                        <Picker.Item
+                            label="12:00 PM"
+                            value="12:00:00"
+                            key="12:00:00"
+                        />
                         {mappperTime(timeSlots)}
                         {/* <Picker.Item label="3:00 PM" value="3:00 PM" />
                         <Picker.Item label="8:00 PM" value="8:00 PM" /> */}
@@ -80,7 +90,7 @@ const Apptime = ({ navigation, route }) => {
                             setPet(itemValue)
                         }
                     >
-                        <Picker.Item label="Pet Name" value="" />
+                        <Picker.Item label="Pet Name" value="" key={""} />
                         {mapper(petList)}
                     </Picker>
                 </View>

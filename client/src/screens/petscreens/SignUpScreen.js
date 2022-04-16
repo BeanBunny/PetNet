@@ -217,7 +217,7 @@ const SignUpScreen = ({ navigation }) => {
                 <ButtonComp text="Login" style={styles.button} disabled />
             ) : (
                 <ButtonComp
-                    text="Sign Up"
+                    text="Login"
                     style={styles.button}
                     disabled={false}
                     onChange={() =>

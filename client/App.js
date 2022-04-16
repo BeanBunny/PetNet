@@ -22,6 +22,8 @@ import AppTime from "./src/screens/petscreens/AppTime";
 import EditProfile from "./src/screens/petscreens/EditProfile";
 import EditPets from "./src/screens/petscreens/EditPetsScreen";
 import AddPetsScreen from "./src/screens/petscreens/AddPetsScreen";
+import VetPendingRequestsScreen from "./src/screens/vetscreens/VetPendingRequestsScreen";
+import VetHomeScreen from "./src/screens/vetscreens/HomeScreen";
 
 import {
     Provider as AuthProvider,
@@ -41,6 +43,15 @@ export default function App() {
                     name="MainNav"
                     screenOptions={{ headerShown: false }}
                 >
+                    <Stack.Screen
+                        name="VetHomeScreen"
+                        component={VetHomeScreen}
+                    />
+                    <Stack.Screen
+                        name="VetPendingRequestsScreen"
+                        component={VetPendingRequestsScreen}
+                    />
+                    <Stack.Screen name="ClinicInfo" component={ClinicInfo} />
                     <Stack.Screen name="Start" component={StartScreen} />
                     <Stack.Screen name="PetOwner" component={PetOwnerFlow} />
                     <Stack.Screen name="Vet" component={VetFlow} />

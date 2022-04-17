@@ -11,10 +11,10 @@ import { models } from "./models/models.js";
 // const { auth, requiresAuth } = pkg; // requires auth == middleware
 
 const MongoClient = mongodb.MongoClient;
-const mongoDBConnectionURL = "mongodb://127.0.0.1:27017/";
+const mongoDBConnectionURL = process.env.MONGODB_URL;
 const dbName = "petnet";
 
-mongoose.connect(mongoDBConnectionURL + dbName);
+mongoose.connect(mongoDBConnectionURL);
 const db = mongoose.connection;
 db.on("connected", () => {
     console.log("Connected to MongoDB...");

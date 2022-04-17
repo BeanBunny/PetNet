@@ -20,6 +20,10 @@ adminRoutes.post("/reject-clinic", requireAuth, adminController.postRejectReques
 
 adminRoutes.post("/ban-user", requireAuth, adminController.postBanUser);
 
+adminRoutes.get("/app-test", (req, res) => {
+    res.send("Online");
+});
+
 //add routes for clinic accept reject
 
 export default adminRoutes;

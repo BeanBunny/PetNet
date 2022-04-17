@@ -1,36 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import TopBar from "../../components/TopBar";
 import CompButton from "../../components/Button";
+import restApi from "../../api/restApi";
 
-const EditPets = () => {
-  const datalist = [
-    { _id: 1, name: "Bird", type: "Bird" },
-    { _id: 2, name: "Cat", type: "Cat" },
-    { _id: 3, name: "Dog", type: "Dog" },
-  ];
+const EditPets = ({ route, navigation }) => {
+  console.log(route.params?.profile, "BRUHH");
+  const [petProfile, setPetProfile] = useState(route.params?.profile);
   return (
     <View>
       <TopBar text="Edit My Pets" textStyle={styles.text} style={styles.bar} />
       <View style={styles.bigcontainer}>
-        <FlatList
-          keyExtractor={(x) => x._id}
-          data={datalist}
-          renderItem={({ item }) => {
-            return (
-              <View style={{ flexDirection: "row" }}>
-                <View style={styles.container}>
-                  <Text style={styles.datatext}>{item.name}</Text>
-                  <Text style={styles.datatext}>{item.type}</Text>
+        {petProfile.length !== 0 ? (
+          <FlatList
+            keyExtractor={(x) => x._id}
+            data={petProfile}
+            renderItem={({ item }) => {
+              return (
+                <View style={{ flexDirection: "row" }}>
+                  <View style={styles.container}>
+                    <Text style={styles.datatext}>{item.petName}</Text>
+                    <Text style={styles.datatext}>{item.petType}</Text>
+                  </View>
+                  <CompButton
+                    text="Delete"
+                    style={{ marginVertical: "5%" }}
+                    onChange={async () => {
+                      try {
+                        let resp = await restApi.post("/petowner/remove-pet", {
+                          petId: item._id,
+                        });
+                        console.log(resp.data);
+                        setPetProfile(resp.data);
+                      } catch (err) {
+                        console.log(err);
+                      }
+                    }}
+                  />
                 </View>
-                <CompButton text="Delete" style={{ marginVertical: "5%" }} />
-              </View>
-            );
-          }}
+              );
+            }}
+          />
+        ) : null}
+        <CompButton
+          text="Add Pet"
+          style={styles.addpet}
+          onChange={() => navigation.navigate("AddPetsScreen")}
         />
-        <CompButton text="Add Pet" style={styles.addpet} />
       </View>
-      <CompButton text="Save" style={styles.savebutton} />
     </View>
   );
 };

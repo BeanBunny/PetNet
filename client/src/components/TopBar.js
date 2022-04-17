@@ -3,11 +3,11 @@ import { View, StyleSheet, Text, Button } from "react-native";
 import { Appbar } from "react-native-paper";
 
 const topbar = (props) => {
-    return (
-        <Appbar style={props.style}>
-            <Appbar.Content title={props.text} style={props.textStyle} />
-        </Appbar>
-    );
+  return (
+    <Appbar style={props.style}>
+      <Appbar.Content title={props.text} style={props.textStyle} />
+    </Appbar>
+  );
 };
 
 const styles = StyleSheet.create({});

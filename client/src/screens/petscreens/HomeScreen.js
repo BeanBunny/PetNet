@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   bar: {
-    backgroundColor: "#326273",
+    backgroundColor: "rgba(67, 105, 219, 0.8)",
     marginTop: "5%",
   },
   image: {

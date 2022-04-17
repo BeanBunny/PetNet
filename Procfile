@@ -1,1 +1,1 @@
-web: node server/app.js
+web: env-cmd -f ./server/config/.env node ./server/app.js

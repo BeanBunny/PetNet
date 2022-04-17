@@ -1,7 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
+import { Context as VetContext } from "../../context/VetContext";
 import { View, StyleSheet, Text } from "react-native";
-import { Headline, ActivityIndicator } from "react-native-paper";
+import {
+    Headline,
+    ActivityIndicator,
+    Button as PaperButton,
+} from "react-native-paper";
 import TopBar from "../../components/TopBar";
 import Button from "../../components/Button";
 import TextButton from "../../components/TextOnlyButton";
@@ -15,50 +21,47 @@ const serv = ({ prop, navigation, vet_id }) => {
                 <Text style={styles.servtext}>{prop.service_name}</Text>
                 <Text style={styles.servtext}>Rs. {prop.price}</Text>
             </View>
-            <Button
-                text="Make Appointment"
-                style={{ marginVertical: "5%" }}
-                onChange={() =>
-                    navigation.navigate("AppDate", {
-                        type: prop.service_name,
-                        vet_id: vet_id,
-                    })
-                }
-            />
         </View>
     );
 };
 
 const AccountScreen = ({ navigation }) => {
     const { signout } = useContext(AuthContext);
-    const [profile, setProfile] = useState(null);
-
-    useEffect(async () => {
-        const resp = await restApi.get("/vet/get-details");
-        console.log(resp.data);
-        setProfile(resp.data);
-    }, []);
+    const { state, getDetails } = useContext(VetContext);
+    useFocusEffect(
+        React.useCallback(() => {
+            return () => getDetails();
+        }, [])
+    );
 
     return (
-        <View>
-            {profile ? (
-                <View>
+        <>
+            {state.profile ? (
+                <View style={{ flex: 1 }}>
                     <TopBar
                         textStyle={styles.text}
-                        text={profile.clinic_name}
+                        text={state.profile.clinic_name}
                         style={styles.bar}
                     />
-                    <View style={{ flexDirection: "row", height: "20%" }}>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            height: "20%",
+                            flex: 0.5,
+                        }}
+                    >
                         <Button
                             text="Edit Profile"
                             onChange={() =>
-                                navigation.navigate("EditProfile", { profile })
+                                navigation.navigate("EditProfile", {
+                                    profile: state.profile,
+                                })
                             }
                             style={{ margin: "2%", flex: 0.5, height: "50%" }}
                         />
                         <Button
                             text="Edit Services"
-                            onChange={() => console.log("pressed")}
+                            onChange={() => navigation.navigate("EditServ")}
                             style={{ margin: "2%", flex: 0.5 }}
                         />
                     </View>
@@ -66,38 +69,45 @@ const AccountScreen = ({ navigation }) => {
                         <Text style={styles.text2}>About Clinic </Text>
                         <View style={styles.input}>
                             <Text style={styles.text3}>
-                                {profile.about_clinic}
+                                {state.profile.about_clinic}
                             </Text>
                         </View>
                     </View>
-                    <View style={styles.container}>
+                    <View>
                         <Text style={styles.text2}>Services</Text>
                         <FlatListComponent
                             Child={serv}
-                            list={profile.services}
-                            vet_id={profile._id}
+                            list={state.services}
+                            vet_id={state.profile._id}
                             navigation={navigation}
                         />
                     </View>
+                    <PaperButton
+                        style={{
+                            backgroundColor: "red",
+                            width: "50%",
+                            marginHorizontal: "25%",
+                            marginTop: "5%",
+                        }}
+                        onPress={() => signout()}
+                    >
+                        Logout
+                    </PaperButton>
                 </View>
             ) : (
                 <ActivityIndicator size="large" />
             )}
-            <Button text="Logout" onChange={() => signout()} />
-        </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
     input: {
-        margin: "7%",
+        // margin: "7%",
         backgroundColor: "white",
     },
     container: {
         backgroundColor: "#EEEEEE",
-        marginHorizontal: "5%",
-        // marginTop: "10%",
-        padding: "5%",
         borderRadius: 10,
         justifyContent: "center",
     },

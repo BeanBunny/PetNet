@@ -7,7 +7,6 @@ import restApi from "../../api/restApi";
 // import Button from "../../components/Button";
 
 const MyCard = ({ prop, updateList }) => {
-    console.log("------->", prop);
     let time = prop.appointment_time[4];
     let date = prop.appointment_time.splice(0, 4).toString();
     return (

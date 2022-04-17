@@ -213,10 +213,10 @@ export const postUpdatePetProfile = async (req, res) => {
 // returning all appointments
 export const getPastAppointments = async (req, res) => {
     // fix pages issue ----------------------------------------------------------------
-    const petsList = req.user.pet;
-    const petOwnerId = req.user._id;
 
     try {
+        const petsList = req.user.pet;
+        const petOwnerId = req.user._id;
         const pastAppointments = await models.appointment
             .find({
                 petowner_id: petOwnerId,

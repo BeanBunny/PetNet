@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Provider, Card, Headline } from "react-native-paper";
+import {
+    Provider,
+    Card,
+    Headline,
+    ActivityIndicator,
+} from "react-native-paper";
 import restApi from "../../api/restApi";
 import TopBar from "../../components/TopBar";
 import Search from "../../components/SearchBar";
@@ -41,14 +46,22 @@ const HomeScreen = ({ navigation }) => {
         <Provider>
             <TopBar textStyle={styles.text} style={styles.bar} text="Clinics" />
             <Search style={styles.input} />
-            {queryRes.length != 0 ? (
+            {queryRes.length !== 0 ? (
                 <FlatListComponent
                     Child={Mycard}
                     list={queryRes}
                     navigation={navigation}
                 />
             ) : (
-                <Headline>{resp}</Headline>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        color: "#0000ff",
+                    }}
+                >
+                    <ActivityIndicator size="large" />
+                </View>
             )}
         </Provider>
     );

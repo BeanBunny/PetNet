@@ -6,25 +6,28 @@ import VetSignUpScreen from "../screens/vetscreens/VetSignUpScreen";
 import ClinicSignUpScreen from "../screens/vetscreens/ClinicSignUpScreen";
 import AfterSignUpScreen from "../screens/vetscreens/AfterSignUpScreen";
 import ViewAppointmentScreen from "../screens/vetscreens/ViewAppointmentScreen";
+import VetHomeScreen from "../screens/vetscreens/HomeScreen";
+import AccountScreen from "../screens/vetscreens/AccountScreen";
+import ApprComApptScreen from "../screens/vetscreens/ApprComApptScreen";
 import { View } from "react-native";
 
 const VetOwnerNav = createNativeStackNavigator();
 const VetOwnerBottomTab = createMaterialBottomTabNavigator();
 const SetAppFlow = createNativeStackNavigator();
 
-// const AppointmentFlow = ({ navigation }) => {
-//   return (
-//     <View style={{ flex: 1 }} collapsable={false}>
-//       <SetAppFlow.Navigator initialRouteName="Clinics">
-//         <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
-//         <VetOwnerBottomTab.Screen
-//           name="AppDate"
-//           component={SetAppointmentCalendarScreen}
-//         />
-//       </SetAppFlow.Navigator>
-//     </View>
-//   );
-// };
+const AppointmentFlow = ({ navigation }) => {
+    return (
+        <View style={{ flex: 1 }} collapsable={false}>
+            <SetAppFlow.Navigator initialRouteName="Clinics">
+                <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
+                <VetOwnerBottomTab.Screen
+                    name="AppDate"
+                    component={SetAppointmentCalendarScreen}
+                />
+            </SetAppFlow.Navigator>
+        </View>
+    );
+};
 
 const VetOwnerBottomTabFlow = ({ props }) => {
     return (
@@ -33,13 +36,13 @@ const VetOwnerBottomTabFlow = ({ props }) => {
             inactiveColor="#3e2465"
         >
             <VetOwnerBottomTab.Screen
-                name="AppFlow"
-                component={AppointmentFlow}
+                name="PendingReq"
+                component={VetHomeScreen}
                 options={{
-                    tabBarLabel: "Clinics",
+                    tabBarLabel: "Pending Appointments",
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
-                            name="hospital-box"
+                            name="clipboard"
                             color={color}
                             size={26}
                         />
@@ -47,10 +50,10 @@ const VetOwnerBottomTabFlow = ({ props }) => {
                 }}
             />
             <VetOwnerBottomTab.Screen
-                name="History"
-                component={HistoryScreen}
+                name="CurrComp"
+                component={ApprComApptScreen}
                 options={{
-                    tabBarLabel: "History",
+                    tabBarLabel: "Appointments",
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                             name="calendar"
@@ -93,7 +96,7 @@ const VetFlow = () => {
             />
             <VetOwnerNav.Screen
                 name="Home"
-                component={ViewAppointmentScreen}
+                component={VetOwnerBottomTabFlow}
                 screenOptions={{ headerShown: false }}
             />
         </VetOwnerNav.Navigator>

@@ -8,35 +8,35 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
     } else {
         // console.log("DB connected");
         //check petowner insertion
-        models
-            .petOwner({
-                name: "Martin Scorsese",
-                phone: "03009988770", //check regex
-                email: "scorcese@gmail.com", //invalid email
-                password: "qwertyuiop123$$",
-                pet: [
-                    {
-                        petType: "Dog",
-                        petName: "De Niro",
-                    },
-                    {
-                        petType: "Dog",
-                        petName: "De Liro",
-                    },
-                    {
-                        petType: "Cat",
-                        petName: "Billo Raani",
-                    },
-                ],
-                location: "Lahore",
-            })
-            .save()
-            .then((res) => {
-                console.log("Pet owner1 added", res);
-            })
-            .catch((err) => {
-                console.log("Error in adding pet owner1", err.message);
-            });
+        // models
+        //     .petOwner({
+        //         name: "Martin Scorsese",
+        //         phone: "03009988770", //check regex
+        //         email: "scorcese@gmail.com", //invalid email
+        //         password: "qwertyuiop123$$",
+        //         pet: [
+        //             {
+        //                 petType: "Dog",
+        //                 petName: "De Niro",
+        //             },
+        //             {
+        //                 petType: "Dog",
+        //                 petName: "De Liro",
+        //             },
+        //             {
+        //                 petType: "Cat",
+        //                 petName: "Billo Raani",
+        //             },
+        //         ],
+        //         location: "Lahore",
+        //     })
+        //     .save()
+        //     .then((res) => {
+        //         console.log("Pet owner1 added", res);
+        //     })
+        //     .catch((err) => {
+        //         console.log("Error in adding pet owner1", err.message);
+        //     });
         // models
         //   .petOwner({
         //     name: "Martin S",
@@ -215,7 +215,8 @@ mongoose.connect("mongodb://localhost/petnet", (error, db) => {
             .clinic({
                 cnic: "4230142301695",
                 email: "saadclinic69@gmail.com",
-                password: "saadking69123$$",
+                password:
+                    "$10$IjYMSjWeQqTQ6MPdMlPIweJojE6VRtznHQi0xMEGkd8waTXMGq2Um",
                 phone: "03000000069",
                 image_url:
                     "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",

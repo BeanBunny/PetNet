@@ -1,6 +1,6 @@
 import { FlatList, View } from "react-native";
 
-const FlatListComponent = ({ Child, list, navigation, vet_id }) => {
+const FlatListComponent = ({ Child, list, navigation, vet_id, updateList }) => {
     return (
         <FlatList
             style={{ marginTop: "2%" }}
@@ -14,6 +14,7 @@ const FlatListComponent = ({ Child, list, navigation, vet_id }) => {
                             prop={item}
                             navigation={navigation}
                             vet_id={vet_id}
+                            updateList={updateList}
                         />
                     </View>
                 );

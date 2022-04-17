@@ -38,6 +38,7 @@ const Apptime = ({ navigation, route }) => {
     const changingDate = () => {
         // date = date.toString().split(" ");
         date[4] = time;
+        console.log(date, "M<<app time");
         return date.splice(1, 4).toString();
     };
 

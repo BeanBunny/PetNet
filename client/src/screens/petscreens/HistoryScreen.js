@@ -83,7 +83,6 @@ const HistoryScreen = ({ navigation }) => {
                 <Button
                     text="Click to refresh"
                     onChange={async () => {
-                        console.log("CALL FOCUS TIME");
                         const response = await restApi.get(
                             "/petowner/past-appointments"
                         );
@@ -150,7 +149,7 @@ const HistoryScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     text: {
-        marginLeft: "31%",
+        marginLeft: "40%",
         color: "white",
         fontSize: 30,
     },

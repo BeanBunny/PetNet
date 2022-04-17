@@ -8,4 +8,24 @@ vetRoutes.post("/signup", vetController.postSignup);
 
 vetRoutes.post("/signin", vetController.postSignin);
 
+vetRoutes.post("/get-appointments", requireAuth, vetController.getAppointments);
+
+vetRoutes.post(
+    "/accept-appointment",
+    requireAuth,
+    vetController.postAcceptAppointment
+);
+
+vetRoutes.post(
+    "/reject-appointment",
+    requireAuth,
+    vetController.postRejectAppointment
+);
+
+vetRoutes.post(
+    "/complete-appointment",
+    requireAuth,
+    vetController.postCompleteAppointment
+);
+
 export default vetRoutes;

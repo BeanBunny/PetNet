@@ -25,10 +25,13 @@ const button = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#326273",
+    backgroundColor: "rgba(108, 20, 153, 0.55)",
     padding: "5%",
     borderRadius: 20,
     alignItems: "center",
+    height: "30%",
+    width: "80%",
+    // marginLeft: "35%",
   },
   disabledContainer: {
     backgroundColor: "#d3d9dc",
@@ -37,8 +40,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textStyle: {
-    fontSize: 15,
+    fontSize: 20,
     color: "white",
+    fontWeight: "bold",
+    alignItems: "center",
   },
 });
 

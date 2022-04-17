@@ -17,7 +17,7 @@ const StartScreen = ({ navigation }) => {
           style={styles.img}
           source={require("../../assets/logoNew.png")}
         />
-        <SqButton
+        <ButtonComp
           text="Pet Owner"
           routeName="Login"
           style={styles.button1}
@@ -25,13 +25,14 @@ const StartScreen = ({ navigation }) => {
           onChange={() => isPetOrVet(false)}
         />
         {/* <View style={styles.line}></View> */}
-        <SqButton
+        <ButtonComp
           text="Vet Clinic"
           routeName="Login"
           style={styles.button2}
           navigation={navigation}
           onChange={() => isPetOrVet(true)}
         />
+        <Text style={styles.bottomText}> Comfort. Care. Compassion.</Text>
       </LinearGradient>
     </View>
   );
@@ -63,9 +64,10 @@ const styles = StyleSheet.create({
     marginTop: "24%",
   },
   button1: {
-    marginHorizontal: "20%",
-    marginTop: "20%",
-    marginBottom: "5%",
+    //   marginHorizontal: "20%",
+    marginTop: "24%",
+    //   marginBottom: "2%",
+    marginLeft: "18%",
   },
   line: {
     borderBottomColor: "black",
@@ -75,8 +77,18 @@ const styles = StyleSheet.create({
   },
   button2: {
     // marginHorizontal: "20%",
-    marginTop: "-90%",
-    marginLeft: "50%",
+    // marginTop: "5%",
+    marginTop: "-26%",
+    marginLeft: "18%",
+    height: "26%",
+  },
+  bottomText: {
+    fontSize: 15,
+    fontStyle: "italic",
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: "7%",
+    color: "white",
   },
 });
 

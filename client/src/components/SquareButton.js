@@ -29,20 +29,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#00000070",
     color: "#FFFFFF",
     padding: "5%",
-    borderRadius: 20,
-    alignItems: "center",
+    borderRadius: 10,
+    // alignItems: "center",
     height: "50%",
+    marginTop: "10%",
     width: "50%",
-  },
-  disabledContainer: {
-    backgroundColor: "#d3d9dc",
-    padding: "5%",
-    borderRadius: 20,
-    alignItems: "center",
+    marginLeft: "22%",
   },
   textStyle: {
     fontSize: 15,
     color: "white",
+    marginTop: "100%",
+    marginLeft: "20%",
+    fontWeight: "bold",
   },
 });
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import * as AsyncStorage from "expo-secure-store";
 
 const instance = axios.create({
-  baseURL: "http://d47c-2400-adc5-1d7-f000-f936-c002-2e6e-9719.ngrok.io",
+  baseURL: "http://3d1a-2400-adc5-1d7-f000-804c-f6c9-c432-bd18.ngrok.io",
 });
 
 instance.interceptors.request.use(

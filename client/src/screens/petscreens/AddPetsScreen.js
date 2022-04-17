@@ -4,6 +4,8 @@ import TopBar from "../../components/TopBar";
 import CompButton from "../../components/Button";
 import Input from "../../components/InputBox";
 import { Picker } from "@react-native-picker/picker";
+import restApi from "../../api/restApi";
+import { errorRequired } from "../../inputvalidation/validators";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -16,8 +18,10 @@ const reducer = (state, action) => {
   }
 };
 
-const AddPetsScreen = () => {
+const AddPetsScreen = ({ navigation }) => {
   const [state, dispatch] = useReducer(reducer, { Name: "", Type: "" });
+  const errName = errorRequired(state.Name);
+  const errType = errorRequired(state.Type);
   return (
     <View>
       <TopBar text="Add Pet" textStyle={styles.text} style={styles.bar} />
@@ -43,7 +47,25 @@ const AddPetsScreen = () => {
           <Picker.Item label="Other" value="Other" />
         </Picker>
       </View>
-      <CompButton text="Add Pet" style={styles.addbutton} />
+      {!(errName && errType) ? (
+        <CompButton
+          text="Add Pet"
+          style={styles.addbutton}
+          onChange={async () => {
+            try {
+              let resp = await restApi.post("/petowner/add-pet", {
+                name: state.Name,
+                type: state.Type,
+              });
+              navigation.navigate("EditPets", {
+                params: { profile: resp.data },
+              });
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        />
+      ) : null}
     </View>
   );
 };

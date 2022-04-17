@@ -24,6 +24,11 @@ const AccountScreen = ({ navigation }) => {
         onChange={() => navigation.navigate("EditProfile", { profile })}
         style={{ margin: "2%", flex: 0.5, height: "50%" }}
       />
+      <Button
+        text="Edit Pets"
+        onChange={() => navigation.navigate("EditPets", { profile })}
+        style={{ margin: "2%", flex: 0.5 }}
+      />
     </View>
   );
 };

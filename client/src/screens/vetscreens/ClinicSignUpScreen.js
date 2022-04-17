@@ -53,14 +53,8 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
     const errorMsgEmail = errorEmail(reducerState.Email);
     const errorMsgNumber = errorNumber(reducerState.Number);
     const errorMsgPassword = errorRequired(reducerState.Password, "Password");
-    const errorMsgConfirmPassword = errorRequired(
-        reducerState.Confirm,
-        "Confirm Password"
-    );
-    const errorMsgEqualPassword = errorEqual(
-        reducerState.Password,
-        reducerState.Confirm
-    );
+    const errorMsgConfirmPassword = errorRequired(reducerState.Confirm, "Confirm Password");
+    const errorMsgEqualPassword = errorEqual(reducerState.Password, reducerState.Confirm);
     const errorMsgCity = errorRequired(reducerState.City, "Your City");
     const errorMsgClinic = errorRequired(reducerState.Clinic, "Clinic name");
 
@@ -70,10 +64,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Image
-                style={styles.img}
-                source={require("../../../assets/Logo1.jpeg")}
-            />
+            <Image style={styles.img} source={require("../../../assets/Logo1.png")} />
             <ScrollView style={styles.container}>
                 <Input
                     label="CNIC"
@@ -82,9 +73,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgCNIC != null ? (
-                    <ErrorTextComponent error={errorMsgCNIC} />
-                ) : null}
+                {errorMsgCNIC != null ? <ErrorTextComponent error={errorMsgCNIC} /> : null}
                 <Input
                     label="Email"
                     placeholder="Email"
@@ -92,9 +81,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgEmail != null ? (
-                    <ErrorTextComponent error={errorMsgEmail} />
-                ) : null}
+                {errorMsgEmail != null ? <ErrorTextComponent error={errorMsgEmail} /> : null}
                 <Input
                     label="Password"
                     placeholder="Password"
@@ -102,9 +89,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={true}
                 />
-                {errorMsgPassword != null ? (
-                    <ErrorTextComponent error={errorMsgPassword} />
-                ) : null}
+                {errorMsgPassword != null ? <ErrorTextComponent error={errorMsgPassword} /> : null}
                 <Input
                     label="Confirm"
                     placeholder="Confirm Password"
@@ -125,9 +110,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgNumber != null ? (
-                    <ErrorTextComponent error={errorMsgNumber} />
-                ) : null}
+                {errorMsgNumber != null ? <ErrorTextComponent error={errorMsgNumber} /> : null}
                 <Input
                     label="Clinic"
                     placeholder="Clinic Name"
@@ -135,9 +118,7 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgClinic != null ? (
-                    <ErrorTextComponent error={errorMsgClinic} />
-                ) : null}
+                {errorMsgClinic != null ? <ErrorTextComponent error={errorMsgClinic} /> : null}
                 <Input
                     label="About"
                     placeholder="About Clinic"
@@ -157,13 +138,9 @@ const ClinicSignUpScreen = ({ navigation, route }) => {
                     <Picker.Item label="Karachi" value="Karachi" />
                     <Picker.Item label="Islamabad" value="Islamabad" />
                 </Picker>
-                {errorMsgCity != null ? (
-                    <ErrorTextComponent error={errorMsgCity} />
-                ) : null}
+                {errorMsgCity != null ? <ErrorTextComponent error={errorMsgCity} /> : null}
             </ScrollView>
-            {state.errorMessage ? (
-                <Text style={{ color: "red" }}>{state.errorMessage}</Text>
-            ) : null}
+            {state.errorMessage ? <Text style={{ color: "red" }}>{state.errorMessage}</Text> : null}
             {errorMsgEmail ||
             errorMsgPassword ||
             errorMsgCity ||

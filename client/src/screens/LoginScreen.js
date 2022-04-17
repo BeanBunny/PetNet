@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 0.2 }}>
-        <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+        <Image style={styles.img} source={require("../../assets/Logo1.png")} />
       </View>
       <View style={styles.container}>
         <Input

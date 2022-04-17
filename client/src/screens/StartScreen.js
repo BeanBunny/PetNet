@@ -7,7 +7,7 @@ const StartScreen = ({ navigation }) => {
     const { _, isPetOrVet } = useContext(AuthContext);
     return (
         <View>
-            <Image style={styles.img} source={require("../../assets/Logo1.jpeg")} />
+            <Image style={styles.img} source={require("../../assets/Logo1.png")} />
             <ButtonComp
                 text="Pet Owner"
                 routeName="Login"

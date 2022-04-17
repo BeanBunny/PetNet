@@ -54,19 +54,10 @@ const SignUpScreen = ({ navigation }) => {
     const errorMsgEmail = errorEmail(reducerState.Email);
     const errorMsgNumber = errorNumber(reducerState.Number);
     const errorMsgPassword = errorRequired(reducerState.Password, "Password");
-    const errorMsgConfirmPassword = errorRequired(
-        reducerState.Confirm,
-        "Confirm Password"
-    );
-    const errorMsgEqualPassword = errorEqual(
-        reducerState.Password,
-        reducerState.Confirm
-    );
+    const errorMsgConfirmPassword = errorRequired(reducerState.Confirm, "Confirm Password");
+    const errorMsgEqualPassword = errorEqual(reducerState.Password, reducerState.Confirm);
     const errorMsgPetName = errorRequired(reducerState.Pet, "First Pet's Name");
-    const errorMsgPetType = errorRequired(
-        reducerState.Type,
-        "First Pet's Type"
-    );
+    const errorMsgPetType = errorRequired(reducerState.Type, "First Pet's Type");
     const errorMsgCity = errorRequired(reducerState.City, "Your City");
 
     const { state, signupPet, clearErrorMessage } = useContext(AuthContext);
@@ -74,14 +65,12 @@ const SignUpScreen = ({ navigation }) => {
     navigation.addListener("focus", clearErrorMessage);
     return (
         <View style={{ flex: 1 }}>
-            <Headline
-                style={{ marginLeft: "30%", marginTop: "3%", color: "#326273" }}
-            >
+            <Headline style={{ marginLeft: "30%", marginTop: "3%", color: "#326273" }}>
                 Pet Owner Sign Up
             </Headline>
             {/* <Image
                 style={styles.img}
-                source={require("../../../assets/Logo1.jpeg")}
+                source={require("../../../assets/Logo1.png")}
             /> */}
             <ScrollView style={styles.container}>
                 <Input
@@ -180,9 +169,7 @@ const SignUpScreen = ({ navigation }) => {
                     <ErrorTextComponent error={errorMsgPetType} />
                 ) : null} */}
             </ScrollView>
-            {state.errorMessage ? (
-                <ErrorTextComponent error={state.errorMessage} />
-            ) : null}
+            {state.errorMessage ? <ErrorTextComponent error={state.errorMessage} /> : null}
 
             {errorMsgName ? (
                 <ErrorTextComponent error={errorMsgName} />

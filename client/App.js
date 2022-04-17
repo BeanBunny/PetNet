@@ -19,13 +19,12 @@ import SetAppointmentCalendarScreen from "./src/screens/petscreens/SetAppointmen
 import AccountScreen from "./src/screens/petscreens/AccountScreen";
 import AddServiceScreen from "./src/screens/vetscreens/AddServiceScreen";
 import AppTime from "./src/screens/petscreens/AppTime";
-import EditProfile from "./src/screens/petscreens/EditProfile";
-import EditPets from "./src/screens/petscreens/EditPetsScreen";
 import AddPetsScreen from "./src/screens/petscreens/AddPetsScreen";
 import ClinicInfo from "./src/screens/petscreens/ClinicInfoScreen";
 
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as VetProvider } from "./src/context/VetContext";
+import { Provider as PetProvider } from "./src/context/PetContext";
 import { navigationRef } from "./src/navigationRef";
 
 const Stack = createNativeStackNavigator();
@@ -34,48 +33,50 @@ const VetNav = createNativeStackNavigator();
 export default function App() {
     return (
         <AuthProvider>
-            <VetProvider>
-                <NavigationContainer ref={navigationRef}>
-                    <Stack.Navigator
-                        name="MainNav"
-                        screenOptions={{ headerShown: false }}
-                    >
-                        <Stack.Screen name="Start" component={StartScreen} />
-                        <Stack.Screen
-                            name="PetOwner"
-                            component={PetOwnerFlow}
-                        />
-                        <Stack.Screen name="Vet" component={VetFlow} />
-                        {/* <Stack.Screen name="Log" component={LoginScreen} /> // LOGOUT HERE  */}
-                        {/* ----------pet owner flow here--------------------- */}
-                        <Stack.Screen
-                            name="ForgotPassword"
-                            component={ForgotPasswordScreen}
-                        />
-                        <Stack.Screen
-                            name="EnterOTP"
-                            component={EnterOTPScreen}
-                        />
-                        <Stack.Screen
-                            name="CreatePassword"
-                            component={CreatePasswordScreen}
-                        />
-                        <Stack.Screen
-                            name="EditProfile"
-                            component={EditProfile}
-                        />
-                        <Stack.Screen
-                            name="AddServiceScreen"
-                            component={AddServiceScreen}
-                        />
-                        <Stack.Screen
-                            name="EditServiceScreen"
-                            component={EditServiceScreen}
-                        />
-                        <Stack.Screen name="AppTime" component={AppTime} />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </VetProvider>
+            <PetProvider>
+                <VetProvider>
+                    <NavigationContainer ref={navigationRef}>
+                        <Stack.Navigator
+                            name="MainNav"
+                            screenOptions={{ headerShown: false }}
+                        >
+                            <Stack.Screen
+                                name="Start"
+                                component={StartScreen}
+                            />
+                            <Stack.Screen
+                                name="PetOwner"
+                                component={PetOwnerFlow}
+                            />
+                            <Stack.Screen name="Vet" component={VetFlow} />
+                            {/* <Stack.Screen name="Log" component={LoginScreen} /> // LOGOUT HERE  */}
+                            {/* ----------pet owner flow here--------------------- */}
+                            <Stack.Screen
+                                name="ForgotPassword"
+                                component={ForgotPasswordScreen}
+                            />
+                            <Stack.Screen
+                                name="EnterOTP"
+                                component={EnterOTPScreen}
+                            />
+                            <Stack.Screen
+                                name="CreatePassword"
+                                component={CreatePasswordScreen}
+                            />
+
+                            <Stack.Screen
+                                name="AddServiceScreen"
+                                component={AddServiceScreen}
+                            />
+                            <Stack.Screen
+                                name="EditServiceScreen"
+                                component={EditServiceScreen}
+                            />
+                            <Stack.Screen name="AppTime" component={AppTime} />
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </VetProvider>
+            </PetProvider>
         </AuthProvider>
     );
 }

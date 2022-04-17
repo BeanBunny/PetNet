@@ -9,11 +9,15 @@ import AccountScreen from "../screens/petscreens/AccountScreen";
 import HistoryScreen from "../screens/petscreens/HistoryScreen";
 import ClinicInfo from "../screens/petscreens/ClinicInfoScreen";
 import AppTime from "../screens/petscreens/AppTime";
+import EditProfile from "../screens/petscreens/EditProfile";
+import EditPets from "../screens/petscreens/EditPetsScreen";
+import AddPetsScreen from "../screens/petscreens/AddPetsScreen";
 import { View } from "react-native";
 
 const PetOwnerNav = createNativeStackNavigator();
 const PetOwnerBottomTab = createMaterialBottomTabNavigator();
 const SetAppFlow = createNativeStackNavigator();
+const ProfileFlow = createNativeStackNavigator();
 
 const AppointmentFlow = ({ navigation }) => {
     return (
@@ -31,6 +35,20 @@ const AppointmentFlow = ({ navigation }) => {
                 <SetAppFlow.Screen name="AppTime" component={AppTime} />
             </SetAppFlow.Navigator>
         </View>
+    );
+};
+
+const PetHomeFlow = () => {
+    return (
+        <ProfileFlow.Navigator
+            initialRouteName="AccScreen"
+            screenOptions={{ headerShown: false }}
+        >
+            <ProfileFlow.Screen name="AccScreen" component={AccountScreen} />
+            <ProfileFlow.Screen name="EditProfile" component={EditProfile} />
+            <ProfileFlow.Screen name="EditPets" component={EditPets} />
+            <ProfileFlow.Screen name="AddPetScreen" component={AddPetsScreen} />
+        </ProfileFlow.Navigator>
     );
 };
 
@@ -70,8 +88,8 @@ const PetOwnerBottomTabFlow = ({ props }) => {
                 }}
             />
             <PetOwnerBottomTab.Screen
-                name="Logout"
-                component={AccountScreen}
+                name="Account"
+                component={PetHomeFlow}
                 options={{
                     tabBarLabel: "Account",
                     tabBarIcon: ({ color }) => (

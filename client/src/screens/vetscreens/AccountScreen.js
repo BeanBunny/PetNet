@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { Context as VetContext } from "../../context/VetContext";
@@ -28,11 +28,13 @@ const serv = ({ prop, navigation, vet_id }) => {
 const AccountScreen = ({ navigation }) => {
     const { signout } = useContext(AuthContext);
     const { state, getDetails } = useContext(VetContext);
-    useFocusEffect(
-        React.useCallback(() => {
-            return () => getDetails();
-        }, [])
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         return () => getDetails();
+    //     }, [])
+    // );
+
+    useEffect(() => getDetails(), []);
 
     return (
         <>

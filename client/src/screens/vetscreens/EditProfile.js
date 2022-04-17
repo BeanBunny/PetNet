@@ -31,7 +31,11 @@ const Edit = ({ route }) => {
     const errAbout = errorRequired(state.About);
     return (
         <View>
-            <TopBar style={styles.bar} textStyle={styles.text} text="Edit Clinic Profile" />
+            <TopBar
+                style={styles.bar}
+                textStyle={styles.text}
+                text="Edit Clinic Profile"
+            />
             <ScrollView style={styles.container}>
                 <Input
                     label="Email"
@@ -54,7 +58,6 @@ const Edit = ({ route }) => {
                     style={styles.input}
                     secure={false}
                 />
-                <Button text="Change Password" style={styles.button} />
             </ScrollView>
             {!(errAbout && errPhone && errEmail) ? (
                 <Button
@@ -62,11 +65,14 @@ const Edit = ({ route }) => {
                     style={styles.button}
                     onChange={async () => {
                         try {
-                            let resp = await restApi.post("/vet/edit-clinic-profile", {
-                                phone: state.Phone,
-                                email: state.Email,
-                                about: state.About,
-                            });
+                            let resp = await restApi.post(
+                                "/vet/edit-clinic-profile",
+                                {
+                                    phone: state.Phone,
+                                    email: state.Email,
+                                    about: state.About,
+                                }
+                            );
                         } catch (err) {
                             console.log(err);
                         }

@@ -26,7 +26,8 @@ export const postSignUp = async (req, res) => {
 
 export const postSignIn = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
+    if (!email || !password)
+        return res.status(422).send({ error: "Invalid login: No input seen" });
 
     const user = await models.petOwner.findOne({ email: email });
     // if (!user) return res.status(422).send({ error: "Invalid email address" });
@@ -157,9 +158,13 @@ export const postUpdateProfilePassword = async (req, res) => {
                 }
                 petOwner.password = hash;
 
-                await models.petOwner.updateOne({ _id: petOwner._id }, petOwner, {
-                    runValidators: true,
-                });
+                await models.petOwner.updateOne(
+                    { _id: petOwner._id },
+                    petOwner,
+                    {
+                        runValidators: true,
+                    }
+                );
 
                 return res.send("Updates successful!");
             });
@@ -227,7 +232,8 @@ export const getPastAppointments = async (req, res) => {
         for (let i = 0; i < pastAppointments.length; i++) {
             let key = pastAppointments[i];
             const pet_id = key.pet_id;
-            const petName = petsList.filter((val) => pet_id.equals(val._id))[0].petName;
+            const petName = petsList.filter((val) => pet_id.equals(val._id))[0]
+                .petName;
             key.petName = petName;
             pastAppointments[i] = key;
         }

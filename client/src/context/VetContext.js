@@ -15,6 +15,7 @@ const vetReducer = (state, action) => {
 
 const getDetails = (dispatch) => async () => {
     try {
+        console.log("grettt deetsstst");
         const resp = await restApi.get("/vet/get-details");
         dispatch({ type: "service", payload: resp.data.services });
         dispatch({ type: "vetProfile", payload: resp.data });

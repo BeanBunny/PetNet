@@ -18,23 +18,16 @@ array.push("Thursday");
 array.push("7th April 2022");
 twodarray.push(array);
 
-function VetPendAppointments() {
+function VetCompleteAppointments() {
   return (
     <View>
  
       <TopBar
         textStyle={styles.text}
-        text="Pending Requests"
+        text="Complete Requests"
         style={styles.bar}
       />
     
-      <View style={{ flexDirection: "row" }}>
-        <ButtonComp
-          style={styles.buttonContainerGreen}
-          text="Accept All"
-        />
-        <ButtonComp style={styles.buttonContainerRed} text="Reject All" />
-      </View>
       <View style={styles.container}>
         <View style={styles.container2}>
         <Image
@@ -51,24 +44,36 @@ function VetPendAppointments() {
         <Text style={styles.timetext}>{twodarray[0][4]}</Text>
         <Text style={styles.day}>{twodarray[0][5]}</Text>
         <Text style={styles.date}>{twodarray[0][6]}</Text>
-        <View style={styles.singleAcceptGreen} />
-        <Image
-          style={styles.imageformattingtick}
-          source={require("../../../assets/tick.png")}
-        />
-        <View style={styles.singleAcceptRed} />
-        <Image
-          style={styles.imageformattingcross}
-          source={require("../../../assets/cross.png")}
-        />
+        <View  />
+        
+        <View  />
       </View>
 
-      
+      <View style={styles.container}>
+        <View style={styles.container2}>
+        <Image
+              style={styles.imageformatting}
+              source={require("../../../assets/appointmentsimg.png")}
+            />
+            <Text>Jaw Surgery</Text>
+            {/* <Text style={styles.baseText2}>{twodarray[0][2]} for {twodarray[0][1]}</Text> */}
+            {/* <Text style={styles.baseText3}>for </Text>
+            <Text style={styles.baseText4}>{twodarray[0][1]}</Text>   */}
+            {/* <Text style={styles.baseText}>{twodarray[0][0]}</Text>
+          <Text style={styles.baseText1}>Owned by: {twodarray[0][3]}</Text> */}
+        </View>
+        <Text style={styles.timetext}>11:00</Text>
+        <Text style={styles.day}>Sunday</Text>
+        <Text style={styles.date}>28th January 2022</Text>
+        <View  />
+        
+        <View  />
+      </View>
     </View>
   );
 }
 
-VetPendAppointments.navigationOptions = () => {
+VetCompleteAppointments.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -231,7 +236,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VetPendAppointments;
+export default VetCompleteAppointments;
 
 
 

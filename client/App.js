@@ -7,7 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import * as AsyncStorage from "expo-secure-store";
 import PetOwnerFlow from "./src/navigators/PetOwnerNavigator";
 import VetFlow from "./src/navigators/VetNavigator";
-import StartScreen from "./src/screens/vetscreens/ViewAppointmentScreen";
+import StartScreen from "./src/screens/vetscreens/CompletedAppointments";
 // import LoginScreen from "./src/screens/petscreens/LoginScreen";
 // import ClinicsScreen from "./src/screens/petscreens/HomeScreen";
 // import petSignUpScreen from "./src/screens/petscreens/SignUpScreen";
@@ -23,6 +23,7 @@ import EditProfile from "./src/screens/petscreens/EditProfile";
 import EditPets from "./src/screens/petscreens/EditPetsScreen";
 import AddPetsScreen from "./src/screens/petscreens/AddPetsScreen";
 import ViewAppointmentsScreen from "./src/screens/vetscreens/ViewAppointmentScreen";
+import VetCompleteAppointments from "./src/screens/vetscreens/CompletedAppointments";
 
 import {
   Provider as AuthProvider,

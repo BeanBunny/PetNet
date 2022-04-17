@@ -5,26 +5,32 @@ import LoginScreen from "../screens/LoginScreen";
 import VetSignUpScreen from "../screens/vetscreens/VetSignUpScreen";
 import ClinicSignUpScreen from "../screens/vetscreens/ClinicSignUpScreen";
 import AfterSignUpScreen from "../screens/vetscreens/AfterSignUpScreen";
-import ViewAppointmentScreen from "../screens/vetscreens/ViewAppointmentScreen";
 import VetHomeScreen from "../screens/vetscreens/HomeScreen";
 import AccountScreen from "../screens/vetscreens/AccountScreen";
 import ApprComApptScreen from "../screens/vetscreens/ApprComApptScreen";
+import Editserv from "../screens/vetscreens/EditServiceScreen";
+import Editprofile from "../screens/vetscreens/EditProfile";
+import Addserv from "../screens/vetscreens/AddServiceScreen";
+import CreatePassword from "../screens/vetscreens/CreatePasswordScreen";
 import { View } from "react-native";
 
 const VetOwnerNav = createNativeStackNavigator();
 const VetOwnerBottomTab = createMaterialBottomTabNavigator();
-const SetAppFlow = createNativeStackNavigator();
+const ProfileNav = createNativeStackNavigator();
 
-const AppointmentFlow = ({ navigation }) => {
+const ProfileFlow = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }} collapsable={false}>
-            <SetAppFlow.Navigator initialRouteName="Clinics">
-                <SetAppFlow.Screen name="Clinics" component={ClinicsScreen} />
-                <VetOwnerBottomTab.Screen
-                    name="AppDate"
-                    component={SetAppointmentCalendarScreen}
+            <ProfileNav.Navigator screenOptions={{ headerShown: false }}>
+                <ProfileNav.Screen name="Account" component={AccountScreen} />
+                <ProfileNav.Screen name="EditProfile" component={Editprofile} />
+                <ProfileNav.Screen name="EditServ" component={Editserv} />
+                <ProfileNav.Screen name="AddServ" component={Addserv} />
+                <ProfileNav.Screen
+                    name="ChangePassword"
+                    component={CreatePassword}
                 />
-            </SetAppFlow.Navigator>
+            </ProfileNav.Navigator>
         </View>
     );
 };
@@ -64,8 +70,8 @@ const VetOwnerBottomTabFlow = ({ props }) => {
                 }}
             />
             <VetOwnerBottomTab.Screen
-                name="Logout"
-                component={AccountScreen}
+                name="AccountFlow"
+                component={ProfileFlow}
                 options={{
                     tabBarLabel: "Account",
                     tabBarIcon: ({ color }) => (

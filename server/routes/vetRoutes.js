@@ -28,4 +28,12 @@ vetRoutes.post(
     vetController.postCompleteAppointment
 );
 
+vetRoutes.get("/get-details", requireAuth, vetController.getClinicDetails);
+
+vetRoutes.post(
+    "/edit-clinic-profile",
+    requireAuth,
+    vetController.postEditClinicProfile
+);
+
 export default vetRoutes;

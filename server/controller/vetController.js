@@ -385,23 +385,21 @@ export const postReportPetOwner = async (req, res) => {
 export const postEditClinicProfile = async (req, res) => {
     //vet id, phone, email, password, clinic name, about clinic (all not required)
     //if they are undefined then they arent updated
-    const vet_id = req.body._id;
+    console.log(req.body);
+    const vet_id = req.user._id;
     const phone = req.body.phone;
     const email = req.body.email;
     const password = req.body.password; //to do: password hashing
-    const clinicName = req.body.clinic_name;
-    const aboutClinic = req.body.about_clinic;
+    const aboutClinic = req.body.about;
 
     try {
         //query the vet to be updated
-        let vet = await models.clinic.findById(vet_id);
+        let vet = req.user;
 
         //update fields which arent undefined
         if (phone) vet.phone = phone;
         if (email) vet.email = email;
-        if (clinicName) vet.clinic_name = clinicName;
         if (aboutClinic) vet.about_clinic = aboutClinic;
-
         if (password) {
             bcrypt.genSalt(saltRounds, function (err, salt) {
                 if (error) return res.status(422).send(err);
@@ -415,9 +413,11 @@ export const postEditClinicProfile = async (req, res) => {
                 });
             });
         } else {
-            await models.clinic.updateOne({ _id: vet_id }, vet, {
+            console.log("jaaate ho naidhr");
+            await models.clinic.updateOne({ _id: vet._id }, vet, {
                 runValidators: true,
             });
+            console.log(vet);
             return res.send("Profile Updated!");
         }
     } catch (err) {
@@ -427,11 +427,12 @@ export const postEditClinicProfile = async (req, res) => {
 
 export const getClinicDetails = async (req, res) => {
     try {
+        console.log("in ontorller");
         //only clinic id required
-        const vet_id = req.body._id;
+        // const vet_id = req.user._id;
         //fetch vet
-        const vet = await models.clinic.findById(vet_id);
-        return res.send(vet);
+        // const vet = await models.clinic.findById(vet_id);
+        return res.send(req.user);
     } catch (err) {
         return res.status(422).send(err.message);
     }

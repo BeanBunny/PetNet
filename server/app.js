@@ -66,7 +66,7 @@ app.use("/admin", adminRoutes);
 app.use("/petowner", petOwnerRoutes);
 
 // Start Server here
-const port = process.env.PORT;
+const port = process.env.PORT || 80;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}...`);
 });

@@ -5,6 +5,8 @@ import Input from "../../components/InputBox";
 import ButtonComp from "../../components/Button";
 import { Context as AuthContext } from "../../context/AuthContext";
 import ErrorTextComponent from "../../components/ErrorTextComponent";
+import { LinearGradient } from "expo-linear-gradient";
+
 import {
   errorEmail,
   errorNumber,
@@ -42,77 +44,82 @@ const VetSignUpScreen = ({ navigation }) => {
   const errorMsgFather = errorRequired(reducerState.Father, "Father");
   const { state, signupVet } = useContext(AuthContext);
   return (
-    <View style={{ flex: 1 }}>
-      <Image
-        style={styles.img}
-        source={require("../../../assets/Logo1.jpeg")}
-      />
-      <View style={styles.container}>
-        <Input
-          label="Name"
-          placeholder="Full Name"
-          reducer={[reducerState, dispatch]}
-          style={styles.input}
-          secure={false}
+    <View style={styles.containerbackground}>
+      <LinearGradient
+        colors={["#39B1FB", "#5095FD", "#6877FE", "#8556FE"]}
+        style={{ flex: 1 }}
+      >
+        <Image
+          style={styles.img}
+          source={require("../../../assets/logoNew.png")}
         />
-        {errorMsgName != null ? (
-          <ErrorTextComponent error={errorMsgName} />
-        ) : null}
-        <Input
-          label="PVMC"
-          placeholder="PVMC Registration Number"
-          reducer={[reducerState, dispatch]}
-          style={styles.input}
-          secure={false}
-        />
-        {errorMsgPVMC != null ? (
-          <ErrorTextComponent error={errorMsgPVMC} />
-        ) : null}
-        <Picker
-          selectedValue={reducerState.Gender}
-          style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>
-            dispatch({ type: "Gender", payload: itemValue })
-          }
-        >
-          <Picker.Item label="Gender" value="" />
-          <Picker.Item label="Male" value="M" />
-          <Picker.Item label="Female" value="F" />
-        </Picker>
-        {errorMsgGender != null ? (
-          <ErrorTextComponent error={errorMsgGender} />
-        ) : null}
-        <Input
-          label="Father"
-          placeholder="Father's Name"
-          reducer={[reducerState, dispatch]}
-          style={styles.input}
-          secure={false}
-        />
-        {errorMsgFather != null ? (
-          <ErrorTextComponent error={errorMsgFather} />
-        ) : null}
-      </View>
-      {errorMsgFather || errorMsgName || errorMsgGender || errorMsgPVMC ? (
-        <ButtonComp text="Continue" style={styles.button} disabled />
-      ) : (
-        <ButtonComp
-          text="Continue"
-          style={styles.button}
-          disabled={false}
-          onChange={() =>
-            navigation.navigate("clinicSignUp", {
-              pvmc_reg: {
-                name: reducerState.Name,
-                gender: reducerState.Gender,
-                reg_num: reducerState.PVMC,
-                father_name: reducerState.Father,
-              },
-              isVet: state.isVet,
-            })
-          }
-        />
-      )}
+        <View style={styles.container}>
+          <Input
+            label="Name"
+            placeholder="Full Name"
+            reducer={[reducerState, dispatch]}
+            style={styles.input}
+            secure={false}
+          />
+          {errorMsgName != null ? (
+            <ErrorTextComponent error={errorMsgName} />
+          ) : null}
+          <Input
+            label="PVMC"
+            placeholder="PVMC Registration Number"
+            reducer={[reducerState, dispatch]}
+            style={styles.input}
+            secure={false}
+          />
+          {errorMsgPVMC != null ? (
+            <ErrorTextComponent error={errorMsgPVMC} />
+          ) : null}
+          <Picker
+            selectedValue={reducerState.Gender}
+            style={styles.input}
+            onValueChange={(itemValue, itemIndex) =>
+              dispatch({ type: "Gender", payload: itemValue })
+            }
+          >
+            <Picker.Item label="Gender" value="" />
+            <Picker.Item label="Male" value="M" />
+            <Picker.Item label="Female" value="F" />
+          </Picker>
+          {errorMsgGender != null ? (
+            <ErrorTextComponent error={errorMsgGender} />
+          ) : null}
+          <Input
+            label="Father"
+            placeholder="Father's Name"
+            reducer={[reducerState, dispatch]}
+            style={styles.input}
+            secure={false}
+          />
+          {errorMsgFather != null ? (
+            <ErrorTextComponent error={errorMsgFather} />
+          ) : null}
+        </View>
+        {errorMsgFather || errorMsgName || errorMsgGender || errorMsgPVMC ? (
+          <ButtonComp text="Continue" style={styles.button} disabled />
+        ) : (
+          <ButtonComp
+            text="Continue"
+            style={styles.button}
+            disabled={false}
+            onChange={() =>
+              navigation.navigate("clinicSignUp", {
+                pvmc_reg: {
+                  name: reducerState.Name,
+                  gender: reducerState.Gender,
+                  reg_num: reducerState.PVMC,
+                  father_name: reducerState.Father,
+                },
+                isVet: state.isVet,
+              })
+            }
+          />
+        )}
+      </LinearGradient>
     </View>
   );
 };
@@ -124,11 +131,15 @@ VetSignUpScreen.navigationOptions = () => {
 };
 
 const styles = StyleSheet.create({
+  containerbackground: {
+    flex: 1,
+    backgroundColor: "#66C4D2",
+  },
   img: {
     justifyContent: "center",
     resizeMode: "contain",
     height: "15%",
-    marginHorizontal: "10%",
+    marginLeft: "26%",
     marginTop: "10%",
   },
   input: {
@@ -144,7 +155,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: "5%",
-    marginHorizontal: "15%",
+    marginLeft: "18%",
+    height: "24%",
   },
 });
 

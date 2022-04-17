@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: "5%",
     marginLeft: "18%",
-    height: "25%",
+    height: "24%",
   },
 });
 

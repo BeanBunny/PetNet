@@ -7,8 +7,6 @@ import petOwnerRoutes from "./routes/petOwnerRoutes.js";
 import mongodb from "mongodb";
 import mongoose from "mongoose";
 import { models } from "./models/models.js";
-// import pkg from "express-openid-connect";
-// const { auth, requiresAuth } = pkg; // requires auth == middleware
 
 const MongoClient = mongodb.MongoClient;
 const mongoDBConnectionURL = process.env.MONGODB_URL;
@@ -22,7 +20,6 @@ db.on("connected", () => {
 db.on("error", function (err) {
     console.log("Mongoose default connection error: " + err);
 });
-// connection is disconnected
 db.on("disconnected", function () {
     console.log("Mongoose default connection disconnected");
 });
@@ -30,19 +27,7 @@ db.on("disconnected", function () {
 // Init an Express App.
 const app = express();
 
-// Use your dependencies here
 // use all controllers(APIs) here
-
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: process.env.SECRET,
-    baseURL: process.env.BASE_URL,
-    clientID: process.env.CLIENT_ID,
-    issuerBaseURL: process.env.ISSUER_BASE_URL,
-};
-
-// app.use(auth(config));
 
 app.use(bodyParser.json());
 

@@ -1,0 +1,1 @@
+web: env-cmd -f ./server/config/.env node ./server/app.js

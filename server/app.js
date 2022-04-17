@@ -11,10 +11,10 @@ import { models } from "./models/models.js";
 // const { auth, requiresAuth } = pkg; // requires auth == middleware
 
 const MongoClient = mongodb.MongoClient;
-const mongoDBConnectionURL = "mongodb://127.0.0.1:27017/";
+const mongoDBConnectionURL = process.env.MONGODB_URL;
 const dbName = "petnet";
 
-mongoose.connect(mongoDBConnectionURL + dbName);
+mongoose.connect(mongoDBConnectionURL);
 const db = mongoose.connection;
 db.on("connected", () => {
     console.log("Connected to MongoDB...");
@@ -32,19 +32,6 @@ const app = express();
 
 // Use your dependencies here
 // use all controllers(APIs) here
-
-// remove this ######################
-const umairAdmin = {
-    email: "umair@gmail.com",
-    password: "12345678",
-};
-try {
-    const signup = models.admin(umairAdmin);
-    await signup.save();
-} catch (err) {
-    // do nothing
-}
-// ends here^^ ######################
 
 const config = {
     authRequired: false,
@@ -66,7 +53,7 @@ app.use("/admin", adminRoutes);
 app.use("/petowner", petOwnerRoutes);
 
 // Start Server here
-const port = process.env.PORT;
+const port = process.env.PORT || 80;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}...`);
 });

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import ButtonComp from "../components/Button";
 import { Context as AuthContext } from "../context/AuthContext";
 import { LinearGradient } from "expo-linear-gradient";
+import SqButton from "../components/SquareButton";
 
 const StartScreen = ({ navigation }) => {
   const { _, isPetOrVet } = useContext(AuthContext);
@@ -16,15 +17,15 @@ const StartScreen = ({ navigation }) => {
           style={styles.img}
           source={require("../../assets/logoNew.png")}
         />
-        <ButtonComp
+        <SqButton
           text="Pet Owner"
           routeName="Login"
           style={styles.button1}
           navigation={navigation}
           onChange={() => isPetOrVet(false)}
         />
-        <View style={styles.line}></View>
-        <ButtonComp
+        {/* <View style={styles.line}></View> */}
+        <SqButton
           text="Vet Clinic"
           routeName="Login"
           style={styles.button2}
@@ -73,8 +74,9 @@ const styles = StyleSheet.create({
     marginVertical: "10%",
   },
   button2: {
-    marginHorizontal: "20%",
-    marginTop: "5%",
+    // marginHorizontal: "20%",
+    marginTop: "-90%",
+    marginLeft: "50%",
   },
 });
 

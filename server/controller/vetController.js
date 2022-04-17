@@ -25,8 +25,7 @@ export const postSignup = async (req, res) => {
                 if (val.email === req.body.email) err += EMAIL;
                 if (val.phone === req.body.phone) err += PHONE;
                 if (val.cnic === req.body.cnic) err += CNIC;
-                if (val.pvmc_reg.reg_num === req.body.pvmc_reg.reg_num)
-                    err += PVMC;
+                if (val.pvmc_reg.reg_num === req.body.pvmc_reg.reg_num) err += PVMC;
             });
             console.log(err);
             return res.send({
@@ -45,10 +44,7 @@ export const postSignup = async (req, res) => {
 
 export const postSignin = async (req, res) => {
     const { email, password } = req.body;
-    console.log(email);
-    console.log(password);
-    if (!email || !password)
-        return res.status(422).send({ error: "Invalid login: No input seen" });
+    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
 
     const user = await models.clinic.findOne({ email: email });
     // if (!user) return res.status(422).send({ error: "Invalid email address" });

@@ -33,19 +33,6 @@ const app = express();
 // Use your dependencies here
 // use all controllers(APIs) here
 
-// remove this ######################
-const umairAdmin = {
-    email: "umair@gmail.com",
-    password: "12345678",
-};
-try {
-    const signup = models.admin(umairAdmin);
-    await signup.save();
-} catch (err) {
-    // do nothing
-}
-// ends here^^ ######################
-
 const config = {
     authRequired: false,
     auth0Logout: true,

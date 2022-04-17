@@ -87,6 +87,7 @@ const LoginScreen = ({ navigation }) => {
             <ButtonComp
               text="Login"
               style={styles.button}
+              routeName = ""
               disabled={false}
               onChange={() =>
                 signin({
@@ -134,7 +135,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     resizeMode: "contain",
     height: "80%",
-    marginLeft: "36%",
+    marginLeft: "27%",
+    //justifyContent: "center",
     marginTop: "17%",
   },
   input1: {
@@ -159,8 +161,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: "10%",
-    marginLeft: "18%",
+    marginLeft: "20%",
     height: "99%",
+    width: "70%",
+    // alignSelf: "center",
   },
 });
 

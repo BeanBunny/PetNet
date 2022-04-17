@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import Input from "../../components/InputBox";
+import Input from "../../AlertButton/components/InputBox";
 import AlertButton from "../../components/AlertButton";
 
 const reducer = (state, action) => {

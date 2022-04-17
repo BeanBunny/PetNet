@@ -59,15 +59,16 @@ const styles = StyleSheet.create({
   img: {
     resizeMode: "contain",
     height: "30%",
-    justifyContent: "center",
-    marginLeft: "25%",
+    alignSelf: "center",
+    //marginLeft: "25%",
     marginTop: "24%",
   },
   button1: {
     //   marginHorizontal: "20%",
     marginTop: "24%",
     //   marginBottom: "2%",
-    marginLeft: "18%",
+    width: "80%",
+    alignSelf: "center",
   },
   line: {
     borderBottomColor: "black",
@@ -79,8 +80,11 @@ const styles = StyleSheet.create({
     // marginHorizontal: "20%",
     // marginTop: "5%",
     marginTop: "-26%",
-    marginLeft: "18%",
+    // marginLeft: "18%",
+    alignSelf: "center",
     height: "26%",
+    width: "80%",
+    
   },
   bottomText: {
     fontSize: 15,

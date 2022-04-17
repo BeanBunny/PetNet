@@ -25,12 +25,13 @@ const button = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(108, 20, 153, 0.55)",
+    // backgroundColor: "rgba(108, 20, 153, 0.55)",
+    backgroundColor: "#8556FE",
     padding: "5%",
     borderRadius: 20,
     alignItems: "center",
     height: "30%",
-    width: "80%",
+    width: "100%",
     // marginLeft: "35%",
   },
   disabledContainer: {
@@ -38,10 +39,10 @@ const styles = StyleSheet.create({
     padding: "5%",
     borderRadius: 20,
     alignItems: "center",
-    width: "80%",
+    width: "83%",
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: 18,
     color: "white",
     fontWeight: "bold",
     alignItems: "center",

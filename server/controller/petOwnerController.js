@@ -48,10 +48,11 @@ export const postSignIn = async (req, res) => {
 export const postAddPet = async (req, res) => {
   const petName = req.body.name;
   const petType = req.body.type;
-  const id = req.body.id;
+  const id = req.user._id;
 
   try {
-    let petOwner = await models.petOwner.findById(id);
+    // let petOwner = await models.petOwner.findById(id);
+    let petOwner = req.user;
 
     if (petOwner.pet.length < 5) {
       petOwner.pet.push({ petType: petType, petName: petName });
@@ -59,7 +60,7 @@ export const postAddPet = async (req, res) => {
         runValidators: true,
       });
 
-      return res.send("Pet added successfully!");
+      return res.send(petOwner);
     } else {
       return res.status(422).send("Pets can not be more than 5");
     }
@@ -70,11 +71,12 @@ export const postAddPet = async (req, res) => {
 
 // i assume i am getting petOwner ID and petID
 export const postRemovePet = async (req, res) => {
-  const petOwnerId = req.body.petOwnerId;
+  const petOwnerId = req.user.petOwnerId;
   const petId = req.body.petId;
 
   try {
-    let petOwner = await models.petOwner.findById(petOwnerId);
+    // let petOwner = await models.petOwner.findById(petOwnerId);
+    let petOwner = req.user;
     let index = -1;
 
     for (let i = 0; i < petOwner.pet.length; i++) {
@@ -92,8 +94,9 @@ export const postRemovePet = async (req, res) => {
       runValidators: true,
     });
 
-    return res.send("Pet Removed successfully!");
+    return res.send(petOwner);
   } catch (err) {
+    console.log(err);
     return res.status(422).send(err.message);
   }
 };

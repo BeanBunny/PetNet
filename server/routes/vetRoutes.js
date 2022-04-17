@@ -36,4 +36,8 @@ vetRoutes.post(
     vetController.postEditClinicProfile
 );
 
+vetRoutes.post("/delete-service", requireAuth, vetController.postDeleteService);
+
+vetRoutes.post("/add-service", requireAuth, vetController.postAddService);
+
 export default vetRoutes;

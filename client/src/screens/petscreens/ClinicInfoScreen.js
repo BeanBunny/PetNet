@@ -38,7 +38,7 @@ const ClinicInfo = ({ route, navigation }) => {
             />
             <View style={styles.container}>
                 <Text style={styles.text2}>About Clinic </Text>
-                <TextButton style={styles.button1} text="Report!" />
+                {/* <TextButton style={styles.button1} text="Report!" /> */}
                 <View style={styles.input}>
                     <Text style={styles.text3}>{clinicInfo.about_clinic}</Text>
                 </View>

@@ -138,65 +138,6 @@ export const getAppointments = async (req, res) => {
     }
 };
 
-// //king function
-// export const getAppointments = async (req, res) => {
-//     console.log("in appointment contoller");
-//     //vet ID and appointment status received
-//     console.log(req.user);
-//     const vetId = req.user._id;
-//     const status = req.body.status;
-//     try {
-//         // query appointments table for the particular clinic
-//         const appointmentsList = await models.appointment.find({
-//             vet_id: vetId,
-//             status: status,
-//         });
-//         if (appointmentsList.length == 0) {
-//             return res.send([]);
-//         }
-//         // get all petowner and pet ids
-//         let petOwnerIds = [];
-//         let petIdLists = [];
-//         appointmentsList.forEach((element) => {
-//             petOwnerIds.push(element.petowner_id);
-//             petIdLists.push(element.petowner_id);
-//         });
-//         // get all petwner details (order would change so for loops rearrange)
-//         const petOwners2 = await models.petOwner.find({
-//             _id: { $in: petOwnerIds },
-//         });
-//         let petOwners = [];
-//         let result = [];
-//         for (let i = 0; i < petOwnerIds.length; i++) {
-//             for (let j = 0; j < petOwners2.length; j++) {
-//                 if (petOwners2[j]._id.equals(petOwnerIds[i])) {
-//                     petOwners.push(petOwners2[j]);
-//                     break;
-//                 }
-//             }
-//             // console.log(petTypes);
-//             result.push({
-//                 appointment_type: appointmentsList[i].type,
-//                 pet_type: petTypes[i],
-//                 petowner_name: petOwners[i].name,
-//                 petowner_phone: petOwners[i].phone,
-//                 date: appointmentsList[i].date.toString().split(" "),
-//                 appointment_status: appointmentsList[i].status,
-//             });
-//         }
-
-// //return sorted result
-// result.sort(function (a, b) {
-//     return a.date - b.date;
-// });
-
-//         return res.send(result);
-//     } catch (err) {
-//         console.log(err);
-//         return res.status(422).send(err.message);
-//     }
-// };
-
 export const postAcceptAppointment = async (req, res) => {
     //need appointment id
     const appointmentId = req.body.id;
@@ -246,10 +187,11 @@ export const postRejectAppointment = async (req, res) => {
 export const postAddService = async (req, res) => {
     //vet_id, service name, description, price received
     //might have to change the below names
-    const { _id, name, description, price } = req.body;
+    const { name, price } = req.body;
+    console.log(price, "<<-----");
     try {
         //add to list of services iff service name does not already exist
-        let vet = await models.clinic.findById(_id);
+        let vet = req.user;
         let servicesList = vet.services;
 
         //check if service name already exists
@@ -265,7 +207,6 @@ export const postAddService = async (req, res) => {
         //make new service
         const newService = {
             service_name: name,
-            description: description,
             price: price,
         };
         //add to list of services
@@ -277,8 +218,9 @@ export const postAddService = async (req, res) => {
             { services: servicesList },
             { runValidators: true }
         );
-        return res.send("Service Added!");
+        return res.send({ profile: vet });
     } catch (err) {
+        console.log(err);
         return res.status(422).send(err.message);
     }
 };
@@ -314,10 +256,11 @@ export const postEditService = async (req, res) => {
 
 export const postDeleteService = async (req, res) => {
     //vet_id, service name received
-    const { _id, name } = req.body;
+    const { name } = req.body;
+    console.log(name);
     let deleteIndex = 0;
     try {
-        let vet = await models.clinic.findById(_id);
+        let vet = req.user;
         let servicesList = vet.services;
         //find index of service that needs to be deleted
         for (let i = 0; i < servicesList.length; i++) {
@@ -326,6 +269,7 @@ export const postDeleteService = async (req, res) => {
                 break;
             }
         }
+        console.log(deleteIndex);
 
         //service at deleteIndex dropped
         servicesList.splice(deleteIndex, 1);
@@ -336,7 +280,8 @@ export const postDeleteService = async (req, res) => {
             { services: servicesList },
             { runValidators: true }
         );
-        return res.send("Service removed!");
+        console.log(vet);
+        return res.send({ profile: vet });
     } catch (err) {
         return res.status(422).send(err.message);
     }

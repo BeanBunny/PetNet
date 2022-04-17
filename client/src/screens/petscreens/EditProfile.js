@@ -3,13 +3,15 @@ import { StyleSheet, View, Text } from "react-native";
 import CompButton from "../../components/Button";
 import Input from "../../components/InputBox";
 import TopBar from "../../components/TopBar";
+import restApi from "../../api/restApi";
+import { errorRequired } from "../../inputvalidation/validators";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "Name":
       return { ...state, Name: action.payload };
-    case "Number":
-      return { ...state, Number: action.payload };
+    case "Phone":
+      return { ...state, Phone: action.payload };
     case "Email":
       return { ...state, Email: action.payload };
     default:
@@ -17,12 +19,15 @@ const reducer = (state, action) => {
   }
 };
 
-const Editprofile = () => {
+const Editprofile = ({ route }) => {
   const [state, dispatch] = useReducer(reducer, {
     Name: "",
     Email: "",
-    Number: "",
+    Phone: "",
   });
+  const errName = errorRequired(state.Name);
+  const errEmail = errorRequired(state.Email);
+  const errPhone = errorRequired(state.Phone);
   return (
     <View>
       <TopBar text="Edit Profile" textStyle={styles.text} style={styles.bar} />
@@ -35,7 +40,7 @@ const Editprofile = () => {
           secure={false}
         />
         <Input
-          label="Number"
+          label="Phone"
           placeholder="03XX-XXXX-XXX"
           reducer={[state, dispatch]}
           style={styles.input}
@@ -52,7 +57,26 @@ const Editprofile = () => {
         <CompButton text="My Pets" style={styles.button} />
         <CompButton text="Change Password" style={styles.button} />
       </View>
-      <CompButton text="Save" style={styles.button} />
+      {!(errEmail && errName && errPhone) ? (
+        <CompButton
+          text="Save"
+          style={styles.button}
+          onChange={async () => {
+            try {
+              let resp = await restApi.post(
+                "/petowner/profile-customization/general",
+                {
+                  name: state.Name,
+                  phone: state.Phone,
+                  email: state.Email,
+                }
+              );
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        />
+      ) : null}
     </View>
   );
 };

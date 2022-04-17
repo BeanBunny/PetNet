@@ -15,30 +15,31 @@ petOwnerRoutes.post("/remove-pet", petOwnerController.postRemovePet);
 petOwnerRoutes.get("/profile", requireAuth, petOwnerController.getProfile);
 
 petOwnerRoutes.post(
-    "/profile-customization/general",
-    petOwnerController.postUpdateProfileGeneral
+  "/profile-customization/general",
+  requireAuth,
+  petOwnerController.postUpdateProfileGeneral
 );
 
 petOwnerRoutes.post(
-    "/profile-customization/password",
-    petOwnerController.postUpdateProfilePassword
+  "/profile-customization/password",
+  petOwnerController.postUpdateProfilePassword
 );
 
 petOwnerRoutes.post(
-    "/profile-customization/pet",
-    petOwnerController.postUpdatePetProfile
+  "/profile-customization/pet",
+  petOwnerController.postUpdatePetProfile
 );
 
 petOwnerRoutes.get(
-    "/past-appointments",
-    requireAuth,
-    petOwnerController.getPastAppointments
+  "/past-appointments",
+  requireAuth,
+  petOwnerController.getPastAppointments
 );
 
 petOwnerRoutes.post(
-    "/set-appointment",
-    requireAuth,
-    petOwnerController.postSetAppointment
+  "/set-appointment",
+  requireAuth,
+  petOwnerController.postSetAppointment
 );
 
 petOwnerRoutes.post("/report-vet", petOwnerController.postReportVet);

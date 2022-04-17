@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-const inputbox = ({ label, placeholder, reducer, style, secure }) => {
+const InputBox = ({ label, placeholder, reducer, style, secure }) => {
     const [state, dispatch] = reducer;
     return (
         <View style={style}>
@@ -20,4 +20,4 @@ const inputbox = ({ label, placeholder, reducer, style, secure }) => {
 
 const styles2 = StyleSheet.create({});
 
-export default inputbox;
+export default InputBox;

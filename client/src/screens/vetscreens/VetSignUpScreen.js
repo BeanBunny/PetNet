@@ -43,7 +43,7 @@ const VetSignUpScreen = ({ navigation }) => {
     const { state, signupVet } = useContext(AuthContext);
     return (
         <View style={{ flex: 1 }}>
-            <Image style={styles.img} source={require("../../../assets/Logo1.png")} />
+            {/* <Image style={styles.img} source={require("../../../assets/Logo1.png")} /> */}
             <ScrollView style={styles.container}>
                 <Input
                     label="Name"

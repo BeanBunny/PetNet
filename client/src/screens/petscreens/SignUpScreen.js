@@ -81,7 +81,7 @@ const SignUpScreen = ({ navigation }) => {
             </Headline>
             {/* <Image
                 style={styles.img}
-                source={require("../../../assets/Logo1.jpeg")}
+                source={require("../../../assets/Logo1.png")}
             /> */}
             <ScrollView style={styles.container}>
                 <Input
@@ -214,10 +214,10 @@ const SignUpScreen = ({ navigation }) => {
             errorMsgPassword ||
             errorMsgPetName ||
             errorMsgPetType ? (
-                <ButtonComp text="Login" style={styles.button} disabled />
+                <ButtonComp text="Signup" style={styles.button} disabled />
             ) : (
                 <ButtonComp
-                    text="Login"
+                    text="Signup"
                     style={styles.button}
                     disabled={false}
                     onChange={() =>

@@ -8,7 +8,6 @@ import restApi from "../../api/restApi";
 
 const MyCard = ({ prop, updateList }) => {
     let time = prop.appointment_time[4];
-    console.log(prop.appointment_time, "daee-------------L>");
     let date =
         prop.appointment_time[0] +
         " " +
@@ -121,12 +120,8 @@ const HistoryScreen = ({ navigation }) => {
         const completedResponse = await restApi.post("/vet/get-appointments", {
             status: "completed",
         });
-        console.log("--------------");
         const currentAppointments = approvedResponse.data;
         const pastAppointments = completedResponse.data;
-
-        console.log(currentAppointments);
-        console.log(pastAppointments);
 
         currentAppointments.length === 0
             ? setCurrentAppointmentsHeading("No Approved Appointments to show")

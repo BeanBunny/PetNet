@@ -40,5 +40,5 @@ app.use("/petowner", petOwnerRoutes);
 // Start Server here
 const port = process.env.PORT || 80;
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}...`);
+    console.log(`Server is running on port ${port} with secret ${process.env.SECRET}...`);
 });

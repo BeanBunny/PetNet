@@ -66,8 +66,6 @@ export const postBanUser = async (req, res) => {
         }
         // is a pet owner
         else {
-            console.log(user);
-
             const petOwner = await models.petOwner.findOne({
                 email: user.email,
             });
@@ -86,7 +84,6 @@ export const postBanUser = async (req, res) => {
 export const postAcceptRequest = async (req, res) => {
     try {
         const { user } = req.body;
-        console.log(user);
 
         //vet profile urls
         const dpUrls = [

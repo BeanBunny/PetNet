@@ -35,10 +35,8 @@ const AccountScreen = ({ navigation }) => {
     // );
 
     useEffect(() => {
-        console.log("getting deets");
         getDetails();
     }, []);
-    // console.log(state, "----------------------");
     return (
         <View style={{ flex: 1 }}>
             {state.profile ? (

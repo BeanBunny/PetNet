@@ -37,8 +37,7 @@ export const postSignIn = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.SECRET);
         res.send({ token, userId: user._id });
     } catch (err) {
-        // res.set("Content-Type", "text/plain");
-        // return res.status(400).send("Incorrect password");
+        console.log(err);
         res.send({ err: "Incorrect password" });
     }
 };

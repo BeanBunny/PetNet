@@ -43,10 +43,7 @@ const VetSignUpScreen = ({ navigation }) => {
     const { state, signupVet } = useContext(AuthContext);
     return (
         <View style={{ flex: 1 }}>
-            <Image
-                style={styles.img}
-                source={require("../../../assets/Logo1.jpeg")}
-            />
+            {/* <Image style={styles.img} source={require("../../../assets/Logo1.png")} /> */}
             <ScrollView style={styles.container}>
                 <Input
                     label="Name"
@@ -55,9 +52,7 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgName != null ? (
-                    <ErrorTextComponent error={errorMsgName} />
-                ) : null}
+                {errorMsgName != null ? <ErrorTextComponent error={errorMsgName} /> : null}
                 <Input
                     label="PVMC"
                     placeholder="PVMC Registration Number"
@@ -65,9 +60,7 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgPVMC != null ? (
-                    <ErrorTextComponent error={errorMsgPVMC} />
-                ) : null}
+                {errorMsgPVMC != null ? <ErrorTextComponent error={errorMsgPVMC} /> : null}
                 <Picker
                     selectedValue={reducerState.Gender}
                     style={styles.input}
@@ -79,9 +72,7 @@ const VetSignUpScreen = ({ navigation }) => {
                     <Picker.Item label="Male" value="M" />
                     <Picker.Item label="Female" value="F" />
                 </Picker>
-                {errorMsgGender != null ? (
-                    <ErrorTextComponent error={errorMsgGender} />
-                ) : null}
+                {errorMsgGender != null ? <ErrorTextComponent error={errorMsgGender} /> : null}
                 <Input
                     label="Father"
                     placeholder="Father's Name"
@@ -89,14 +80,9 @@ const VetSignUpScreen = ({ navigation }) => {
                     style={styles.input}
                     secure={false}
                 />
-                {errorMsgFather != null ? (
-                    <ErrorTextComponent error={errorMsgFather} />
-                ) : null}
+                {errorMsgFather != null ? <ErrorTextComponent error={errorMsgFather} /> : null}
             </ScrollView>
-            {errorMsgFather ||
-            errorMsgName ||
-            errorMsgGender ||
-            errorMsgPVMC ? (
+            {errorMsgFather || errorMsgName || errorMsgGender || errorMsgPVMC ? (
                 <ButtonComp text="Continue" style={styles.button} disabled />
             ) : (
                 <ButtonComp

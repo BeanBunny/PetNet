@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-const button = ({
+const Button = ({
   style,
   text,
   navigation,
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default button;
+export default Button;

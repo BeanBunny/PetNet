@@ -13,10 +13,6 @@ import CompButton from "../../components/Button";
 import restApi from "../../api/restApi";
 
 const Editserv = ({ navigation }) => {
-    // console.log(route.params?.profile);
-    // const [vetServices, setVetServices] = useState(route.params?.profile);
-    // route.params = undefined;
-    // console.log(vetServices, "in edit");
     const { state, deleteService, getDetails } = useContext(VetContext);
 
     return (

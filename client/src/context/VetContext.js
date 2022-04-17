@@ -15,7 +15,6 @@ const vetReducer = (state, action) => {
 
 const getDetails = (dispatch) => async () => {
     try {
-        console.log("getting deets");
         const resp = await restApi.get("/vet/get-details");
         dispatch({ type: "service", payload: resp.data.services });
         dispatch({ type: "vetProfile", payload: resp.data });
@@ -28,12 +27,10 @@ const addService =
     (dispatch) =>
     async ({ service_name, price }) => {
         try {
-            console.log("addding");
             let resp = await restApi.post("/vet/add-service", {
                 name: service_name,
                 price: price,
             });
-            console.log(resp.data, "in context");
             dispatch({ type: "service", payload: resp.data.profile.services });
             dispatch({ type: "vetProfile", payload: resp.data.profile });
             navigate("EditServ");
@@ -46,11 +43,9 @@ const deleteService =
     (dispatch) =>
     async ({ item }) => {
         try {
-            console.log("deleting");
             let resp = await restApi.post("/vet/delete-service", {
                 name: item.service_name,
             });
-            console.log(resp.data, "in context");
             dispatch({ type: "service", payload: resp.data.profile.services });
             dispatch({ type: "vetProfile", payload: resp.data.profile });
         } catch (err) {

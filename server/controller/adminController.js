@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const postSignIn = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password)
-        return res.status(422).send({ error: "Invalid login: No input seen" });
+    if (!email || !password) return res.status(422).send({ error: "Invalid login: No input seen" });
     const user = await models.admin.findOne({ email: email });
     if (!user) return res.status(422).send({ error: "Invalid email address" });
     try {
@@ -67,7 +66,6 @@ export const postBanUser = async (req, res) => {
         }
         // is a pet owner
         else {
-            console.log("INSIDE BANNED PET OWNER");
             console.log(user);
 
             const petOwner = await models.petOwner.findOne({
@@ -86,7 +84,6 @@ export const postBanUser = async (req, res) => {
 
 // req = vet object
 export const postAcceptRequest = async (req, res) => {
-    console.log("INSIDE post Accept Request");
     try {
         const { user } = req.body;
         console.log(user);
@@ -99,7 +96,6 @@ export const postAcceptRequest = async (req, res) => {
         ];
         //generate image randomly
         const image = dpUrls[Math.floor(Math.random() * dpUrls.length)];
-        console.log(image, "<<<<<<<<<<<<<<<<");
 
         //remove from verification table
         await models.verificationClinic.deleteOne({ email: user.email });
@@ -133,7 +129,6 @@ export const postAcceptRequest = async (req, res) => {
 
 // req = vet object
 export const postRejectRequest = async (req, res) => {
-    console.log("INSIDE post RejectRequest");
     try {
         const { user } = req.body;
 

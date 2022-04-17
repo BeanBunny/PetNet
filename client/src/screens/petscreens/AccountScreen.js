@@ -24,7 +24,6 @@ const AccountScreen = ({ navigation }) => {
 
   useEffect(async () => {
     const resp = await restApi.get("/petowner/profile");
-    console.log(resp.data);
     setProfile(resp.data);
   }, []);
 

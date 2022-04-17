@@ -8,7 +8,6 @@ import { errorRequired } from "../../inputvalidation/validators";
 import ErrorTextComponent from "../../components/ErrorTextComponent";
 
 const Apptime = ({ navigation, route }) => {
-    console.log(route.params, "<<<<<<<<<<<<<<<<<<<<<<<");
     let { date, type, vet_id } = route.params;
     const [time, setTime] = useState("");
     const [petList, setPetList] = useState([]);
@@ -38,7 +37,7 @@ const Apptime = ({ navigation, route }) => {
     const changingDate = () => {
         // date = date.toString().split(" ");
         date[4] = time;
-        console.log(date, "M<<app time");
+
         return date.splice(1, 4).toString();
     };
 
@@ -46,12 +45,9 @@ const Apptime = ({ navigation, route }) => {
         let { data } = await restApi.get("/petowner/profile");
         setPetList(data.pet);
     }, []);
-    console.log("timeeeeee", time.length);
-    console.log("tppperrr", pet.length);
     let errorTime = errorRequired(time, "Time");
     let errorPet = errorRequired(pet, "Pet Name");
-    console.log("-->", errorTime);
-    console.log(errorPet);
+
 
     return (
         <View>
@@ -111,10 +107,6 @@ const Apptime = ({ navigation, route }) => {
                     text="Confirm"
                     onChange={async () => {
                         date = changingDate();
-                        console.log("pettt-->", pet);
-                        console.log("dateeee-->", date);
-                        console.log("type-->", type);
-                        console.log("vet id-->", vet_id);
                         try {
                             let data = await restApi.post(
                                 "/petowner/set-appointment",

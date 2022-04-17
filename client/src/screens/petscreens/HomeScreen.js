@@ -17,7 +17,6 @@ const Mycard = ({ prop, navigation }) => {
             <TouchableOpacity
                 onPress={() => {
                     navigation.navigate("ClinicInfo", { clinicInfo: prop });
-                    console.log("presssed");
                 }}
             >
                 <Card>

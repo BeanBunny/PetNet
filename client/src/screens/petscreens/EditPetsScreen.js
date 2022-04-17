@@ -5,7 +5,6 @@ import CompButton from "../../components/Button";
 import restApi from "../../api/restApi";
 
 const EditPets = ({ route, navigation }) => {
-  console.log(route.params?.profile, "BRUHH");
   const [petProfile, setPetProfile] = useState(route.params?.profile);
   return (
     <View>
@@ -30,7 +29,6 @@ const EditPets = ({ route, navigation }) => {
                         let resp = await restApi.post("/petowner/remove-pet", {
                           petId: item._id,
                         });
-                        console.log(resp.data);
                         setPetProfile(resp.data);
                       } catch (err) {
                         console.log(err);

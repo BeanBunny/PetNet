@@ -7,10 +7,8 @@ import restApi from "../../api/restApi";
 import { sendEmail } from "../../api/sendEmail";
 
 const MyCard = ({ prop, updateList }) => {
-    console.log("------->", prop);
     let time = prop.appointment_time[4];
     let date = prop.appointment_time.splice(0, 4).toString();
-    // console.log(date);
     return (
         <View style={styles.list}>
             <Card>
@@ -49,14 +47,14 @@ const MyCard = ({ prop, updateList }) => {
                                         id: prop._id,
                                     }
                                 );
-                                console.log("accepted appointment");
+                            
                                 const resp = await restApi.post(
                                     "/vet/get-appointments",
                                     {
                                         status: "pending",
                                     }
                                 );
-                                console.log("got newwww appointment");
+                                
                                 updateList(resp.data);
                             } catch (err) {
                                 console.log(err);

@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 export const postSignup = async (req, res) => {
     const details = req.body;
     try {
-        console.log(req.body);
         const checkExist = await models.clinic.find({
             $or: [
                 { email: req.body.email },
@@ -103,14 +102,11 @@ export const getAppointments = async (req, res) => {
             let appointmentPetId = appointmentsList[i].pet_id;
 
             for (let j = 0; j < listOfPets.length; j++) {
-                // console.log(appointmentPetId);
-                // console.log(listOfPets[j]._id);
                 if (appointmentPetId.equals(listOfPets[j]._id)) {
-                    // console.log(listOfPets);
                     petTypes.push(listOfPets[j].petType);
                 }
             }
-            // console.log(petTypes);
+
             result[i] = {
                 appointment_type: appointmentsList[i].type,
                 petType: petTypes[i],
@@ -131,7 +127,7 @@ export const getAppointments = async (req, res) => {
             let date = val.appointment_time.toString().split(" ");
             return { ...val, appointment_time: date };
         });
-        console.log(result);
+
         return res.send(result);
     } catch (err) {
         return res.status(422).send(err.message);
@@ -188,7 +184,7 @@ export const postAddService = async (req, res) => {
     //vet_id, service name, description, price received
     //might have to change the below names
     const { name, price } = req.body;
-    console.log(price, "<<-----");
+
     try {
         //add to list of services iff service name does not already exist
         let vet = req.user;
@@ -257,7 +253,6 @@ export const postEditService = async (req, res) => {
 export const postDeleteService = async (req, res) => {
     //vet_id, service name received
     const { name } = req.body;
-    console.log(name);
     let deleteIndex = 0;
     try {
         let vet = req.user;
@@ -269,7 +264,6 @@ export const postDeleteService = async (req, res) => {
                 break;
             }
         }
-        console.log(deleteIndex);
 
         //service at deleteIndex dropped
         servicesList.splice(deleteIndex, 1);
@@ -280,7 +274,7 @@ export const postDeleteService = async (req, res) => {
             { services: servicesList },
             { runValidators: true }
         );
-        console.log(vet);
+
         return res.send({ profile: vet });
     } catch (err) {
         return res.status(422).send(err.message);
@@ -292,7 +286,7 @@ export const getServices = async (req, res) => {
     const vet_email = req.body.email;
     try {
         const vet = await models.clinic.findOne({ email: vet_email });
-        console.log(vet);
+
         const servicesList = vet.services;
         //where each service has name description and price
         return res.send(servicesList);
@@ -326,7 +320,7 @@ export const postReportPetOwner = async (req, res) => {
 export const postEditClinicProfile = async (req, res) => {
     //vet id, phone, email, password, clinic name, about clinic (all not required)
     //if they are undefined then they arent updated
-    console.log(req.body);
+
     const vet_id = req.user._id;
     const phone = req.body.phone;
     const email = req.body.email;
@@ -354,11 +348,10 @@ export const postEditClinicProfile = async (req, res) => {
                 });
             });
         } else {
-            console.log("jaaate ho naidhr");
             await models.clinic.updateOne({ _id: vet._id }, vet, {
                 runValidators: true,
             });
-            console.log(vet);
+
             return res.send("Profile Updated!");
         }
     } catch (err) {
@@ -368,11 +361,6 @@ export const postEditClinicProfile = async (req, res) => {
 
 export const getClinicDetails = async (req, res) => {
     try {
-        console.log("in ontorller");
-        //only clinic id required
-        // const vet_id = req.user._id;
-        //fetch vet
-        // const vet = await models.clinic.findById(vet_id);
         return res.send(req.user);
     } catch (err) {
         return res.status(422).send(err.message);

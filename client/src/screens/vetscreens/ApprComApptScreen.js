@@ -47,7 +47,6 @@ const MyCard = ({ prop, updateList }) => {
                                         id: prop._id,
                                     }
                                 );
-                                console.log("accepted appointment");
                                 updateList();
                             } catch (err) {
                                 console.log(err);
@@ -63,7 +62,6 @@ const MyCard = ({ prop, updateList }) => {
 };
 
 const MyCard2 = ({ prop, updateList }) => {
-    console.log("------->", prop);
     let time = prop.appointment_time[4];
     let date = prop.appointment_time.splice(0, 4).toString();
     return (

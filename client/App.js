@@ -7,7 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import * as AsyncStorage from "expo-secure-store";
 import PetOwnerFlow from "./src/navigators/PetOwnerNavigator";
 import VetFlow from "./src/navigators/VetNavigator";
-import StartScreen from "./src/screens/petscreens/EditProfile";
+import StartScreen from "./src/screens/petscreens/EnterOTP";
 // import LoginScreen from "./src/screens/petscreens/LoginScreen";
 // import ClinicsScreen from "./src/screens/petscreens/HomeScreen";
 // import petSignUpScreen from "./src/screens/petscreens/SignUpScreen";

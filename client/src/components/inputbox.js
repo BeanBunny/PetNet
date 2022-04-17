@@ -18,6 +18,6 @@ const inputbox = ({ label, placeholder, reducer, style, secure }) => {
     );
 };
 
-const styles = StyleSheet.create({});
+const styles2 = StyleSheet.create({});
 
 export default inputbox;

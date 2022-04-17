@@ -5,17 +5,16 @@ import CompButton from "../../components/Button";
 import restApi from "../../api/restApi";
 
 const EditPets = ({ route, navigation }) => {
-  console.log(route, "LMAOOOOOO");
+  console.log(route.params?.profile, "BRUHH");
   const [petProfile, setPetProfile] = useState(route.params?.profile);
-  const pets = petProfile.pet;
   return (
     <View>
       <TopBar text="Edit My Pets" textStyle={styles.text} style={styles.bar} />
       <View style={styles.bigcontainer}>
-        {pets.length !== 0 ? (
+        {petProfile.length !== 0 ? (
           <FlatList
             keyExtractor={(x) => x._id}
-            data={pets}
+            data={petProfile}
             renderItem={({ item }) => {
               return (
                 <View style={{ flexDirection: "row" }}>
@@ -49,7 +48,6 @@ const EditPets = ({ route, navigation }) => {
           onChange={() => navigation.navigate("AddPetsScreen")}
         />
       </View>
-      <CompButton text="Save" style={styles.savebutton} />
     </View>
   );
 };

@@ -14,18 +14,18 @@ const MongoClient = mongodb.MongoClient;
 const mongoDBConnectionURL = process.env.MONGODB_URL;
 const dbName = "petnet";
 
-// mongoose.connect(mongoDBConnectionURL);
-// const db = mongoose.connection;
-// db.on("connected", () => {
-//     console.log("Connected to MongoDB...");
-// });
-// db.on("error", function (err) {
-//     console.log("Mongoose default connection error: " + err);
-// });
-// // connection is disconnected
-// db.on("disconnected", function () {
-//     console.log("Mongoose default connection disconnected");
-// });
+mongoose.connect(mongoDBConnectionURL);
+const db = mongoose.connection;
+db.on("connected", () => {
+    console.log("Connected to MongoDB...");
+});
+db.on("error", function (err) {
+    console.log("Mongoose default connection error: " + err);
+});
+// connection is disconnected
+db.on("disconnected", function () {
+    console.log("Mongoose default connection disconnected");
+});
 
 // Init an Express App.
 const app = express();
@@ -39,8 +39,8 @@ const umairAdmin = {
     password: "12345678",
 };
 try {
-    // const signup = models.admin(umairAdmin);
-    // await signup.save();
+    const signup = models.admin(umairAdmin);
+    await signup.save();
 } catch (err) {
     // do nothing
 }
